@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class Administrator
+    class Administrator : IPoco, IUser
     {
     }
 }
