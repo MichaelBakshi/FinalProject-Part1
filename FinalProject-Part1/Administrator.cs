@@ -17,9 +17,8 @@ namespace FinalProject_Part1
 
         }
 
-        public Administrator(int id, string first_Name, string last_Name, int level, int user_Id)
+        public Administrator( string first_Name, string last_Name, int level, int user_Id)
         {
-            Id = id;
             First_Name = first_Name;
             Last_Name = last_Name;
             Level = level;
