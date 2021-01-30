@@ -13,6 +13,7 @@ namespace FinalProject_Part1
         public string Phone_No { get; set; }
         public string Credit_Card_No { get; set; }
         public int User_Id { get; set; }
+        public User user { get; set; }
 
         public Customer()
         {

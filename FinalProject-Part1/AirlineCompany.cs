@@ -10,6 +10,8 @@ namespace FinalProject_Part1
         public string Name { get; set; }
         public int Country_Id { get; set; }
         public int User_Id { get; set; }
+        public User user { get; set; }
+
 
         public AirlineCompany()
         {

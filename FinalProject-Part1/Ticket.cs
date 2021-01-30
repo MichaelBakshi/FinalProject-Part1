@@ -9,8 +9,10 @@ namespace FinalProject_Part1
         public int Id { get; set; }
         public int Flight_Id { get; set; }
         public int Customer_Id { get; set; }
+        public Flight flight { get; set; }
+        public Customer customer { get; set; }
 
-        public Ticket()
+    public Ticket()
         {
                 
         }
