@@ -6,8 +6,8 @@ namespace FinalProject_Part1
 {
     interface IBasicDb<T> where T: IPoco
     {
-        void Add(T newItem);
+        //void Add(T newItem);
 
-        T Get();
+        //T Get();
     }
 }
