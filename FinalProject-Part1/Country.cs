@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class Country : IPoco
+    public class Country : IPoco
     {
         public int Id { get; set; }
         public string Name { get; set; }
