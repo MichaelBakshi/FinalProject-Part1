@@ -36,14 +36,12 @@ namespace FinalProject_Part1
                 using (cmd.Connection = new NpgsqlConnection(m_conn_string))
                 {
                     cmd.Connection.Open();
-
                     cmd.CommandType = System.Data.CommandType.Text;  //StoredProcedure instead of text
                     cmd.CommandText = query;
 
                     result = cmd.ExecuteNonQuery();
                 }
             }
-
             return result;
         }
 
@@ -60,7 +58,7 @@ namespace FinalProject_Part1
 
         }
 
-        public Country GetCountryById(int id)
+        public  Country GetCountryById(int id)
         {
             Country result = null;
 
@@ -69,9 +67,8 @@ namespace FinalProject_Part1
                 using (cmd.Connection = new NpgsqlConnection(m_conn_string))
                 {
                     cmd.Connection.Open();
-
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"SELECT * FROM VISITS WHERE visit_id={id}";
+                    cmd.CommandText = $"select * from sp_get_country_by_id({id})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
@@ -79,18 +76,16 @@ namespace FinalProject_Part1
                     {
                         result = new Country
                         {
-                            //Id = (int)reader["visit_id"],
-                            //FirstName = reader["first_name"].ToString(),
+                            Id = (int)reader["id"],
+                            Name = reader["name"].ToString()
                             //LastName = reader["last_name"].ToString(),
                             //VisitedAt = Convert.ToDateTime(reader["visited_at"]),
                             //Phone = reader["phone"].ToString(),
                             //StoreId = (int)reader["store_id"]
                         };
                     }
-
                 }
             }
-
             return result;
         }
 
