@@ -50,5 +50,10 @@ namespace FinalProject_Part1
         {
             return !(administrator1 == administrator2);
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, First name: {First_Name}, Last name: {Last_Name}, Level: {Level}, User ID: {User_Id} ";
+        }
     }
 }
