@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class AdminDAOPGSQL : IAdminDAO
+    public class AdminDAOPGSQL : IAdminDAO
     {
         private string m_conn_string;
 

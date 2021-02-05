@@ -22,7 +22,8 @@ namespace ConsoleTests
             //dao.RemoveCountry(11);
             //dao.UpdateCountry(9, "Mongoly");
 
-
+            AdminDAOPGSQL admindao = new AdminDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
+            admindao.UpdateAdministrator(1, "Billy", "Tuhes", 1, 1);
 
             // אוקיי אני יודע מה הבעיה
             // אוקיי עכשיו אתה צריך להכניס סיסמא ושם הדאטא בייס
