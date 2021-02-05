@@ -40,5 +40,10 @@ namespace FinalProject_Part1
         {
             return !(left == right);
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Name: {Name}";
+        }
     }
 }

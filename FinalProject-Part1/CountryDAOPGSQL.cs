@@ -78,10 +78,7 @@ namespace FinalProject_Part1
                         {
                             Id = (int)reader["id"],
                             Name = reader["name"].ToString()
-                            //LastName = reader["last_name"].ToString(),
-                            //VisitedAt = Convert.ToDateTime(reader["visited_at"]),
-                            //Phone = reader["phone"].ToString(),
-                            //StoreId = (int)reader["store_id"]
+
                         };
                     }
                 }
@@ -98,43 +95,33 @@ namespace FinalProject_Part1
                 using (cmd.Connection = new NpgsqlConnection(m_conn_string))
                 {
                     cmd.Connection.Open();
-
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = "SELECT * FROM VISITS";
+                    cmd.CommandText = "select * from sp_get_all_countries()";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Country v = new Country
+                        Country c = new Country
                         {
-                            //Id = (int)reader["visit_id"],
-                            //FirstName = reader["first_name"].ToString(),
-                            //LastName = reader["last_name"].ToString(),
-                            //VisitedAt = Convert.ToDateTime(reader["visited_at"]),
-                            //Phone = reader["phone"].ToString(),
-                            //StoreId = (int)reader["store_id"]
+                            Id = (int)reader["id"],
+                            Name = reader["name"].ToString()
                         };
-                        result.Add(v);
+                        result.Add(c);
                     }
-
                 }
             }
-
             return result;
         }
 
-        public int RemoveCountry(int id)
+        public void RemoveCountry(int id)
         {
-            int result = ExecuteNonQuery($"DELETE * FROM VISITS WHERE visit_id={id}");
-            return result;
+            int result = ExecuteNonQuery($"call  sp_delete_country ({id})");
         }
 
-        public void UpdateCountry(Country v, int id)
+        public void UpdateCountry(int id, string country_name)
         {
-            //int result = ExecuteNonQuery(
-            //    $"UPDATE FROM VISITS SET first_name={v.FirstName}, last_name={v.LastName}, visited_at={v.VisitedAt}," +
-            //    $"phone={v.Phone}, store_id={v.StoreId} WHERE visit_id={id}");
+            int result = ExecuteNonQuery( $"call sp_update_country( {id}, '{country_name}')");
         }
 
 
