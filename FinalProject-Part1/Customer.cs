@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class Customer : IPoco, IUser
+    class Customer : IPoco, IUserDAO
     {
         public int Id { get; set; }
         public string First_Name { get; set; }
