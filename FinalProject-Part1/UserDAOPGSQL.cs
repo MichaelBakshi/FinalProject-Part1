@@ -108,7 +108,7 @@ namespace FinalProject_Part1
 
         public void UpdateUser(int id, string username, string password, string email, int user_role)
         {
-            int result = ExecuteNonQuery($"call sp_update_user( {id}, '{username}', '{password}', '{email}', {user_role}");
+            int result = ExecuteNonQuery($"call sp_update_user( {id}, '{username}', '{password}', '{email}', {user_role})");
         }
     }
 }
