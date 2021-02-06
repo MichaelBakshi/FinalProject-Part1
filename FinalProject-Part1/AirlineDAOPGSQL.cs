@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FinalProject_Part1
 {
-    class AirlineDAOPGSQL :IAirlineDAO
+    public class AirlineDAOPGSQL :IAirlineDAO
     {
         private string m_conn_string;
 
-        public TicketDAOPGSQL(string conn_string)
+        public AirlineDAOPGSQL(string conn_string)
         {
             m_conn_string = conn_string;
         }
@@ -33,15 +34,15 @@ namespace FinalProject_Part1
         }
 
 
-        public void AddTicket(Ticket t)
+        public void AddAirline(AirlineCompany a)
         {
 
-            ExecuteNonQuery($"call sp_insert_ticket({t.Flight_Id}, {t.Customer_Id});");
+            ExecuteNonQuery($"call sp_insert_airline('{a.Name}', {a.Country_Id}, {a.User_Id});");
         }
 
-        public Ticket GetTicketById(int id)
+        public AirlineCompany GetAirlineById(int id)
         {
-            Ticket result = null;
+            AirlineCompany result = null;
 
             using (NpgsqlCommand cmd = new NpgsqlCommand())
             {
@@ -49,17 +50,18 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_ticket_by_id({id})";
+                    cmd.CommandText = $"select * from sp_get_airline_by_id({id})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read())
                     {
-                        result = new Ticket
+                        result = new AirlineCompany
                         {
                             Id = (int)reader["id"],
-                            Flight_Id = (int)reader["id"],
-                            Customer_Id = (int)reader["id"]
+                            Name = reader["name"].ToString(),
+                            Country_Id = (int)reader["country_id"],
+                            User_Id = (int)reader["user_id"]
                         };
                     }
                 }
@@ -67,9 +69,9 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Ticket> GetAllTickets()
+        public List<AirlineCompany> GetAllAirlines()
         {
-            List<Ticket> result = new List<Ticket>();
+            List<AirlineCompany> result = new List<AirlineCompany>();
 
             using (NpgsqlCommand cmd = new NpgsqlCommand())
             {
@@ -77,17 +79,18 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = "select * from sp_get_all_tickets()";
+                    cmd.CommandText = "select * from sp_get_all_airline_companies()";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Ticket c = new Ticket
+                        AirlineCompany c = new AirlineCompany
                         {
                             Id = (int)reader["id"],
-                            Flight_Id = (int)reader["id"],
-                            Customer_Id = (int)reader["id"]
+                            Name = reader["name"].ToString(),
+                            Country_Id = (int)reader["country_id"],
+                            User_Id = (int)reader["user_id"]
                         };
                         result.Add(c);
                     }
@@ -96,14 +99,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveTicket(int id)
+        public void RemoveAirline(int id)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_ticket ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_airline_company ({id})");
         }
 
-        public void UpdateTicket(int id, int flight_id, int customer_id)
+        public void UpdateAirline(int id, string name, int country_id, int user_id)
         {
-            int result = ExecuteNonQuery($"call sp_update_ticket( {id}, {flight_id}, {customer_id})");
+            int result = ExecuteNonQuery($"call sp_update_airline( {id}, '{name}', {country_id}, {user_id})");
         }
     }
 }
