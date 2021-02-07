@@ -89,9 +89,9 @@ namespace FinalProject_Part1
                         User u = new User
                         {
                             Id = (int)reader["id"],
-                            Username = reader["name"].ToString(),
-                            Password = reader["name"].ToString(),
-                            Email = reader["name"].ToString(),
+                            Username = reader["username"].ToString(),
+                            Password = reader["password"].ToString(),
+                            Email = reader["email"].ToString(),
                             User_Role = (int)reader["id"]
                         };
                         result.Add(u);

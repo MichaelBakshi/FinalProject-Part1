@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class Flight : IPoco
+    public class Flight : IPoco
     {
         public int Id { get; set; }
         public int Airline_Company_Id { get; set; }

@@ -28,8 +28,13 @@ namespace ConsoleTests
             //AirlineDAOPGSQL airline1 = new AirlineDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
             //airline1.UpdateAirline(14, "Aeroflot", 3, 11);
 
-            UserDAOPGSQL userdao1 = new UserDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
-            userdao1.UpdateUser(7, "EL-AL", "elal", "elal@gmail.com", 2);
+            //UserDAOPGSQL userdao1 = new UserDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
+            //userdao1.UpdateUser(7, "EL-AL", "elal", "elal@gmail.com", 2);
+
+            CustomerDAOPGSQL customerDAO = new CustomerDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
+            //customerDAO.UpdateCustomer(1, "Asaf", "Cohen", "Lapid", "08-8976543", "4580523652145236", 3);
+            Customer customer = customerDAO.GetCustomerById(4);
+            Console.WriteLine(customer);
 
             // אוקיי אני יודע מה הבעיה
             // אוקיי עכשיו אתה צריך להכניס סיסמא ושם הדאטא בייס
