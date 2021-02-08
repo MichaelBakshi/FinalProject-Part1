@@ -46,5 +46,10 @@ namespace FinalProject_Part1
             return !(left == right);
         }
 
+        public override string ToString()
+        {
+            return $"Id: {Id}, Flight_Id: {Flight_Id}, Customer_Id: {Customer_Id}, Flight: {flight}, Customer: {customer} ";
+        }
+
     }
 }

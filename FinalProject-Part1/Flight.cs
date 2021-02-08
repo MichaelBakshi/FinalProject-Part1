@@ -56,5 +56,11 @@ namespace FinalProject_Part1
         {
             return !(left == right);
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Airline_Company_Id: {Airline_Company_Id}, Origin_Country_Id: {Origin_Country_Id}, Destination_Country_Id: {Destination_Country_Id}, " +
+                $"Departure_Time: {Departure_Time}, Landing_Time: {Landing_Time}, Remaining_Tickets: {Remaining_Tickets}, AirlineCompany: { airlineCompany}  ";
+        }
     }
 }

@@ -50,5 +50,11 @@ namespace FinalProject_Part1
         {
             return !(left == right);
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, First_Name: {First_Name}, Last_Name: {Last_Name}, Address: {Address}, Phone_No: {Phone_No}, Credit_Card_No: {Credit_Card_No}, User_Id: {User_Id}, " +
+                $"User: {user} ";
+        }
     }
 }

@@ -47,5 +47,10 @@ namespace FinalProject_Part1
         {
             return !(left == right);
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Name: {Name}, Country_Id: {Country_Id}, User_Id: {User_Id}, User: {user} ";
+        }
     }
 }
