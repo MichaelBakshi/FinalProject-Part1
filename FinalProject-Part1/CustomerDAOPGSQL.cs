@@ -72,6 +72,38 @@ namespace FinalProject_Part1
             return result;
         }
 
+        public Customer GetCustomerByUsername(string _username)
+        {
+            Customer result = null;
+
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+                {
+                    cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select * from sp_get_customer_by_username({_username})";
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        result = new Customer
+                        {
+                            Id = (int)reader["id"],
+                            First_Name = reader["first_name"].ToString(),
+                            Last_Name = reader["last_name"].ToString(),
+                            Address = reader["address"].ToString(),
+                            Phone_No = reader["phone_no"].ToString(),
+                            Credit_Card_No = reader["credit_card_no"].ToString(),
+                            User_Id = (int)reader["user_id"]
+                        };
+                    }
+                }
+            }
+            return result;
+        }
+
         public List<Customer> GetAllCustomers()
         {
             List<Customer> result = new List<Customer>();
