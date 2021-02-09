@@ -6,6 +6,8 @@ namespace FinalProject_Part1
 {
     public interface IAnonymousUserFacade
     {
+         List<AirlineCompany> GetAllAirlines();
+
 
     }
 }

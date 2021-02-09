@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    public class AnonymousUserFacade
+    public class AnonymousUserFacade : FacadeBase, IAnonymousUserFacade
     {
 
     }
