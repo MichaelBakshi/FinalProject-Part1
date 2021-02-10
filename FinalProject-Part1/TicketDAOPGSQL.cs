@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class TicketDAOPGSQL : ITicketDAO
+    public class TicketDAOPGSQL : ITicketDAO
     {
         private string m_conn_string;
 

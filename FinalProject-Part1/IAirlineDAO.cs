@@ -6,7 +6,7 @@ using System.Text;
 namespace FinalProject_Part1
 {
 
-    interface IAirlineDAO : IBasicDb<AirlineCompany>
+    public interface IAirlineDAO : IBasicDb<AirlineCompany>
     {
 
         //public AirlineCompany GetAirlineByCountry(string _name)

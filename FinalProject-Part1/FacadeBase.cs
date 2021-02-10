@@ -6,10 +6,11 @@ namespace FinalProject_Part1
 {
     public abstract class FacadeBase
     {
-        AirlineDAOPGSQL _airlineDAO;
-        CountryDAOPGSQL _countryDAO;
-        CustomerDAOPGSQL _customerDAO;
-        FlightDAOPGSQL _flightDAO;
-        TicketDAOPGSQL _ticketDAO;
+
+        protected IAirlineDAO _airlineDAO;
+        protected CountryDAOPGSQL _countryDAO;
+        protected CustomerDAOPGSQL _customerDAO;
+        protected FlightDAOPGSQL _flightDAO;
+        protected TicketDAOPGSQL _ticketDAO;
     }
 }
