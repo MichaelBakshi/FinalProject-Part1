@@ -8,6 +8,8 @@ namespace FinalProject_Part1
 
     public interface IAirlineDAO : IBasicDb<AirlineCompany>
     {
+        AirlineCompany GetAirlineByUsername(string _name);
+        AirlineCompany GetAirlineByCountry(string _name);
 
         //public AirlineCompany GetAirlineByCountry(string _name)
         //{

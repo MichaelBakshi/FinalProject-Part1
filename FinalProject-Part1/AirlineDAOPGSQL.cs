@@ -34,7 +34,7 @@ namespace FinalProject_Part1
         }
 
 
-        public void AddAirline(AirlineCompany a)
+        public void Add(AirlineCompany a)
         {
 
             ExecuteNonQuery($"call sp_insert_airline('{a.Name}', {a.Country_Id}, {a.User_Id});");
