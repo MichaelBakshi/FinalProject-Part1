@@ -12,5 +12,15 @@ namespace FinalProject_Part1
         protected CustomerDAOPGSQL _customerDAO;
         protected FlightDAOPGSQL _flightDAO;
         protected TicketDAOPGSQL _ticketDAO;
+
+        protected FacadeBase()
+        {
+            _airlineDAO = new AirlineDAOPGSQL("" );
+            _countryDAO = new CountryDAOPGSQL("");
+            _customerDAO = new CustomerDAOPGSQL("");
+            _flightDAO = new FlightDAOPGSQL("");
+            _ticketDAO = new TicketDAOPGSQL("");
+        }
+
     }
 }

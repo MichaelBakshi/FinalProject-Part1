@@ -6,14 +6,14 @@ namespace FinalProject_Part1
 {
     public class AnonymousUserFacade : FacadeBase, IAnonymousUserFacade
     {
-
+        
         public List<AirlineCompany> GetAllAirlines()
         {
+            
             throw new NotImplementedException();
             //_airlineDAO 
 
         }
-        
-
+       
     }
 }

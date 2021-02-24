@@ -40,7 +40,7 @@ namespace FinalProject_Part1
             ExecuteNonQuery($"call sp_insert_airline('{a.Name}', {a.Country_Id}, {a.User_Id});");
         }
 
-        public AirlineCompany GetAirlineById(int id)
+        public AirlineCompany GetById(int id)
         {
             AirlineCompany result = null;
 
@@ -69,7 +69,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public AirlineCompany GetAirlineByUsername(string _name)
+        public AirlineCompany GetAirlineByUsername(string _username)
         {
             AirlineCompany result = null;
 
@@ -79,7 +79,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_airline_by_username({_name})";
+                    cmd.CommandText = $"select * from sp_get_airline_by_username({_username})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
@@ -99,7 +99,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public AirlineCompany GetAirlineByCountry(string _name)
+        public AirlineCompany GetAirlineByCountry(string _country_name)
         {
             AirlineCompany result = null;
 
@@ -109,7 +109,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_airline_by_country({_name})";
+                    cmd.CommandText = $"select * from sp_get_airline_by_country({_country_name})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
@@ -129,7 +129,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<AirlineCompany> GetAllAirlines()
+        public List<AirlineCompany> GetAll()
         {
             List<AirlineCompany> result = new List<AirlineCompany>();
 
@@ -159,14 +159,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveAirline(int id)
+        public void Remove(int id)
         {
             int result = ExecuteNonQuery($"call  sp_delete_airline_company ({id})");
         }
 
-        public void UpdateAirline(int id, string name, int country_id, int user_id)
+        public void Update(AirlineCompany airline)
         {
-            int result = ExecuteNonQuery($"call sp_update_airline( {id}, '{name}', {country_id}, {user_id})");
+            int result = ExecuteNonQuery($"call sp_update_airline( {airline.Id}, '{airline.Name}', {airline.Country_Id}, {airline.User_Id})");
         }
     }
 }

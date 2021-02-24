@@ -7,7 +7,11 @@ namespace FinalProject_Part1
     public interface IBasicDb<T> where T: IPoco
     {
         void Add(T newItem);
+        T GetById(int id);
 
-        //T Get();
+        List<T> GetAll();
+         void Remove(int id);
+        void Update(T item_for_update);
+
     }
 }
