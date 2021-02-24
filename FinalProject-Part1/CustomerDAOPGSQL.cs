@@ -34,13 +34,13 @@ namespace FinalProject_Part1
         }
 
 
-        public void AddCustomer(Customer c)
+        public void Add(Customer c)
         {
 
             ExecuteNonQuery($"call sp_insert_customer('{c.First_Name}', '{c.Last_Name}', '{c.Address}', '{c.Phone_No}', '{c.Credit_Card_No}', {c.User_Id});");
         }
 
-        public Customer GetCustomerById(int id)
+        public Customer GetById(int id)
         {
             Customer result = null;
 
@@ -104,7 +104,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Customer> GetAllCustomers()
+        public List<Customer> GetAll()
         {
             List<Customer> result = new List<Customer>();
 
@@ -137,14 +137,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveCustomer(int id)
+        public void Remove(Customer c)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_customer ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_customer ({c.Id})");
         }
 
-        public void UpdateCustomer(int id, string first_name, string last_name, string address, string phone_no, string credit_card_no, int user_id)
+        public void Update(Customer c)
         {
-            int result = ExecuteNonQuery($"call sp_update_customer( {id}, '{first_name}', '{last_name}', '{address}', '{phone_no}', '{credit_card_no}',  {user_id})");
+            int result = ExecuteNonQuery($"call sp_update_customer( {c.Id}, '{c.First_Name}', '{c.Last_Name}', '{c.Address}', '{c.Phone_No}', '{c.Credit_Card_No}',  {c.User_Id})");
         }
     }
 }

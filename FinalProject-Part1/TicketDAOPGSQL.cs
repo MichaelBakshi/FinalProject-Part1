@@ -34,13 +34,13 @@ namespace FinalProject_Part1
         }
 
 
-        public void AddTicket(Ticket t)
+        public void Add(Ticket t)
         {
 
             ExecuteNonQuery($"call sp_insert_ticket({t.Flight_Id}, {t.Customer_Id});");
         }
 
-        public Ticket GetTicketById(int id)
+        public Ticket GetById(int id)
         {
             Ticket result = null;
 
@@ -68,7 +68,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Ticket> GetAllTickets()
+        public List<Ticket> GetAll()
         {
             List<Ticket> result = new List<Ticket>();
 
@@ -97,14 +97,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveTicket(int id)
+        public void Remove(Ticket t)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_ticket ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_ticket ({t.Id})");
         }
 
-        public void UpdateTicket(int id, int flight_id, int customer_id)
+        public void Update(Ticket t)
         {
-            int result = ExecuteNonQuery($"call sp_update_ticket( {id}, {flight_id}, {customer_id})");
+            int result = ExecuteNonQuery($"call sp_update_ticket( {t.Id}, {t.Flight_Id}, {t.Customer_Id})");
         }
     }
 }

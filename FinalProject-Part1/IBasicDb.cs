@@ -10,8 +10,9 @@ namespace FinalProject_Part1
         T GetById(int id);
 
         List<T> GetAll();
-         void Remove(int id);
+        void Remove(T item_to_remove);
         void Update(T item_for_update);
+         
 
     }
 }

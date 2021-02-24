@@ -46,19 +46,16 @@ namespace FinalProject_Part1
         }
 
 
-        public void AddCountry(Country v    )
+        public void Add(Country c    )
         {
             //ExecuteNonQuery("INSERT INTO VISITS(first_name, last_name, visited_at, phone, store_id)" +
             //$"VALUES('{v.FirstName}', '{v.LastName}', '{v.VisitedAt}', '{v.Phone}', {v.StoreId});");
 
-            ExecuteNonQuery($"call sp_insert_country('{v.Name}');");
-            // בוא תנסה להריץ את השורה הזאת, נראה אם זה עובד
-            // אני ממליץ לך ליצור בתוך הסולושן פרויקט קונסול כדי לעשות בדיקות וכו... רוצה נעשה את זה ביחד?
-           
+            ExecuteNonQuery($"call sp_insert_country('{c.Name}');");           
 
         }
 
-        public  Country GetCountryById(int id)
+        public  Country GetById(int id)
         {
             Country result = null;
 
@@ -86,7 +83,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Country> GetAllCountries()
+        public List<Country> GetAll()
         {
             List<Country> result = new List<Country>();
 
@@ -114,14 +111,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveCountry(int id)
+        public void Remove(Country c)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_country ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_country ({c.Id})");
         }
 
-        public void UpdateCountry(int id, string country_name)
+        public void Update(Country c)
         {
-            int result = ExecuteNonQuery( $"call sp_update_country( {id}, '{country_name}')");
+            int result = ExecuteNonQuery( $"call sp_update_country( {c.Id}, '{c.Name}')");
         }
 
 

@@ -159,9 +159,9 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void Remove(int id)
+        public void Remove(AirlineCompany airline)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_airline_company ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_airline_company ({airline.Id})");
         }
 
         public void Update(AirlineCompany airline)

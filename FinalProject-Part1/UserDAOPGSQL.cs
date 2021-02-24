@@ -34,13 +34,13 @@ namespace FinalProject_Part1
         }
 
 
-        public void AddUser(User u)
+        public void Add(User u)
         {
 
             ExecuteNonQuery($"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});");
         }
 
-        public User GetUserById(int id)
+        public User GetById(int id)
         {
             User result = null;
 
@@ -70,7 +70,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<User> GetAllAUsers()
+        public List<User> GetAll()
         {
             List<User> result = new List<User>();
 
@@ -101,14 +101,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveUser(int id)
+        public void Remove(User u)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_user ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_user ({u.Id})");
         }
 
-        public void UpdateUser(int id, string username, string password, string email, int user_role)
+        public void Update(User u)
         {
-            int result = ExecuteNonQuery($"call sp_update_user( {id}, '{username}', '{password}', '{email}', {user_role})");
+            int result = ExecuteNonQuery($"call sp_update_user( {u.Id}, '{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role})");
         }
     }
 }

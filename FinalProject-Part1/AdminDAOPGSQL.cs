@@ -34,13 +34,13 @@ namespace FinalProject_Part1
         }
 
 
-        public void Add_administrator(Administrator a)
+        public void Add(Administrator a)
         {
 
             ExecuteNonQuery($"call sp_insert_administrator('{a.First_Name}', '{a.Last_Name}', '{a.Level}', '{a.User_Id}');");
         }
 
-        public Administrator GetAdministratorById(int id)
+        public Administrator GetById(int id)
         {
             Administrator result = null;
 
@@ -70,7 +70,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Administrator> GetAllAdministrators()
+        public List<Administrator> GetAll()
         {
             List<Administrator> result = new List<Administrator>();
 
@@ -101,14 +101,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveAdministrator(int id)
+        public void Remove(Administrator a)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_administrator ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_administrator ({a.Id})");
         }
 
-        public void UpdateAdministrator(int id, string first_name, string last_name, int level, int user_id)
+        public void Update(Administrator a)
         {
-            int result = ExecuteNonQuery($"call sp_update_administrator( {id}, '{first_name}', '{last_name}', {level}, {user_id})");
+            int result = ExecuteNonQuery($"call sp_update_administrator( {a.Id}, '{a.First_Name}', '{a.Last_Name}', {a.Level}, {a.User_Id})");
         }
     }
 }
