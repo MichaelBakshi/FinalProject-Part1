@@ -34,13 +34,13 @@ namespace FinalProject_Part1
         }
 
 
-        public void AddFlight(Flight f)
+        public void Add(Flight f)
         {
 
             ExecuteNonQuery($"call sp_insert_flight({f.Airline_Company_Id}, {f.Origin_Country_Id}, {f.Destination_Country_Id}, {f.Departure_Time}, {f.Landing_Time}, {f.Remaining_Tickets} );");
         }
 
-        public Flight GetFlightById(int id)
+        public Flight GetById(int id)
         {
             Flight result = null;
 
@@ -72,9 +72,9 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public Flight GetFlightByCustomer(int _customer_id)
+        public IList <Flight> GetFlightsByCustomer(Customer c)
         {
-            Flight result = null;
+            List<Flight> result = new List<Flight>();
 
             using (NpgsqlCommand cmd = new NpgsqlCommand())
             {
@@ -82,13 +82,13 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_flight_by_customer({_customer_id})";
+                    cmd.CommandText = $"select * from sp_get_all_flights_by_customer({c.Id})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        result = new Flight
+                        Flight f = new Flight
                         {
                             Id = (int)reader["id"],
                             Airline_Company_Id = (int)reader["airline_company_id"],
@@ -96,15 +96,16 @@ namespace FinalProject_Part1
                             Destination_Country_Id = (int)reader["destination_country_id"],
                             Departure_Time = (DateTime)reader["departure_time"],
                             Landing_Time = (DateTime)reader["landing_time"],
-                            
+                            Remaining_Tickets = (int)reader["remaining_tickets"]
                         };
+                        result.Add(f);
                     }
                 }
             }
             return result;
         }
 
-        public List<Flight> GetAllFlights()
+        public List<Flight> GetAll()
         {
             List<Flight> result = new List<Flight>();
 
@@ -137,7 +138,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Flight> GetFlightsByDepartureDate(DateTime _departure_date)
+        public IList<Flight> GetFlightsByDepartureDate(DateTime _departure_date)
         {
             List<Flight> result = new List<Flight>();
 
@@ -170,7 +171,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Flight> GetFlightsByLandingDate(DateTime _landing_date)
+        public IList<Flight> GetFlightsByLandingDate(DateTime _landing_date)
         {
             List<Flight> result = new List<Flight>();
 
@@ -203,7 +204,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Flight> GetFlightsByDestinationCountry(string _destination_country)
+        public IList<Flight> GetFlightsByDestinationCountry(int countryCode)
         {
             List<Flight> result = new List<Flight>();
 
@@ -213,7 +214,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_flights_by_destination_country('{_destination_country}')";
+                    cmd.CommandText = $"select * from sp_get_flights_by_destination_country('{countryCode}')";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
@@ -236,7 +237,7 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public List<Flight> GetFlightsByOriginCountry(string _origin_country)
+        public IList<Flight> GetFlightsByOriginCountry(int countryCode)
         {
             List<Flight> result = new List<Flight>();
 
@@ -246,7 +247,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_flights_by_origin_country('{_origin_country}')";
+                    cmd.CommandText = $"select * from sp_get_flights_by_origin_country('{countryCode}')";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
@@ -269,14 +270,14 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public void RemoveFlight(int id)
+        public void Remove(Flight f)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_flight ({id})");
+            int result = ExecuteNonQuery($"call  sp_delete_flight ({f.Id})");
         }
 
-        public void Updateflight(int id, int airline_company_id, int origin_country_id, int destination_country_id, DateTime departure_time, DateTime landing_time, int remaining_tickets)
+        public void Update(Flight f)
         {
-            int result = ExecuteNonQuery($"call sp_update_flight( {id}, {airline_company_id}, {origin_country_id}, {destination_country_id}, '{departure_time}', '{landing_time}',  {remaining_tickets})");
+            int result = ExecuteNonQuery($"call sp_update_flight( {f.Id}, {f.Airline_Company_Id}, {f.Origin_Country_Id}, {f.Destination_Country_Id}, '{f.Departure_Time}', '{f.Landing_Time}',  {f.Remaining_Tickets})");
         }
     }
 }

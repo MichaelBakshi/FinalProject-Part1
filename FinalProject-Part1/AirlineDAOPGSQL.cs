@@ -99,9 +99,9 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public AirlineCompany GetAirlineByCountry(string _country_name)
+        public IList<AirlineCompany> GetAllAirlinesByCountry(int country_id)
         {
-            AirlineCompany result = null;
+            List<AirlineCompany> result = new List<AirlineCompany>();
 
             using (NpgsqlCommand cmd = new NpgsqlCommand())
             {
@@ -109,20 +109,20 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_airline_by_country({_country_name})";
+                    cmd.CommandText = $"select * from sp_get_all_airlines_by_country({country_id})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        result = new AirlineCompany
+                        AirlineCompany c = new AirlineCompany
                         {
                             Id = (int)reader["id"],
                             Name = reader["name"].ToString(),
                             Country_Id = (int)reader["country_id"],
-                            User_Id = (int)reader["user_id"],
-
+                            User_Id = (int)reader["user_id"]
                         };
+                        result.Add(c);
                     }
                 }
             }
