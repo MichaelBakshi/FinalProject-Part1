@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    interface ICountryDAO : IBasicDb<Country>
+    public interface ICountryDAO : IBasicDb<Country>
     {
 
 

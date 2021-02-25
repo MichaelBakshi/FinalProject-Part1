@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    interface IAdminDAO : IBasicDb<Administrator>
+    public interface IAdminDAO : IBasicDb<Administrator>
     {
 
     }

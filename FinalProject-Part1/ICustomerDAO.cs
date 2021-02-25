@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    interface ICustomerDAO : IBasicDb<Customer>
+    public interface ICustomerDAO : IBasicDb<Customer>
     {
         Customer GetCustomerByUsername(string _username);
         

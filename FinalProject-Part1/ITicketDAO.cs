@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    interface ITicketDAO : IBasicDb<Ticket>
+    public interface ITicketDAO : IBasicDb<Ticket>
     {
 
     }

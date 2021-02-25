@@ -6,8 +6,14 @@ namespace FinalProject_Part1
 {
     public interface IAnonymousUserFacade
     {
-         List<AirlineCompany> GetAllAirlines();
+        IList<Flight> GetAllFlights();
 
-
+        IList<AirlineCompany> GetAllAirlineCompanies();
+        Dictionary<Flight, int> GetAllFlightsVacancy();
+        Flight GetFlightById(int id);
+        IList<Flight> GetFlightsByOriginCountry(int countryCode);
+        IList<Flight> GetFlightsByDestinationCountry(int countryCode);
+        IList<Flight> GetFlightsByDepatrureDate(DateTime departureDate);
+        IList<Flight> GetFlightsByLandingDate(DateTime landingDate);
     }
 }

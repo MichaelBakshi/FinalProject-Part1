@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    interface IUserDAO : IBasicDb<User>
+    public interface IUserDAO : IBasicDb<User>
     {
 
     }

@@ -6,12 +6,13 @@ namespace FinalProject_Part1
 {
     public abstract class FacadeBase
     {
-
         protected IAirlineDAO _airlineDAO;
-        protected CountryDAOPGSQL _countryDAO;
-        protected CustomerDAOPGSQL _customerDAO;
-        protected FlightDAOPGSQL _flightDAO;
-        protected TicketDAOPGSQL _ticketDAO;
+        protected ICountryDAO _countryDAO;
+        protected ICustomerDAO _customerDAO;
+        protected IAdminDAO _adminDAO;
+        protected IUserDAO _userDAO;
+        protected IFlightDAO _flightDAO;
+        protected ITicketDAO _ticketDAO;
 
         protected FacadeBase()
         {
@@ -21,6 +22,5 @@ namespace FinalProject_Part1
             _flightDAO = new FlightDAOPGSQL("");
             _ticketDAO = new TicketDAOPGSQL("");
         }
-
     }
 }
