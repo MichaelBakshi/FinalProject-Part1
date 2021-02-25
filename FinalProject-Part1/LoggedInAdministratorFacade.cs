@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class LoggedInAdministratorFacade : ILoggedInAdministratorFacade, AnonymousUserFacade
+    class LoggedInAdministratorFacade : AnonymousUserFacade, ILoggedInAdministratorFacade
     {
         public IList<Customer> GetAllCustomers(LoginToken<Administrator> token)
         {
