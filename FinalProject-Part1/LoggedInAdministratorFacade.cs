@@ -8,7 +8,7 @@ namespace FinalProject_Part1
     {
         public IList<Customer> GetAllCustomers(LoginToken<Administrator> token)
         {
-            throw new NotImplementedException();
+            return _customerDAO.GetAll();
         }
         public void CreateNewAirline(LoginToken<Administrator> token, AirlineCompany airline)
         {

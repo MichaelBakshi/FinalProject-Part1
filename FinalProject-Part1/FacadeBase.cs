@@ -14,13 +14,14 @@ namespace FinalProject_Part1
         protected IFlightDAO _flightDAO;
         protected ITicketDAO _ticketDAO;
 
-        protected FacadeBase()
-        {
-            _airlineDAO = new AirlineDAOPGSQL("" );
-            _countryDAO = new CountryDAOPGSQL("");
-            _customerDAO = new CustomerDAOPGSQL("");
-            _flightDAO = new FlightDAOPGSQL("");
-            _ticketDAO = new TicketDAOPGSQL("");
-        }
+        //protected FacadeBase()
+        //{
+        //    _airlineDAO = new AirlineDAOPGSQL("" );
+        //    _countryDAO = new CountryDAOPGSQL("");
+        //    _customerDAO = new CustomerDAOPGSQL("");
+        //    _flightDAO = new FlightDAOPGSQL("");
+        //    _ticketDAO = new TicketDAOPGSQL("");
+        //}
+        //it's better to put connection string in configuration file. json, for example
     }
 }

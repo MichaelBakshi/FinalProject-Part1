@@ -21,7 +21,7 @@ namespace FinalProject_Part1
 
         public IList<AirlineCompany> GetAllAirlineCompanies()
         {
-            throw new NotImplementedException();
+            return _airlineDAO.GetAll();
         }
         public Dictionary<Flight, int> GetAllFlightsVacancy()
         {
