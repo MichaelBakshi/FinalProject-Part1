@@ -16,7 +16,7 @@ namespace FinalProject_Part1
         //}
         public IList<Flight> GetAllFlights()
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetAll();
         }
 
         public IList<AirlineCompany> GetAllAirlineCompanies()
@@ -29,7 +29,7 @@ namespace FinalProject_Part1
         }
         public Flight GetFlightById(int id)
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetById(id);
         }
         public IList<Flight> GetFlightsByOriginCountry(int countryCode)
         {

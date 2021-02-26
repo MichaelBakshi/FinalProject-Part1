@@ -6,6 +6,7 @@ namespace FinalProject_Part1
 {
     public class LoginToken <T>: ILoginToken
     {
-
+        public T User { get; set; }
+        
     }
 }
