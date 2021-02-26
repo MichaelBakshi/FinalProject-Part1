@@ -8,7 +8,7 @@ namespace FinalProject_Part1
     {
         public IList<Flight> GetAllMyFlights(LoginToken<Customer> token)
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetAll();
         }
         public Ticket PurchaseTicket(LoginToken<Customer> token, Flight flight)
         {
@@ -16,7 +16,7 @@ namespace FinalProject_Part1
         }
         public void CancelTicket(LoginToken<Customer> token, Ticket ticket)
         {
-            throw new NotImplementedException();
+            _ticketDAO.Remove(ticket);
         }
 
     }
