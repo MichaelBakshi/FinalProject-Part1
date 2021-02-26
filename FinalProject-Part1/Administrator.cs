@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    public class Administrator : IPoco, IUserDAO
+    public class Administrator : IPoco, IUser
     {
         public int Id { get; set; }
         public string First_Name { get; set; }
