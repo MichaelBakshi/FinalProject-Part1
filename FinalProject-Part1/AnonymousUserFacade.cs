@@ -7,13 +7,6 @@ namespace FinalProject_Part1
     public class AnonymousUserFacade : FacadeBase, IAnonymousUserFacade
     {
         
-        //public List<AirlineCompany> GetAllAirlines()
-        //{
-            
-        //    throw new NotImplementedException();
-        //    //_airlineDAO 
-
-        //}
         public IList<Flight> GetAllFlights()
         {
             return _flightDAO.GetAll();
@@ -33,19 +26,19 @@ namespace FinalProject_Part1
         }
         public IList<Flight> GetFlightsByOriginCountry(int countryCode)
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetFlightsByOriginCountry(countryCode);
         }
         public IList<Flight> GetFlightsByDestinationCountry(int countryCode)
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetFlightsByDestinationCountry(countryCode);
         }
         public IList<Flight> GetFlightsByDepatrureDate(DateTime departureDate)
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetFlightsByDepartureDate(departureDate);
         }
         public IList<Flight> GetFlightsByLandingDate(DateTime landingDate)
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetFlightsByLandingDate(landingDate);
         }
     }
 }

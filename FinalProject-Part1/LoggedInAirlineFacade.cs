@@ -8,31 +8,44 @@ namespace FinalProject_Part1
     {
         public IList<Ticket> GetAllTickets(LoginToken<AirlineCompany> token)
         {
-            throw new NotImplementedException();
+            return _ticketDAO.GetAll();
         }
-        public IList<Ticket> GetAllFlights(LoginToken<AirlineCompany> token)
+        public IList<Flight> GetAllFlights(LoginToken<AirlineCompany> token)
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetAll();
         }
         public void CancelFlight(LoginToken<AirlineCompany> token, Flight flight)
         {
-            throw new NotImplementedException();
+            _flightDAO.Remove(flight);
         }
         public void CreateFlight(LoginToken<AirlineCompany> token, Flight flight)
         {
-            throw new NotImplementedException();
+            _flightDAO.Add(flight);
         }
         public void UpdateFlight(LoginToken<AirlineCompany> token, Flight flight)
         {
-            throw new NotImplementedException();
+            _flightDAO.Update(flight);
         }
         public void ChangeMyPassword(LoginToken<AirlineCompany> token, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            if (oldPassword==token.User.user.Password)
+            {
+                token.User.user.Password = newPassword;
+                _airlineDAO.Update(token.User);
+                //log4net
+            }
+            else
+            {
+                throw new WrongCredentialsException("The old password is incorrect. Please try agsin.");
+                //log4net
+            }
         }
         public void MofidyAirlineDetails(LoginToken<AirlineCompany> token, AirlineCompany airline)
         {
-            throw new NotImplementedException();
+            if (token != null)
+            {
+                _airlineDAO.Update(airline);
+            }
         }
 
     }

@@ -12,39 +12,39 @@ namespace FinalProject_Part1
         }
         public void CreateNewAirline(LoginToken<Administrator> token, AirlineCompany airline)
         {
-            throw new NotImplementedException();
+            _airlineDAO.Add(airline);
         }
-        public void UpdateAirlineDetails(LoginToken<Administrator> token, AirlineCompany customer)
+        public void UpdateAirlineDetails(LoginToken<Administrator> token, AirlineCompany airline)
         {
-            throw new NotImplementedException();
+            _airlineDAO.Update(airline);
         }
         public void RemoveAirline(LoginToken<Administrator> token, AirlineCompany airline)
         {
-            throw new NotImplementedException();
+            _airlineDAO.Remove(airline);
         }
         public void CreateNewCustomer(LoginToken<Administrator> token, Customer customer)
         {
-            throw new NotImplementedException();
+           _customerDAO.Add(customer);
         }
         public void UpdateCustomerDetails(LoginToken<Administrator> token, Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDAO.Update(customer);
         }
         public void RemoveCustomer(LoginToken<Administrator> token, Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDAO.Remove(customer);
         }
         public void CreateAdmin(LoginToken<Administrator> token, Administrator admin)
         {
-            throw new NotImplementedException();
+            _adminDAO.Add(admin);
         }
         public void UpdateAdmin(LoginToken<Administrator> token, Administrator admin)
         {
-            throw new NotImplementedException();
+            _adminDAO.Update(admin);
         }
         public void RemoveAdmin(LoginToken<Administrator> token, Administrator admin)
         {
-            throw new NotImplementedException();
+            _adminDAO.Remove(admin);
         }
 
     }
