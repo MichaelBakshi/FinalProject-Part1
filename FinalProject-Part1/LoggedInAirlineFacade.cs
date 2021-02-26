@@ -8,36 +8,62 @@ namespace FinalProject_Part1
     {
         public IList<Ticket> GetAllTickets(LoginToken<AirlineCompany> token)
         {
-            return _ticketDAO.GetAll();
-        }
-        public IList<Flight> GetAllFlights(LoginToken<AirlineCompany> token)
-        {
-            return _flightDAO.GetAll();
-        }
-        public void CancelFlight(LoginToken<AirlineCompany> token, Flight flight)
-        {
-            _flightDAO.Remove(flight);
-        }
-        public void CreateFlight(LoginToken<AirlineCompany> token, Flight flight)
-        {
-            _flightDAO.Add(flight);
-        }
-        public void UpdateFlight(LoginToken<AirlineCompany> token, Flight flight)
-        {
-            _flightDAO.Update(flight);
-        }
-        public void ChangeMyPassword(LoginToken<AirlineCompany> token, string oldPassword, string newPassword)
-        {
-            if (oldPassword==token.User.user.Password)
+            if (token != null)
             {
-                token.User.user.Password = newPassword;
-                _airlineDAO.Update(token.User);
-                //log4net
+                return _ticketDAO.GetAll();
             }
             else
             {
-                throw new WrongCredentialsException("The old password is incorrect. Please try agsin.");
-                //log4net
+                throw new Exception("There is a problem to get all tickets. Please check your login details.");
+            }
+        }
+        public IList<Flight> GetAllFlights(LoginToken<AirlineCompany> token)
+        {
+            if (token != null)
+            {
+                return _flightDAO.GetAll();
+            }
+            else
+            {
+                throw new Exception("There is a problem to get all flights. Please check your login details.");
+            }
+        }
+        public void CancelFlight(LoginToken<AirlineCompany> token, Flight flight)
+        {
+            if (token != null)
+            {
+                _flightDAO.Remove(flight);
+            }
+        }
+        public void CreateFlight(LoginToken<AirlineCompany> token, Flight flight)
+        {
+            if (token!=null)
+            {
+                _flightDAO.Add(flight);
+            }
+        }
+        public void UpdateFlight(LoginToken<AirlineCompany> token, Flight flight)
+        {
+            if (token != null)
+            { 
+                _flightDAO.Update(flight);
+            }
+        }
+        public void ChangeMyPassword(LoginToken<AirlineCompany> token, string oldPassword, string newPassword)
+        {
+            if (token != null)
+            {
+                if (oldPassword == token.User.user.Password)
+                {
+                    token.User.user.Password = newPassword;
+                    _airlineDAO.Update(token.User);
+                    //log4net
+                }
+                else
+                {
+                    throw new WrongCredentialsException("The old password is incorrect. Please try agsin.");
+                    //log4net
+                }
             }
         }
         public void MofidyAirlineDetails(LoginToken<AirlineCompany> token, AirlineCompany airline)

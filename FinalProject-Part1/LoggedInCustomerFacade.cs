@@ -8,7 +8,14 @@ namespace FinalProject_Part1
     {
         public IList<Flight> GetAllMyFlights(LoginToken<Customer> token)
         {
-            return _flightDAO.GetAll();
+            if (token != null)
+            {
+                return _flightDAO.GetAll();
+            }
+            else
+            {
+                throw new Exception("There is a problem to get all flights. Please check your login details.");
+            }
         }
         public Ticket PurchaseTicket(LoginToken<Customer> token, Flight flight)
         {
@@ -16,7 +23,10 @@ namespace FinalProject_Part1
         }
         public void CancelTicket(LoginToken<Customer> token, Ticket ticket)
         {
-            _ticketDAO.Remove(ticket);
+            if (token != null)
+            {
+                _ticketDAO.Remove(ticket);
+            }
         }
 
     }
