@@ -6,10 +6,10 @@ namespace FinalProject_Part1
 {
     class LoginService:ILoginService
     {
-        private IAirlineDAO _airlineDAO = new AirlineDAOPGSQL("");
+        private IAirlineDAO _airlineDAO = new AirlineDAOPGSQL();
         private ICustomerDAO _customerDAO = new CustomerDAOPGSQL();
-        private IAdminDAO _adminDAO = new AdminDAOPGSQL("");
-        private IUserDAO _userDAO = new UserDAOPGSQL("");
+        private IAdminDAO _adminDAO = new AdminDAOPGSQL();
+        private IUserDAO _userDAO = new UserDAOPGSQL();
 
         public bool TryLogin(string userName, string password, out ILoginToken token, out FacadeBase facade)
         {

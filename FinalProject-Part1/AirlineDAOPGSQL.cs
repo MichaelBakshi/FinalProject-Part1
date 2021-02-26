@@ -9,9 +9,9 @@ namespace FinalProject_Part1
     {
         private string m_conn_string;
 
-        public AirlineDAOPGSQL(string conn_string)
+        public AirlineDAOPGSQL()
         {
-            m_conn_string = conn_string;
+            m_conn_string = GlobalConfig.ConnectionString;
         }
 
 

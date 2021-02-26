@@ -9,9 +9,9 @@ namespace FinalProject_Part1
     {
         private string m_conn_string;
 
-        public TicketDAOPGSQL(string conn_string)
+        public TicketDAOPGSQL()
         {
-            m_conn_string = conn_string;
+            m_conn_string = GlobalConfig.ConnectionString;
         }
 
 

@@ -7,23 +7,12 @@ namespace FinalProject_Part1
 {
     public class CountryDAOPGSQL : ICountryDAO
     {
-        //void IBasicDb<Country>.Add(Country newItem)
-        //{
-
-        //}
-
-        //Country IBasicDb<Country>.Get()
-        //{
-        //    Country result = new Country();
-
-
-        //    return result;
-        //}
+       
         private string m_conn_string;
 
-        public CountryDAOPGSQL(string conn_string)
+        public CountryDAOPGSQL()
         {
-            m_conn_string = conn_string;
+            m_conn_string = GlobalConfig.ConnectionString;
         }
 
 
@@ -48,9 +37,6 @@ namespace FinalProject_Part1
 
         public void Add(Country c    )
         {
-            //ExecuteNonQuery("INSERT INTO VISITS(first_name, last_name, visited_at, phone, store_id)" +
-            //$"VALUES('{v.FirstName}', '{v.LastName}', '{v.VisitedAt}', '{v.Phone}', {v.StoreId});");
-
             ExecuteNonQuery($"call sp_insert_country('{c.Name}');");           
 
         }
