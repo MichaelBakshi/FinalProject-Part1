@@ -6,6 +6,6 @@ namespace FinalProject_Part1
 {
     public interface IUserDAO : IBasicDb<User>
     {
-
+        User GetByUsername(string username);
     }
 }

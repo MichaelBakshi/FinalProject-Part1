@@ -110,5 +110,11 @@ namespace FinalProject_Part1
         {
             int result = ExecuteNonQuery($"call sp_update_user( {u.Id}, '{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role})");
         }
+
+        public User GetByUsername(string username)
+        {
+            // To implement
+            return null;
+        }
     }
 }

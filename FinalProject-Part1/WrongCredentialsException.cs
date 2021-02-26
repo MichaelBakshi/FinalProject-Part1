@@ -4,7 +4,11 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class WrongCredentialsException
+    class WrongCredentialsException : ApplicationException
     {
+        public WrongCredentialsException(string message)
+        {
+
+        }
     }
 }
