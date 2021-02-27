@@ -19,7 +19,9 @@ namespace FinalProject_Part1
         }
         public Ticket PurchaseTicket(LoginToken<Customer> token, Flight flight)
         {
-            throw new NotImplementedException();
+            Ticket t = new Ticket(flight.Id, token.User.Id);
+             _ticketDAO.Add(t);
+            return t;
         }
         public void CancelTicket(LoginToken<Customer> token, Ticket ticket)
         {
