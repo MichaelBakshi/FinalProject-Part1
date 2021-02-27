@@ -61,7 +61,7 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    throw new WrongCredentialsException("The old password is incorrect. Please try agsin.");
+                    throw new WrongCredentialsException("The old password is incorrect. Please try again.");
                     //log4net
                 }
             }
