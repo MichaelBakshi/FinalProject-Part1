@@ -31,16 +31,14 @@ namespace ConsoleTests
             //UserDAOPGSQL userdao1 = new UserDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
             //userdao1.UpdateUser(7, "EL-AL", "elal", "elal@gmail.com", 2);
 
-            CustomerDAOPGSQL customerDAO = new CustomerDAOPGSQL();
+            //CustomerDAOPGSQL customerDAO = new CustomerDAOPGSQL();
             //customerDAO.UpdateCustomer(1, "Asaf", "Cohen", "Lapid", "08-8976543", "4580523652145236", 3);
-            Customer customer = customerDAO.GetById(4);
-            Console.WriteLine(customer);
+            //Customer customer = customerDAO.GetById(4);
+            //Console.WriteLine(customer);
 
-            // אוקיי אני יודע מה הבעיה
-            // אוקיי עכשיו אתה צריך להכניס סיסמא ושם הדאטא בייס
-            // היוזר ניים הוא postgres
-            // סבבה אני רואה שקראת לזה postgres
-            // אוקיי בוא תבדוק בטבלה של המדינות אם יש מונוליה
+            FlightDAOPGSQL flightDAOPGSQL = new FlightDAOPGSQL();
+            flightDAOPGSQL.GetAllFlightsVacancy();
+
         }
     }
 }
