@@ -122,8 +122,8 @@ namespace FinalProject_Part1
                     {
                         Flight f = new Flight
                         {
-                            Id = (int)reader["id"],
-                            Airline_Company_Id = (int)reader["airline_company_id"],
+                            //Id = (int)reader["id"],
+                            Airline_Company_Id = (int)(long)reader["airline_company_id"],
                             Origin_Country_Id = (int)reader["origin_country_id"],
                             Destination_Country_Id = (int)reader["destination_country_id"],
                             Departure_Time = (DateTime)reader["departure_time"],
@@ -157,8 +157,8 @@ namespace FinalProject_Part1
                     {
                         Flight f = new Flight
                         {
-                            Id = (int)reader["id"],
-                            Airline_Company_Id = (int)reader["airline_company_id"],
+                            Id = (int)(long)reader["id"],
+                            Airline_Company_Id = (int)(long)reader["airline_company_id"],
                             Origin_Country_Id = (int)reader["origin_country_id"],
                             Destination_Country_Id = (int)reader["destination_country_id"],
                             Departure_Time = (DateTime)reader["departure_time"],

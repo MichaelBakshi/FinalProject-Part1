@@ -37,7 +37,15 @@ namespace ConsoleTests
             //Console.WriteLine(customer);
 
             FlightDAOPGSQL flightDAOPGSQL = new FlightDAOPGSQL();
-            flightDAOPGSQL.GetAllFlightsVacancy();
+            //List<Flight> flights = flightDAOPGSQL.GetAll();
+            //foreach (var item in flights)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            Dictionary<Flight, int> keyValues = flightDAOPGSQL.GetAllFlightsVacancy();
+            foreach (KeyValuePair<Flight, int> kvp in keyValues)
+                Console.WriteLine("Flight: {0}, Available seats: {1}", kvp.Key, kvp.Value);
 
         }
     }
