@@ -12,8 +12,7 @@ namespace FinalProject_Part1
         private object key = new object();
         private static FlightsCenterSystem instance = null;
         private static object key_singleton = new object();
-        public const int max_connections = 10;
-        //private FlightsCenterSystem() { }
+        
         public static FlightsCenterSystem Instance
         {
             get 
@@ -31,22 +30,26 @@ namespace FinalProject_Part1
                 return instance; 
             }
         }
-        public void DoSomething ()
-        {
-            Console.WriteLine("Hello from singleton!");
-        }
+        //public void DoSomething ()
+        //{
+        //    Console.WriteLine("Hello from singleton!");
+        //}
 
-        private FlightsCenterSystem ()
-        {
-            for (int i = 0; i < max_connections; i++)
-            {
-                //m_connections.Enqueue(new MyDbConnection());
-            }
+        //private FlightsCenterSystem ()
+        //{
+        //    for (int i = 0; i < max_connections; i++)
+        //    {
+        //        //m_connections.Enqueue(new MyDbConnection());
+        //    }
 
-        }
+        //}
 
+        //ConnectionPool.DbConnection
 
-
-        //public FacadeBase facade ()
+        //public FacadeBase GetFacade ()
+        //{
+        //    LoginService
+        //}
+        
     }
 }
