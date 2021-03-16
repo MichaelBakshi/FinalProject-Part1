@@ -6,6 +6,7 @@ namespace FinalProject_Part1
 {
     class LoginService:ILoginService
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IAirlineDAO _airlineDAO = new AirlineDAOPGSQL();
         private ICustomerDAO _customerDAO = new CustomerDAOPGSQL();
         private IAdminDAO _adminDAO = new AdminDAOPGSQL();
@@ -25,46 +26,66 @@ namespace FinalProject_Part1
             }
             else
             {
-                //log4net
-                User user = _userDAO.GetByUsername(userName);
-                if (user.Password == password)
+                try
                 {
-                    if (user.User_Role == 1)
+                    User user;
+                    try
                     {
-                        Administrator admin = _adminDAO.GetById(user.Id);
-                        admin.user = user;
-                        token = new LoginToken<Administrator>()
-                        {
-                            User = admin
-                        };
-                        facade = new LoggedInAdministratorFacade();
+                        user = _userDAO.GetByUsername(userName);
                     }
-                    if (user.User_Role == 2)
+                    catch (Exception e)
                     {
-                        AirlineCompany airline = _airlineDAO.GetById(user.Id);
-                        airline.user = user;
-                        token = new LoginToken<AirlineCompany>()
-                        {
-                            User = airline
-                        };
-                        facade = new LoggedInAirlineFacade();
+                        logger.Fatal("my error message", e);
+                        return false;
                     }
-                    if (user.User_Role == 3)
+                   
+                    if (user.Password == password)
                     {
-                        Customer customer = _customerDAO.GetById(user.Id);
-                        customer.user = user;
-                        token = new LoginToken<Customer>()
+                        if (user.User_Role == 1)
                         {
-                            User = customer
-                        };
-                        facade = new LoggedInCustomerFacade();
+                            Administrator admin = _adminDAO.GetById(user.Id);
+                            admin.user = user;
+                            token = new LoginToken<Administrator>()
+                            {
+                                User = admin
+                            };
+                            facade = new LoggedInAdministratorFacade();
+                        }
+                        if (user.User_Role == 2)
+                        {
+                            AirlineCompany airline = _airlineDAO.GetById(user.Id);
+                            airline.user = user;
+                            token = new LoginToken<AirlineCompany>()
+                            {
+                                User = airline
+                            };
+                            facade = new LoggedInAirlineFacade();
+                        }
+                        if (user.User_Role == 3)
+                        {
+                            Customer customer = _customerDAO.GetById(user.Id);
+                            customer.user = user;
+                            token = new LoginToken<Customer>()
+                            {
+                                User = customer
+                            };
+                            facade = new LoggedInCustomerFacade();
+                        }
+                        return true;
                     }
-                    return true;
+                    else
+                    {
+                        throw new WrongCredentialsException("Username or password are incorrect. Please try again.");
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    throw new WrongCredentialsException("Username or password are incorrect. Please try again.");
-                }                
+
+                    logger.Error("my error message", e);
+                    return false;
+                }
+                //log4net
+              
             }
 
         }

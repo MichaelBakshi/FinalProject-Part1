@@ -6,6 +6,8 @@ namespace FinalProject_Part1
 {
     class LoggedInAdministratorFacade : AnonymousUserFacade, ILoggedInAdministratorFacade
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public IList<Customer> GetAllCustomers(LoginToken<Administrator> token)
         {
             //if (token != null)
@@ -99,11 +101,14 @@ namespace FinalProject_Part1
         }
         public void CreateAdmin(LoginToken<Administrator> token, Administrator admin)
         {
+            logger.Debug("starting CreateAdmin()");
+
             if (token != null)
             {
                 if (token.User.Level == 3)
                 {
                     _adminDAO.Add(admin);
+
                 }
                 else
                 {
