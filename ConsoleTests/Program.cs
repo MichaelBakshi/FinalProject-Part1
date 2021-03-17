@@ -58,11 +58,11 @@ namespace ConsoleTests
             //foreach (KeyValuePair<Flight, int> kvp in keyValues)
             //    Console.WriteLine("Flight: {0}, Available seats: {1}", kvp.Key, kvp.Value);
 
-            //FlightsCenterSystem flightsCenter = FlightsCenterSystem.Instance;
+            FlightsCenterSystem flightsCenter = FlightsCenterSystem.Instance;
             //FlightsCenterSystem flightsCenter1 = FlightsCenterSystem.Instance.GetFacade();
             //bool equal = flightsCenter == flightsCenter1;
 
-            //flightsCenter.DoSomething();
+            flightsCenter.DoSomething();
 
         }
     }

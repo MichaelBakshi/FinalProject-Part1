@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace FinalProject_Part1
 {
@@ -9,6 +11,10 @@ namespace FinalProject_Part1
         //singleton
         //GetFacade
 
+        private Queue<NpgsqlConnection> m_connections;
+        public const int max_connections = 10;
+        // TODO: change this! should come from config file!
+        private static string conn_string = "Host=localhost;Username=postgres;Password=admin;Database=postgres";
         private object key = new object();
         private static FlightsCenterSystem instance = null;
         private static object key_singleton = new object();
@@ -30,19 +36,79 @@ namespace FinalProject_Part1
                 return instance; 
             }
         }
-        //public void DoSomething ()
-        //{
-        //    Console.WriteLine("Hello from singleton!");
-        //}
+        public void DoSomething()
+        {
+            Console.WriteLine("Hello from singleton!");
+        }
 
-        //private FlightsCenterSystem ()
+        private FlightsCenterSystem()
+        {
+            m_connections = new Queue<NpgsqlConnection>(max_connections);
+
+
+            for (int i = 0; i < max_connections; i++)
+            {
+                m_connections.Enqueue(new NpgsqlConnection(conn_string));
+            }
+        }
+
+        public NpgsqlConnection GetConnection()
+        {
+            lock (key)
+            {
+                while (m_connections.Count == 0)
+                {
+                    Monitor.Wait(key);
+                }
+                NpgsqlConnection result = m_connections.Dequeue();
+                //result.Open(); // check if not failed, if so create new connection
+                result = new NpgsqlConnection(conn_string); // is this better?
+                result.Open();
+                return result;
+            }
+        }
+
+        //public MyDbConnection GetConnection()
         //{
-        //    for (int i = 0; i < max_connections; i++)
+        //    try
         //    {
-        //        //m_connections.Enqueue(new MyDbConnection());
+        //        Monitor.Enter(key);
+        //        while (m_connections.Count == 0)
+        //        {
+        //            Monitor.Wait(key);
+        //        }
+        //        var conn = m_connections.Dequeue();
+        //        return conn;
         //    }
-
+        //    finally
+        //    {
+        //        Monitor.Exit(key);
+        //    }
         //}
+
+        public void ReturnConnection(NpgsqlConnection conn)
+        {
+            lock (key)
+            {
+                //conn.Close(); // here? or maybe somewhere else?
+                m_connections.Enqueue(conn);
+                Monitor.Pulse(key);
+            }
+        }
+
+        //public void RestoreConnection(MyDbConnection conn)
+        //{
+        //    try
+        //    {
+        //        Monitor.Enter(key);
+        //        m_connections.Enqueue(conn);
+        //    }
+        //    finally
+        //    {
+        //        Monitor.Exit(key);
+        //    }
+        //}
+
 
         //ConnectionPool.DbConnection
 
@@ -51,6 +117,6 @@ namespace FinalProject_Part1
 
         //    LoginService
         //}
-        
+
     }
 }
