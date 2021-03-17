@@ -8,7 +8,7 @@ namespace FinalProject_Part1
     {
         public WrongCredentialsException(string message)
         {
-            Console.WriteLine(message);
+            //Console.WriteLine(message);
         }
     }
 }

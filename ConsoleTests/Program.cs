@@ -1,14 +1,25 @@
 ﻿using FinalProject_Part1;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace ConsoleTests
 {
     class Program
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         static void Main(string[] args)
         {
+            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+            
             Console.WriteLine("Hello World!");
+
+            log.Info("test");
             //CountryDAOPGSQL dao = new CountryDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
             //dao.AddCountry(new Country("China"));
             //Country result_of_get = dao.GetCountryById(5);
@@ -36,7 +47,7 @@ namespace ConsoleTests
             //Customer customer = customerDAO.GetById(4);
             //Console.WriteLine(customer);
 
-            FlightDAOPGSQL flightDAOPGSQL = new FlightDAOPGSQL();
+            //FlightDAOPGSQL flightDAOPGSQL = new FlightDAOPGSQL();
             //List<Flight> flights = flightDAOPGSQL.GetAll();
             //foreach (var item in flights)
             //{
@@ -47,11 +58,11 @@ namespace ConsoleTests
             //foreach (KeyValuePair<Flight, int> kvp in keyValues)
             //    Console.WriteLine("Flight: {0}, Available seats: {1}", kvp.Key, kvp.Value);
 
-            FlightsCenterSystem flightsCenter = FlightsCenterSystem.Instance;
+            //FlightsCenterSystem flightsCenter = FlightsCenterSystem.Instance;
             //FlightsCenterSystem flightsCenter1 = FlightsCenterSystem.Instance.GetFacade();
             //bool equal = flightsCenter == flightsCenter1;
 
-            flightsCenter.DoSomething();
+            //flightsCenter.DoSomething();
 
         }
     }

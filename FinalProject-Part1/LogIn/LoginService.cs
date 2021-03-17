@@ -19,6 +19,7 @@ namespace FinalProject_Part1
             if (userName== "admin" && password =="9999" )
             {
                 //log4net
+                //logger.
                 token = new LoginToken<Administrator>();
                 facade = new LoggedInAdministratorFacade();   
                 return true;
@@ -80,7 +81,7 @@ namespace FinalProject_Part1
                 }
                 catch (Exception e)
                 {
-
+                    Console.WriteLine(e);
                     logger.Error("my error message", e);
                     return false;
                 }
