@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace ConsoleTests
 {
@@ -14,12 +15,12 @@ namespace ConsoleTests
 
         static void Main(string[] args)
         {
-            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+            //var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            //XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
             
-            Console.WriteLine("Hello World!");
+            //Console.WriteLine("Hello World!");
 
-            log.Info("test");
+            //log.Info("test");
             //CountryDAOPGSQL dao = new CountryDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
             //dao.AddCountry(new Country("China"));
             //Country result_of_get = dao.GetCountryById(5);
@@ -62,7 +63,18 @@ namespace ConsoleTests
             //FlightsCenterSystem flightsCenter1 = FlightsCenterSystem.Instance.GetFacade();
             //bool equal = flightsCenter == flightsCenter1;
 
-            flightsCenter.DoSomething();
+            for(int i=0;i<15;i++)
+            {
+                ThreadPool.QueueUserWorkItem((x) =>
+                {
+                    var a = flightsCenter.GetConnection();
+                    Console.WriteLine($"thread {Thread.CurrentThread}, got connection");
+                    Thread.Sleep(2000);
+                    flightsCenter.ReturnConnection(a);
+                    Console.WriteLine($"thread {Thread.CurrentThread}, returned connection");
+                });
+            }
+            Console.ReadLine();
 
         }
     }

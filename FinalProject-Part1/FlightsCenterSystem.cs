@@ -94,6 +94,8 @@ namespace FinalProject_Part1
                 m_connections.Enqueue(conn);
                 Monitor.Pulse(key);
             }
+
+            
         }
 
         //public void RestoreConnection(MyDbConnection conn)
@@ -112,11 +114,22 @@ namespace FinalProject_Part1
 
         //ConnectionPool.DbConnection
 
-        //public FacadeBase GetFacade ()
+        //public FacadeBase GetFacade()
         //{
 
         //    LoginService
         //}
 
+        public FacadeBase GetFacade<T>(LoginToken<T> token) where T : IUser
+        {
+            if (typeof(T) == typeof(Administrator))
+                return new LoggedInAdministratorFacade();
+            if (typeof(T) == typeof(AirlineCompany))
+                return new LoggedInAirlineFacade();
+            if (typeof(T) == typeof(Customer))
+                return new LoggedInCustomerFacade();
+            else
+                return new AnonymousUserFacade();
+        }
     }
 }
