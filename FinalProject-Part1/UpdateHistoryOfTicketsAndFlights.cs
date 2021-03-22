@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace FinalProject_Part1
 {
-    public static class UpdateHistoryOfTicketsAndFlights
+    public  class UpdateHistoryOfTicketsAndFlights
     {
         private static string conn_string = "Host=localhost;Username=postgres;Password=admin;Database=postgres";
         public static void UpdateTicketsHistory()
@@ -40,13 +40,13 @@ namespace FinalProject_Part1
         {
             while (true)
             {
-                if (DateTime.Now.ToString("HH:mm") == "00:00")
-                {
+                //if (DateTime.Now.ToString("HH:mm") == "00:00")
+                //{
                     UpdateTicketsHistory();
                     Thread.Sleep(5000);
                     UpdateFlightsHistory();
                     Thread.Yield();
-                }
+                //}
             }
 
         }

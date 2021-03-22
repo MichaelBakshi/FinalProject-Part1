@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FinalProject_Part1
 {
@@ -18,9 +19,9 @@ namespace FinalProject_Part1
         private object key = new object();
         private static FlightsCenterSystem instance = null;
         private static object key_singleton = new object();
+        UpdateHistoryOfTicketsAndFlights uh;
+
         
-
-
         public static FlightsCenterSystem Instance
         {
             get 
@@ -48,9 +49,14 @@ namespace FinalProject_Part1
                 m_connections.Enqueue(new NpgsqlConnection(conn_string));
             }
 
-            Thread t1 = new Thread(new ThreadStart(UpdateHistoryOfTicketsAndFlights.UpdateHistory));
-            t1.Start();
-            
+            //Thread t1 = new Thread(new ThreadStart(UpdateHistoryOfTicketsAndFlights.UpdateHistory));
+            //t1.Start();
+            //Task.Run(() => UpdateHistoryOfTicketsAndFlights.UpdateHistory());
+
+            Task.Factory.StartNew(() =>
+            {
+                UpdateHistoryOfTicketsAndFlights.UpdateHistory();
+            }, TaskCreationOptions.LongRunning);
         }
 
         public NpgsqlConnection GetConnection()
