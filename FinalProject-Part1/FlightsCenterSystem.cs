@@ -18,7 +18,7 @@ namespace FinalProject_Part1
         private object key = new object();
         private static FlightsCenterSystem instance = null;
         private static object key_singleton = new object();
-        private string m_conn_string;
+        
 
 
         public static FlightsCenterSystem Instance
@@ -39,46 +39,6 @@ namespace FinalProject_Part1
             }
         }
 
-
-        public void UpdateTicketsHistory()
-        {
-
-            using (NpgsqlCommand cmd = new NpgsqlCommand())
-            {
-                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
-                {
-                    cmd.Connection.Open();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"call sp_update_tickets_history()";
-                }
-            }
-        }
-
-        public void UpdateFlightsHistory()
-        {
-
-            using (NpgsqlCommand cmd = new NpgsqlCommand())
-            {
-                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
-                {
-                    cmd.Connection.Open();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"call * sp_update_flights_history()";
-                }
-            }
-        }
-
-        public void UpdateHistory()
-        {
-            if (DateTime.Now.ToString("HH:mm") == "00:00")
-            {
-                UpdateTicketsHistory();
-                Thread.Sleep(5000);
-                UpdateFlightsHistory();
-                Thread.Yield();
-            }
-        }
-
         private FlightsCenterSystem()
         {
             m_connections = new Queue<NpgsqlConnection>(max_connections);
@@ -88,7 +48,7 @@ namespace FinalProject_Part1
                 m_connections.Enqueue(new NpgsqlConnection(conn_string));
             }
 
-            Thread t1 = new Thread(new ThreadStart(UpdateHistory));
+            Thread t1 = new Thread(new ThreadStart(UpdateHistoryOfTicketsAndFlights.UpdateHistory));
             t1.Start();
             
         }
