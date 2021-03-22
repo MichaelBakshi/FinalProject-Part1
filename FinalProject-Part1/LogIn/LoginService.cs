@@ -18,8 +18,7 @@ namespace FinalProject_Part1
             facade = null;
             if (userName== "admin" && password =="9999" )
             {
-                //log4net
-                //logger.
+                logger.Info("Super administrator logged in.");
                 token = new LoginToken<Administrator>();
                 facade = new LoggedInAdministratorFacade();   
                 return true;
@@ -36,7 +35,7 @@ namespace FinalProject_Part1
                     }
                     catch (Exception e)
                     {
-                        logger.Fatal("my error message", e);
+                        logger.Fatal("Wrong username. Please try again.", e);
                         return false;
                     }
                    
@@ -72,17 +71,19 @@ namespace FinalProject_Part1
                             };
                             facade = new LoggedInCustomerFacade();
                         }
+                        logger.Info("Login was completed. Username and password are correct.");
                         return true;
                     }
                     else
                     {
+                        logger.Error("Login failed. Username or password are incorrect.");
                         throw new WrongCredentialsException("Username or password are incorrect. Please try again.");
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    logger.Error("my error message", e);
+                    logger.Error("Login failed.", e);
                     return false;
                 }
                 //log4net
