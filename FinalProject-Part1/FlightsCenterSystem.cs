@@ -57,6 +57,7 @@ namespace FinalProject_Part1
             {
                 UpdateHistoryOfTicketsAndFlights.UpdateHistory();
             }, TaskCreationOptions.LongRunning);
+            
         }
 
         public NpgsqlConnection GetConnection()
