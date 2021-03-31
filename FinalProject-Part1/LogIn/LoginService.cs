@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class LoginService:ILoginService
+    public class LoginService:ILoginService
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IAirlineDAO _airlineDAO = new AirlineDAOPGSQL();
@@ -12,15 +12,13 @@ namespace FinalProject_Part1
         private IAdminDAO _adminDAO = new AdminDAOPGSQL();
         private IUserDAO _userDAO = new UserDAOPGSQL();
 
-        public bool TryLogin(string userName, string password, out ILoginToken token, out FacadeBase facade)
+        public bool TryLogin(string userName, string password, out ILoginToken token)
         {
             token = null;
-            facade = null;
             if (userName== "admin" && password =="9999" )
             {
                 logger.Info("Super administrator logged in.");
-                token = new LoginToken<Administrator>();
-                facade = new LoggedInAdministratorFacade();   
+                token = new LoginToken<Administrator>();  
                 return true;
                 
             }
@@ -49,7 +47,6 @@ namespace FinalProject_Part1
                             {
                                 User = admin
                             };
-                            facade = new LoggedInAdministratorFacade();
                         }
                         if (user.User_Role == 2)
                         {
@@ -59,7 +56,6 @@ namespace FinalProject_Part1
                             {
                                 User = airline
                             };
-                            facade = new LoggedInAirlineFacade();
                         }
                         if (user.User_Role == 3)
                         {
@@ -69,7 +65,6 @@ namespace FinalProject_Part1
                             {
                                 User = customer
                             };
-                            facade = new LoggedInCustomerFacade();
                         }
                         logger.Info("Login was completed. Username and password are correct.");
                         return true;

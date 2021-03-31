@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    interface ILoginToken
+    public interface ILoginToken
     {
     }
 }

@@ -6,6 +6,6 @@ namespace FinalProject_Part1
 {
     interface ILoginService
     {
-        public bool TryLogin(string userName, string password, out ILoginToken token, out FacadeBase facade);
+        public bool TryLogin(string userName, string password, out ILoginToken token);
     }
 }

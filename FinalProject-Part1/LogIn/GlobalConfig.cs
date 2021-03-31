@@ -16,11 +16,12 @@ namespace FinalProject_Part1
         }
 
         public static string ConnectionString { get {return configJson.ConnectionString; } }
-
+        public static string TestConnectionString { get { return configJson.TestConnectionString; } }
     }
 
     class ConfigJson
     {
         public string ConnectionString { get; set; }
+        public string TestConnectionString { get; set; }
     }
 }

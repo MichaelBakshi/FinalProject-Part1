@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class LoggedInAirlineFacade : AnonymousUserFacade, ILoggedInAirlineFacade
+    public class LoggedInAirlineFacade : AnonymousUserFacade, ILoggedInAirlineFacade
     {
         public IList<Ticket> GetAllTickets(LoginToken<AirlineCompany> token)
         {
