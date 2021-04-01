@@ -9,16 +9,16 @@ namespace FinalProject_Part1
     {
         private string m_conn_string;
 
-        public AdminDAOPGSQL(bool testMode = false)
+        public AdminDAOPGSQL()
         {
-            if (!testMode)
-            {
+            //if (!testMode)
+            //{
                 m_conn_string = GlobalConfig.ConnectionString;
-            }
-            else
-            {
-                m_conn_string = GlobalConfig.TestConnectionString;
-            }
+            //}
+            //else
+            //{
+            //    m_conn_string = GlobalConfig.TestConnectionString;
+            //}
         }
 
 

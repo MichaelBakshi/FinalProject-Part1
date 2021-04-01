@@ -12,6 +12,7 @@ namespace FinalProjectTestCore
         public void ClearDB ()
         {
             //call dao for sp which dletes all tables. exept caountries
+            TestingDAOPGSQL.ExecuteNonQuery($"call sp_delete_all_tables()");
         }
 
         [TestInitialize]

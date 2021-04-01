@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleTests\ConsoleTests.csproj" />
     <ProjectReference Include="..\FinalProject-Part1\FinalProject-Part1.csproj" />
   </ItemGroup>
 
