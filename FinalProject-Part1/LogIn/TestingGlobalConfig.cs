@@ -11,7 +11,7 @@ namespace FinalProject_Part1.LogIn
         private static ConfigJson configJson;
         static TestingGlobalConfig()
         {
-            string configFile = File.ReadAllText("C:\\Users\\Michael Bakshi\\source\\repos\\FinalProject-Part1\\config.json");
+            string configFile = File.ReadAllText("C:\\Users\\Michael Bakshi\\source\\repos\\FinalProject-Part1\\testing_config.json");
             configJson = JsonConvert.DeserializeObject<ConfigJson>(configFile);
         }
 
