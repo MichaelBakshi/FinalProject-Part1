@@ -34,11 +34,6 @@ namespace FinalProjectTestCore
             airlineFacade.CreateFlight(new LoginToken<AirlineCompany>(), new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1));
             administratorFacade.CreateTicket(new LoginToken<Administrator>(), new Ticket(1, 1));
 
-            // add flights
-
-            // add customers
-
-            // add tickets
         }
     }
 }
