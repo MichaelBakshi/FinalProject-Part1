@@ -18,7 +18,7 @@ namespace FinalProject_Part1
         }
         public Dictionary<Flight, int> GetAllFlightsVacancy()
         {
-            throw new NotImplementedException();
+            return _flightDAO.GetAllFlightsVacancy();
         }
         public Flight GetFlightById(int id)
         {

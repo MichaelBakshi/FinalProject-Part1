@@ -52,6 +52,10 @@ namespace FinalProject_Part1
             { 
                 _flightDAO.Update(flight);
             }
+            else
+            {
+                throw new Exception("There is a problem to get all flights. Please check your login details.");
+            }
         }
         public void ChangeMyPassword(LoginToken<AirlineCompany> token, string oldPassword, string newPassword)
         {
@@ -75,6 +79,10 @@ namespace FinalProject_Part1
             if (token != null)
             {
                 _airlineDAO.Update(airline);
+            }
+            else
+            {
+                throw new Exception("There is a problem to get all flights. Please check your login details.");
             }
         }
 

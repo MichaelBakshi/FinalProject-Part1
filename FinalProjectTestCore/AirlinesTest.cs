@@ -20,12 +20,14 @@ namespace FinalProjectTestCore
             airlineFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<AirlineCompany>) as LoggedInAirlineFacade;
         }
 
+        
+
         [TestMethod]
-        public void GetFlightById()
+        public void GetAllTickets()
         {
             Flight flight = airlineFacade.GetFlightById(1);
-            Flight expectedFlight = new Flight(1, 1, 2, DateTime.Now, DateTime.Now, 5);
-            Assert.AreEqual(flight, expectedFlight);  
+            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Assert.AreEqual(flight, expectedFlight);
         }
 
         [TestMethod]
@@ -38,7 +40,23 @@ namespace FinalProjectTestCore
             });
             Assert.ThrowsException<Exception>(() =>
             {
-                airlineFacade.GetAllFlights(null);
+                airlineFacade.GetAllTickets(null);
+            });
+            Assert.ThrowsException<Exception>(() =>
+            {
+                airlineFacade.CreateFlight(null, new Flight());
+            });
+            Assert.ThrowsException<Exception>(() =>
+            {
+                airlineFacade.UpdateFlight(null, new Flight());
+            });
+            Assert.ThrowsException<Exception>(() =>
+            {
+                airlineFacade.ChangeMyPassword(null, "old_password", "new_password");
+            });
+            Assert.ThrowsException<Exception>(() =>
+            {
+                airlineFacade.MofidyAirlineDetails(null, new AirlineCompany());
             });
         }
     }
