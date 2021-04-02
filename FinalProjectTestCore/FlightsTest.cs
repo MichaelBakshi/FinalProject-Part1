@@ -7,6 +7,7 @@ namespace FinalProjectTestCore
     public class FlightsTest
     {
         FlightDAOPGSQL flightDAOPGSQL = new FlightDAOPGSQL();
+        
 
         [TestInitialize]
         public void ClearDB ()
@@ -20,7 +21,7 @@ namespace FinalProjectTestCore
         {
             //login to users
             ILoginToken loginToken;
-            new LoginService().TryLogin("user", "pass", out loginToken);
+            new LoginService().TryLogin( "userName",  "password", out loginToken);
             LoggedInAirlineFacade facade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<AirlineCompany>) as LoggedInAirlineFacade;
         }
 
