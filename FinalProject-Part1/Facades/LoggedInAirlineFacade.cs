@@ -34,6 +34,10 @@ namespace FinalProject_Part1
             {
                 _flightDAO.Remove(flight);
             }
+            else
+            {
+                throw new Exception("There is a problem to get all flights. Please check your login details.");
+            }
         }
         public void CreateFlight(LoginToken<AirlineCompany> token, Flight flight)
         {

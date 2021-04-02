@@ -16,6 +16,7 @@ namespace FinalProject_Part1
         void CreateAdmin(LoginToken<Administrator> token, Administrator admin);
         void UpdateAdmin(LoginToken<Administrator> token, Administrator admin);
         void RemoveAdmin(LoginToken<Administrator> token, Administrator admin);
+        void CreateUser(LoginToken<Administrator> token, User user);
 
     }
 }

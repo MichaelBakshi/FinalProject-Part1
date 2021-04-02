@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1
 {
-    class LoggedInAdministratorFacade : AnonymousUserFacade, ILoggedInAdministratorFacade
+    public class LoggedInAdministratorFacade : AnonymousUserFacade, ILoggedInAdministratorFacade
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -137,6 +137,21 @@ namespace FinalProject_Part1
                 if (token.User.Level == 3)
                 {
                     _adminDAO.Remove(admin);
+                }
+                else
+                {
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to access this function");
+                }
+            }
+        }
+
+        public void CreateUser(LoginToken<Administrator> token, User user)
+        {
+            if (token != null)
+            {
+                if (token.User.Level == 1)
+                {
+                    _userDAO.Add(user);
                 }
                 else
                 {
