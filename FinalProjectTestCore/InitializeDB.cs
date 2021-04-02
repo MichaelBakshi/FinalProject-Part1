@@ -22,16 +22,17 @@ namespace FinalProjectTestCore
         [TestInitialize]
         public void InsertData()
         {
-            administratorFacade.CreateUser(new LoginToken<Administrator>(), new User("us", "123", "a@a.com", 1));
-            administratorFacade.CreateUser(new LoginToken<Administrator>(), new User("us", "123", "a@a.com", 2));
-            administratorFacade.CreateUser(new LoginToken<Administrator>(), new User("us", "123", "a@a.com", 3));
+            administratorFacade.CreateUser(new LoginToken<Administrator>(), new User("admin_username", "admin_password", "admin_email", 1));
+            administratorFacade.CreateUser(new LoginToken<Administrator>(), new User("airline_username", "airline_passsword", "airline_email", 2));
+            administratorFacade.CreateUser(new LoginToken<Administrator>(), new User("customer_username", "customer_password", "customer_email", 3));
 
-            administratorFacade.CreateNewAirline(new LoginToken<Administrator>(), new AirlineCompany(
-                "El-Al",1,1
-                ));
+            administratorFacade.CreateAdmin(new LoginToken<Administrator>(), new Administrator("adminfirst_name", "admin_last_name", 1, 1));
+            administratorFacade.CreateNewAirline(new LoginToken<Administrator>(), new AirlineCompany("airline_name", 3, 2));
+            administratorFacade.CreateNewCustomer(new LoginToken<Administrator>(), new Customer("customer_first_name", "customer_last_name", "customer_address", "customer_phone_no", "customer_credit_card_no", 3));
 
 
-            airlineFacade.CreateFlight(new LoginToken<AirlineCompany>(), new Flight(1, 1, 2, DateTime.Now, DateTime.Now, 5));
+            airlineFacade.CreateFlight(new LoginToken<AirlineCompany>(), new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1));
+            administratorFacade.
 
             // add flights
 

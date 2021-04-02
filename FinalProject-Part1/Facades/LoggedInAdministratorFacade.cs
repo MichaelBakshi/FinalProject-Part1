@@ -149,9 +149,24 @@ namespace FinalProject_Part1
         {
             if (token != null)
             {
-                if (token.User.Level == 1)
+                if (token.User.Level == 3)
                 {
                     _userDAO.Add(user);
+                }
+                else
+                {
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to access this function");
+                }
+            }
+        }
+
+        public void CreateTicket(LoginToken<Administrator> token, Ticket ticket)
+        {
+            if (token != null)
+            {
+                if (token.User.Level == 3)
+                {
+                    _ticketDAO.Add(ticket);
                 }
                 else
                 {
