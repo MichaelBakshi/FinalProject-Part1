@@ -19,7 +19,7 @@ namespace FinalProject_Part1
         private object key = new object();
         private static FlightsCenterSystem instance = null;
         private static object key_singleton = new object();
-        UpdateHistoryOfTicketsAndFlights uh;
+        //UpdateHistoryOfTicketsAndFlights uh;
 
         
         public static FlightsCenterSystem Instance

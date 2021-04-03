@@ -10,12 +10,13 @@ namespace FinalProjectTestCore
     public class AirlinesTest
     {
         LoggedInAirlineFacade airlineFacade;
+        LoginToken<AirlineCompany> token;
 
         [TestInitialize]
         public void TryLogin()
         {
             ILoginToken loginToken;
-            new LoginService().TryLogin("userName", "password", out loginToken);
+             token= new LoginService().TryLogin("userName", "password", out token);
             airlineFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<AirlineCompany>) as LoggedInAirlineFacade;
         }
 
@@ -53,9 +54,11 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetAllTickets()
         {
-            Flight flight = airlineFacade.GetFlightById(1);
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
-            Assert.AreEqual(flight, expectedFlight);
+            Ticket expectedTicket = new Ticket(1, 1);
+            List<Ticket> list_of_tickets = (List<Ticket>)airlineFacade.GetAllTickets();
+            List<Ticket> expected_list_of_tickets = null;
+            expected_list_of_tickets.Add(expectedTicket);
+            Assert.AreEqual(list_of_tickets, expected_list_of_tickets);
         }
 
         [TestMethod]
@@ -73,58 +76,25 @@ namespace FinalProjectTestCore
         public void CancelFlight()
         {
             //Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
-            List<Flight> list_of_flights = (List<Flight>)airlineFacade.GetAllFlights();
-            List<Flight> expected_list_of_flights = null;
-            expected_list_of_flights.Remove(expectedFlight);
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            //List<Flight> list_of_flights = (List<Flight>)airlineFacade.CancelFlight();
+            //Flight expected_cancelled_flight = null;
+            //expected_list_of_flights.Remove(expectedFlight);
+            //Assert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
-        public void CancelFlight(LoginToken<AirlineCompany> token, Flight flight)
+
+
+
+        //create flight
+        [TestMethod]
+        public void CreateFlight()
         {
-            if (token != null)
-            {
-                _flightDAO.Remove(flight);
-            }
-            else
-            {
-                throw new Exception("There is a problem to get all flights. Please check your login details.");
-            }
-        }
-
-        public Flight GetById(int id)
-        {
-            Flight result = null;
-
-            using (NpgsqlCommand cmd = new NpgsqlCommand())
-            {
-                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
-                {
-                    cmd.Connection.Open();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_flight_by_id({id})";
-
-                    NpgsqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        result = new Flight
-                        {
-                            Id = (int)reader["id"],
-                            Airline_Company_Id = (int)reader["airline_company_id"],
-                            Origin_Country_Id = (int)reader["origin_country_id"],
-                            Destination_Country_Id = (int)reader["destination_country_id"],
-                            Departure_Time = (DateTime)reader["departure_time"],
-                            Landing_Time = (DateTime)reader["landing_time"],
-                            Remaining_Tickets = (int)reader["remaining_tickets"]
-                        };
-                    }
-                }
-            }
-            return result;
+            
+                _flightDAO.Add(flight);
+            
         }
 
         //change my password
-        //create flight
         //modify airline details
         //update flight
 
