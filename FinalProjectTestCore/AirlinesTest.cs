@@ -10,13 +10,14 @@ namespace FinalProjectTestCore
     public class AirlinesTest
     {
         LoggedInAirlineFacade airlineFacade;
-        LoginToken<AirlineCompany> token;
+        LoginToken<AirlineCompany> airlineToken;
 
         [TestInitialize]
         public void TryLogin()
         {
             ILoginToken loginToken;
-             token= new LoginService().TryLogin("userName", "password", out token);
+            new LoginService().TryLogin("userName", "password", out loginToken);
+            airlineToken = (LoginToken<AirlineCompany>)loginToken;
             airlineFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<AirlineCompany>) as LoggedInAirlineFacade;
         }
 
@@ -55,7 +56,7 @@ namespace FinalProjectTestCore
         public void GetAllTickets()
         {
             Ticket expectedTicket = new Ticket(1, 1);
-            List<Ticket> list_of_tickets = (List<Ticket>)airlineFacade.GetAllTickets();
+            List<Ticket> list_of_tickets = (List<Ticket>)airlineFacade.GetAllTickets(airlineToken);
             List<Ticket> expected_list_of_tickets = null;
             expected_list_of_tickets.Add(expectedTicket);
             Assert.AreEqual(list_of_tickets, expected_list_of_tickets);
@@ -75,11 +76,12 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void CancelFlight()
         {
-            //Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
-            //List<Flight> list_of_flights = (List<Flight>)airlineFacade.CancelFlight();
-            //Flight expected_cancelled_flight = null;
-            //expected_list_of_flights.Remove(expectedFlight);
-            //Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            List<Flight> list_of_flights = (List<Flight>)airlineFacade.CancelFlight(airlineToken, expectedFlight);
+            Flight expected_cancelled_flight = null;
+            expected_list_of_flights.Remove(expectedFlight);
+            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+
         }
 
 

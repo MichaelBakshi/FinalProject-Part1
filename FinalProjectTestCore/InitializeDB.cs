@@ -30,7 +30,6 @@ namespace FinalProjectTestCore
             administratorFacade.CreateNewAirline(new LoginToken<Administrator>(), new AirlineCompany("airline_name", 3, 2));
             administratorFacade.CreateNewCustomer(new LoginToken<Administrator>(), new Customer("customer_first_name", "customer_last_name", "customer_address", "customer_phone_no", "customer_credit_card_no", 3));
 
-
             airlineFacade.CreateFlight(new LoginToken<AirlineCompany>(), new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1));
             administratorFacade.CreateTicket(new LoginToken<Administrator>(), new Ticket(1, 1));
 
