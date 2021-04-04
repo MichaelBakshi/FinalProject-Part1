@@ -24,6 +24,10 @@ namespace FinalProject_Part1
         {
             return _flightDAO.GetById(id);
         }
+        public AirlineCompany GetAirlineById(int id)
+        { 
+                return _airlineDAO.GetById(id);
+        }
         public IList<Flight> GetFlightsByOriginCountry(int countryCode)
         {
             return _flightDAO.GetFlightsByOriginCountry(countryCode);

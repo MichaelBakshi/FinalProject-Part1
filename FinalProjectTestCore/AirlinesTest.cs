@@ -10,6 +10,7 @@ namespace FinalProjectTestCore
     public class AirlinesTest
     {
         LoggedInAirlineFacade airlineFacade;
+        AnonymousUserFacade anonymousUserFacade;
         LoginToken<AirlineCompany> airlineToken;
 
         [TestInitialize]
@@ -76,30 +77,50 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void CancelFlight()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
-            List<Flight> list_of_flights = (List<Flight>)airlineFacade.CancelFlight(airlineToken, expectedFlight);
-            Flight expected_cancelled_flight = null;
-            expected_list_of_flights.Remove(expectedFlight);
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            //Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            //List<Flight> list_of_flights = (List<Flight>)airlineFacade.CancelFlight(airlineToken, expectedFlight);
+            //Flight expected_cancelled_flight = null;
+            //expected_list_of_flights.Remove(expectedFlight);
+            //Assert.AreEqual(list_of_flights, expected_list_of_flights);
 
         }
-
-
 
 
         //create flight
         [TestMethod]
         public void CreateFlight()
         {
-            
-                _flightDAO.Add(flight);
-            
+            Flight additionalFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight second_flight = airlineFacade.GetFlightById(2);
+            Assert.AreEqual(additionalFlight, second_flight);
         }
 
         //change my password
-        //modify airline details
-        //update flight
+        [TestMethod]
+        public void ChangeMyPassword()
+        {
+           
+            
+        }
 
+        //modify airline details
+        [TestMethod]
+        public void Modify_airline_details()
+        {
+            AirlineCompany airline = new AirlineCompany("Delta", 5, 2);
+            airlineFacade.MofidyAirlineDetails(airlineToken,airline);
+            AirlineCompany airline_before_modification = anonymousUserFacade.GetAirlineById(1);
+            Assert.AreNotEqual(airline, airline_before_modification);
+        }
+        //update flight
+        [TestMethod]
+        public void Modify_flight_details()
+        {
+            Flight additionalFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 20);
+            airlineFacade.UpdateFlight(airlineToken,additionalFlight);
+            Flight flight_before_modification = airlineFacade.GetFlightById(1);
+            Assert.AreNotEqual(additionalFlight, flight_before_modification);
+        }
 
     }
 }
