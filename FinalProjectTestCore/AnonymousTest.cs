@@ -33,8 +33,10 @@ namespace FinalProjectTestCore
         {
             Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
             List<Flight> list_of_flights  = (List<Flight>)anonymousUserFacade.GetAllFlights();
-            List<Flight> expected_list_of_flights=null;
-            expected_list_of_flights.Add(expectedFlight);
+            List<Flight> expected_list_of_flights = new List<Flight>
+            {
+                expectedFlight
+            };
             Assert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
