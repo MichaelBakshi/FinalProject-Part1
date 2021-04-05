@@ -28,6 +28,14 @@ namespace FinalProject_Part1
         { 
                 return _airlineDAO.GetById(id);
         }
+        public Customer GetCustomerById(int id)
+        {
+            return _customerDAO.GetById(id);
+        }
+        public Administrator GetAdminById(int id)
+        {
+            return _adminDAO.GetById(id);
+        }
         public IList<Flight> GetFlightsByOriginCountry(int countryCode)
         {
             return _flightDAO.GetFlightsByOriginCountry(countryCode);

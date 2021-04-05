@@ -68,13 +68,79 @@ namespace FinalProjectTestCore
 
 
         //create new airline
+        [TestMethod]
+        public void CreateAirline()
+        {
+            AirlineCompany additionalAirline = new AirlineCompany("second_airline_name", 1, 4);
+            AirlineCompany second_airline = administratorFacade.GetAirlineById(2);
+            Assert.AreEqual(additionalAirline, second_airline);
+        }
+
+
         //create new customer
+        [TestMethod]
+        public void CreateCustomer()
+        {
+            Customer additionalCustomer = new Customer("2customer_first_name", "2customer_last_name", "2customer_address", "2customer_phone_no", "2customer_credit_card_no", 4);
+            Customer second_customer = anonymousUserFacade.GetCustomerById(2);
+            Assert.AreEqual(additionalCustomer, second_customer);
+        }
+
+
         //remove airline
+        [TestMethod]
+        public void RemoveAirline()
+        {
+            
+
+        }
         //remove customer
+        [TestMethod]
+        public void RemoveCustomer()
+        {
+
+
+        }
+
         //update airline details
+        [TestMethod]
+        public void Modify_airline_details()
+        {
+            AirlineCompany airline = new AirlineCompany("Delta", 5, 2);
+            administratorFacade.UpdateAirlineDetails(admin_token, airline);
+            AirlineCompany airline_before_modification = anonymousUserFacade.GetAirlineById(1);
+            Assert.AreNotEqual(airline, airline_before_modification);
+        }
+
         //update customer details
+        [TestMethod]
+        public void Update_customer_details()
+        {
+            Customer customer = new Customer("2customer_first_name", "2customer_last_name", "2customer_address", "2customer_phone_no", "2customer_credit_card_no", 4);
+            administratorFacade.UpdateCustomerDetails(admin_token, customer);
+            Customer customer_before_modification = administratorFacade.GetCustomerById(1);
+            Assert.AreNotEqual(customer, customer_before_modification);
+        }
+
         //create admin
+        [TestMethod]
+        public void CreateAdmin()
+        {
+            Administrator additionalAdmin = new Administrator("adminfirst_name", "admin_last_name", 1, 1);
+            Administrator second_admin = administratorFacade.GetAdminById(2);
+            Assert.AreEqual(additionalAdmin, second_admin);
+        }
+
         //update admin
+        [TestMethod]
+        public void Update_customer_details()
+        {
+            Customer customer = new Customer("2customer_first_name", "2customer_last_name", "2customer_address", "2customer_phone_no", "2customer_credit_card_no", 4);
+            administratorFacade.UpdateCustomerDetails(admin_token, customer);
+            Customer customer_before_modification = administratorFacade.GetCustomerById(1);
+            Assert.AreNotEqual(customer, customer_before_modification);
+        }
+
         //remove admin
     }
 }

@@ -112,6 +112,7 @@ namespace FinalProjectTestCore
             AirlineCompany airline_before_modification = anonymousUserFacade.GetAirlineById(1);
             Assert.AreNotEqual(airline, airline_before_modification);
         }
+
         //update flight
         [TestMethod]
         public void Modify_flight_details()
