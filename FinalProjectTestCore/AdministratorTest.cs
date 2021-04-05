@@ -102,6 +102,14 @@ namespace FinalProjectTestCore
 
         }
 
+        //remove admin
+        [TestMethod]
+        public void RemoveAdmin()
+        {
+
+
+        }
+
         //update airline details
         [TestMethod]
         public void Modify_airline_details()
@@ -133,14 +141,14 @@ namespace FinalProjectTestCore
 
         //update admin
         [TestMethod]
-        public void Update_customer_details()
+        public void Update_admin_details()
         {
-            Customer customer = new Customer("2customer_first_name", "2customer_last_name", "2customer_address", "2customer_phone_no", "2customer_credit_card_no", 4);
-            administratorFacade.UpdateCustomerDetails(admin_token, customer);
-            Customer customer_before_modification = administratorFacade.GetCustomerById(1);
-            Assert.AreNotEqual(customer, customer_before_modification);
+            Administrator admin = new Administrator("2adminfirst_name", "2admin_last_name", 1, 1);
+            administratorFacade.UpdateAdmin(admin_token, admin);
+            Administrator admin_before_modification = administratorFacade.GetAdminById(1);
+            Assert.AreNotEqual(admin, admin_before_modification);
         }
 
-        //remove admin
+        
     }
 }
