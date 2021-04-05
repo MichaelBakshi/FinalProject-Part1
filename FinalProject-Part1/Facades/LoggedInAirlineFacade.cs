@@ -10,7 +10,8 @@ namespace FinalProject_Part1
         {
             if (token != null)
             {
-                return _ticketDAO.GetAll();
+                return _ticketDAO.GetAll(); // get tickets by airline id
+                // return _ticketDAO.GetTicketsByAirlineId(token.User.Id);
             }
             else
             {

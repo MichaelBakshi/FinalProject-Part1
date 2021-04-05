@@ -45,7 +45,7 @@ namespace FinalProjectTestCore
         {
             AirlineCompany expected_airline_company = new AirlineCompany("airline_name", 3, 2);
             List<AirlineCompany> list_of_airline_companies = (List < AirlineCompany >) anonymousUserFacade.GetAllAirlineCompanies();
-            List<AirlineCompany> expected_list_of_airlines = null;
+            List<AirlineCompany> expected_list_of_airlines = new List<AirlineCompany>();
             expected_list_of_airlines.Add(expected_airline_company);
             Assert.AreEqual(list_of_airline_companies, expected_list_of_airlines);
         }

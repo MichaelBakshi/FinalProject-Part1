@@ -14,6 +14,7 @@ namespace FinalProject_Part1
             m_conn_string = GlobalConfig.ConnectionString;
         }
 
+        // get tickets by airline id
 
         private int ExecuteNonQuery(string query)
         {
