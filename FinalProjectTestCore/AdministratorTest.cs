@@ -57,13 +57,13 @@ namespace FinalProjectTestCore
 
         //get all customers
         [TestMethod]
-        public void GetAllTickets()
+        public void GetAllCustomers()
         {
-            Ticket expectedTicket = new Ticket(1, 1);
-            List<Ticket> list_of_tickets = (List<Ticket>)airlineFacade.GetAllTickets(airlineToken);
-            List<Ticket> expected_list_of_tickets = null;
-            expected_list_of_tickets.Add(expectedTicket);
-            Assert.AreEqual(list_of_tickets, expected_list_of_tickets);
+            Customer expectedCustomer = new Customer("customer_first_name", "customer_last_name", "customer_address", "customer_phone_no", "customer_credit_card_no", 3);
+            List<Customer> list_of_customers = (List<Customer>)administratorFacade.GetAllCustomers(admin_token);
+            List<Customer> expected_list_of_customers = null;
+            expected_list_of_customers.Add(expectedCustomer);
+            Assert.AreEqual(list_of_customers, expected_list_of_customers);
         }
 
 
