@@ -66,7 +66,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetAllMyFlights()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             List<Flight> list_of_flights = (List<Flight>)customerFacade.GetAllFlights(); // why there is no need for token here?
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -77,7 +77,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void PurchasTicket()
         {
-            Flight additionalFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight additionalFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             additionalFlight.Id = 2;
             customerFacade.PurchaseTicket(customer_token, additionalFlight); 
             Flight new_flight = airlineFacade.GetFlightById(2);

@@ -54,8 +54,6 @@ namespace FinalProjectTestCore
         }
 
 
-
-        //get all customers
         [TestMethod]
         public void GetAllCustomers()
         {

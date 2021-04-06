@@ -67,7 +67,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetAllFlights()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01,01), new DateTime(2000, 01, 01), 1);
             List<Flight> list_of_flights = (List<Flight>)airlineFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -79,7 +79,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void CancelFlight()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2017,5,5), DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             expectedFlight.Id = 1;
             airlineFacade.CancelFlight(airlineToken, expectedFlight);
             Flight expected_cancelled_flight = airlineFacade.GetFlightById(1);
@@ -92,7 +92,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void CreateFlight()
         {
-            Flight additionalFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight additionalFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             additionalFlight.Id = 2;
             // insert and assume ai resets
             airlineFacade.CreateFlight(airlineToken, additionalFlight); // assume new id is 2
@@ -126,7 +126,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void Modify_flight_details()
         {
-            Flight additionalFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 20);
+            Flight additionalFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 20);
             additionalFlight.Id = 1;
             airlineFacade.UpdateFlight(airlineToken,additionalFlight);
             Flight flight_before_modification = airlineFacade.GetFlightById(1);

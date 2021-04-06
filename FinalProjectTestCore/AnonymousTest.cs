@@ -24,14 +24,14 @@ namespace FinalProjectTestCore
         public void GetFlightById()
         {
             Flight flight = anonymousUserFacade.GetFlightById(1);
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             Assert.AreEqual(flight, expectedFlight);
         }
 
         [TestMethod]
         public void GetAllFlights()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             List<Flight> list_of_flights  = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>
             {
@@ -53,7 +53,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetAllFlightsVacancy()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             Dictionary<Flight, int> flights_vacancy = anonymousUserFacade.GetAllFlightsVacancy();
             Dictionary<Flight, int> expected_flights_vacancy = new Dictionary<Flight, int>();
             expected_flights_vacancy.Add(expectedFlight, 1);
@@ -63,7 +63,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetFlightsByDepartureDate()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -73,7 +73,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetFlightsByLandingDate()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -83,7 +83,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetFlightsByOriginCountry()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -93,7 +93,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void GetFlightsByDestinationCountry()
         {
-            Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
