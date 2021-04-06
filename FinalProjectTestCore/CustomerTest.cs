@@ -70,7 +70,7 @@ namespace FinalProjectTestCore
             List<Flight> list_of_flights = (List<Flight>)customerFacade.GetAllFlights(); // why there is no need for token here?
             List<Flight> expected_list_of_flights = null;
             expected_list_of_flights.Add(expectedFlight);
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            CollectionAssert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
         //purchase ticket

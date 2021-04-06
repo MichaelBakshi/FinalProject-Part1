@@ -63,7 +63,7 @@ namespace FinalProjectTestCore
             List<Customer> list_of_customers = (List<Customer>)administratorFacade.GetAllCustomers(admin_token);
             List<Customer> expected_list_of_customers = null;
             expected_list_of_customers.Add(expectedCustomer);
-            Assert.AreEqual(list_of_customers, expected_list_of_customers);
+            CollectionAssert.AreEqual(list_of_customers, expected_list_of_customers);
         }
 
 

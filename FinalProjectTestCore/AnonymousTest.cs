@@ -37,7 +37,7 @@ namespace FinalProjectTestCore
             {
                 expectedFlight
             };
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            CollectionAssert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace FinalProjectTestCore
             List<AirlineCompany> list_of_airline_companies = (List < AirlineCompany >) anonymousUserFacade.GetAllAirlineCompanies();
             List<AirlineCompany> expected_list_of_airlines = new List<AirlineCompany>();
             expected_list_of_airlines.Add(expected_airline_company);
-            Assert.AreEqual(list_of_airline_companies, expected_list_of_airlines);
+            CollectionAssert.AreEqual(list_of_airline_companies, expected_list_of_airlines);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace FinalProjectTestCore
             Dictionary<Flight, int> flights_vacancy = anonymousUserFacade.GetAllFlightsVacancy();
             Dictionary<Flight, int> expected_flights_vacancy = null;
             expected_flights_vacancy.Add(expectedFlight, 1);
-            Assert.AreEqual(flights_vacancy, expected_flights_vacancy);
+            CollectionAssert .AreEqual(flights_vacancy, expected_flights_vacancy);
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace FinalProjectTestCore
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = null;
             expected_list_of_flights.Add(expectedFlight);
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            CollectionAssert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace FinalProjectTestCore
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = null;
             expected_list_of_flights.Add(expectedFlight);
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            CollectionAssert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace FinalProjectTestCore
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = null;
             expected_list_of_flights.Add(expectedFlight);
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            CollectionAssert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
         [TestMethod]
@@ -97,7 +97,7 @@ namespace FinalProjectTestCore
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = null;
             expected_list_of_flights.Add(expectedFlight);
-            Assert.AreEqual(list_of_flights, expected_list_of_flights);
+            CollectionAssert.AreEqual(list_of_flights, expected_list_of_flights);
         }
 
     }

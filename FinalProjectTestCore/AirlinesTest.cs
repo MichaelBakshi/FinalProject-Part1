@@ -60,7 +60,7 @@ namespace FinalProjectTestCore
             List<Ticket> list_of_tickets = (List<Ticket>)airlineFacade.GetAllTickets(airlineToken);
             List<Ticket> expected_list_of_tickets = null;
             expected_list_of_tickets.Add(expectedTicket);
-            Assert.AreEqual(list_of_tickets, expected_list_of_tickets);
+            CollectionAssert.AreEqual(list_of_tickets, expected_list_of_tickets);
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void ChangeMyPassword()
         {
-           
+           //like modify
             
         }
 
