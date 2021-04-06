@@ -120,8 +120,9 @@ namespace FinalProjectTestCore
         public void Modify_airline_details()
         {
             AirlineCompany airline = new AirlineCompany("Delta", 5, 2);
+            airline.Id = 1;
             administratorFacade.UpdateAirlineDetails(admin_token, airline);
-            AirlineCompany airline_before_modification = anonymousUserFacade.GetAirlineById(1);
+            AirlineCompany airline_before_modification = airlineFacade.GetAirlineById(1);
             Assert.AreNotEqual(airline, airline_before_modification);
         }
 
@@ -130,9 +131,10 @@ namespace FinalProjectTestCore
         public void Update_customer_details()
         {
             Customer customer = new Customer("2customer_first_name", "2customer_last_name", "2customer_address", "2customer_phone_no", "2customer_credit_card_no", 4);
+            customer.Id = 1;
             administratorFacade.UpdateCustomerDetails(admin_token, customer);
             Customer customer_before_modification = administratorFacade.GetCustomerById(1);
-            Assert.AreNotEqual(customer, customer_before_modification);
+            Assert.AreEqual(customer, customer_before_modification);
         }
 
         //create admin
@@ -151,9 +153,10 @@ namespace FinalProjectTestCore
         public void Update_admin_details()
         {
             Administrator admin = new Administrator("2adminfirst_name", "2admin_last_name", 1, 1);
+            admin.Id = 1;
             administratorFacade.UpdateAdmin(admin_token, admin);
             Administrator admin_before_modification = administratorFacade.GetAdminById(1);
-            Assert.AreNotEqual(admin, admin_before_modification);
+            Assert.AreEqual(admin, admin_before_modification);
         }
 
         

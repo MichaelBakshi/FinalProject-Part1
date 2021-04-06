@@ -114,7 +114,7 @@ namespace FinalProjectTestCore
             AirlineCompany airline = new AirlineCompany("Delta", 5, 2);
             airline.Id = 1;
             airlineFacade.MofidyAirlineDetails(airlineToken,airline);
-            AirlineCompany airline_before_modification = anonymousUserFacade.GetAirlineById(1);
+            AirlineCompany airline_before_modification = airlineFacade.GetAirlineById(1);
             Assert.AreEqual(airline, airline_before_modification);
         }
 
@@ -123,9 +123,10 @@ namespace FinalProjectTestCore
         public void Modify_flight_details()
         {
             Flight additionalFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 20);
+            additionalFlight.Id = 1;
             airlineFacade.UpdateFlight(airlineToken,additionalFlight);
             Flight flight_before_modification = airlineFacade.GetFlightById(1);
-            Assert.AreNotEqual(additionalFlight, flight_before_modification);
+            Assert.AreEqual(additionalFlight, flight_before_modification);
         }
 
     }
