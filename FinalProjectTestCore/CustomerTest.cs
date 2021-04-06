@@ -58,8 +58,10 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void CancelTicket()
         {
-
-
+            Ticket ticket = customerFacade.GetTicketById(1);
+            customerFacade.CancelTicket(customer_token, ticket);
+            Ticket cancelled_ticket = customerFacade.GetTicketById(1);
+            Assert.IsNull(cancelled_ticket);
         }
 
         //get all my flights

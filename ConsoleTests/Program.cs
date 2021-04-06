@@ -17,7 +17,7 @@ namespace ConsoleTests
         {
             //var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             //XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
-            
+
             //Console.WriteLine("Hello World!");
 
             //log.Info("test");
@@ -59,22 +59,23 @@ namespace ConsoleTests
             //foreach (KeyValuePair<Flight, int> kvp in keyValues)
             //    Console.WriteLine("Flight: {0}, Available seats: {1}", kvp.Key, kvp.Value);
 
-            FlightsCenterSystem flightsCenter = FlightsCenterSystem.Instance;
+            //FlightsCenterSystem flightsCenter = FlightsCenterSystem.Instance;
             //FlightsCenterSystem flightsCenter1 = FlightsCenterSystem.Instance.GetFacade();
             //bool equal = flightsCenter == flightsCenter1;
 
-            for(int i=0;i<15;i++)
-            {
-                ThreadPool.QueueUserWorkItem((x) =>
-                {
-                    var a = flightsCenter.GetConnection();
-                    Console.WriteLine($"thread {Thread.CurrentThread}, got connection");
-                    Thread.Sleep(2000);
-                    flightsCenter.ReturnConnection(a);
-                    Console.WriteLine($"thread {Thread.CurrentThread}, returned connection");
-                });
-            }
-            Console.ReadLine();
+            //for(int i=0;i<15;i++)
+            //{
+            //    ThreadPool.QueueUserWorkItem((x) =>
+            //    {
+            //        var a = flightsCenter.GetConnection();
+            //        Console.WriteLine($"thread {Thread.CurrentThread}, got connection");
+            //        Thread.Sleep(2000);
+            //        flightsCenter.ReturnConnection(a);
+            //        Console.WriteLine($"thread {Thread.CurrentThread}, returned connection");
+            //    });
+            //}
+            //Console.ReadLine();
+
 
         }
     }

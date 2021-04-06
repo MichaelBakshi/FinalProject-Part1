@@ -94,22 +94,30 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void RemoveAirline()
         {
-            
+            AirlineCompany airline = administratorFacade.GetAirlineById(1);
+            administratorFacade.RemoveAirline(admin_token, airline);
+            AirlineCompany removed_airline = administratorFacade.GetAirlineById(1);
+            Assert.IsNull(removed_airline);
 
         }
         //remove customer
         [TestMethod]
         public void RemoveCustomer()
         {
-
-
+            Customer customer = administratorFacade.GetCustomerById(1);
+            administratorFacade.RemoveCustomer(admin_token, customer);
+            Customer removed_customer = administratorFacade.GetCustomerById(1);
+            Assert.IsNull(removed_customer);            
         }
 
         //remove admin
         [TestMethod]
         public void RemoveAdmin()
         {
-
+            Administrator admin = administratorFacade.GetAdminById(1);
+            administratorFacade.RemoveAdmin(admin_token, admin);
+            Administrator removed_administrator = administratorFacade.GetAdminById(1);
+            Assert.IsNull(removed_administrator);
 
         }
 

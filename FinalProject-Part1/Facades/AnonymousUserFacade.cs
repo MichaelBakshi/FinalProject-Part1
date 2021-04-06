@@ -36,6 +36,11 @@ namespace FinalProject_Part1
         {
             return _adminDAO.GetById(id);
         }
+        public Ticket GetTicketById(int id)
+        {
+            return _ticketDAO.GetById(id);
+        }
+
         public IList<Flight> GetFlightsByOriginCountry(int countryCode)
         {
             return _flightDAO.GetFlightsByOriginCountry(countryCode);

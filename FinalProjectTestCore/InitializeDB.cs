@@ -12,6 +12,7 @@ namespace FinalProjectTestCore
         TestingFacade testingFacade = new TestingFacade();
         LoggedInAirlineFacade airlineFacade = new LoggedInAirlineFacade();
         LoggedInAdministratorFacade administratorFacade = new LoggedInAdministratorFacade();
+        LoggedInCustomerFacade customerFacade = new LoggedInCustomerFacade();
 
         [TestInitialize]
         public void ClearDB()
