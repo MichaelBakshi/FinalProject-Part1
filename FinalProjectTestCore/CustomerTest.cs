@@ -74,7 +74,15 @@ namespace FinalProjectTestCore
         }
 
         //purchase ticket
-
+        [TestMethod]
+        public void PurchasTicket()
+        {
+            Flight additionalFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
+            additionalFlight.Id = 2;
+            customerFacade.PurchaseTicket(customer_token, additionalFlight); 
+            Flight new_flight = airlineFacade.GetFlightById(2);
+            Assert.AreEqual(additionalFlight, new_flight);
+        }
 
     }
 }

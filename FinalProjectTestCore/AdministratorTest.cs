@@ -72,8 +72,11 @@ namespace FinalProjectTestCore
         public void CreateAirline()
         {
             AirlineCompany additionalAirline = new AirlineCompany("second_airline_name", 1, 4);
+            additionalAirline.Id = 2;
+            administratorFacade.CreateNewAirline(admin_token, additionalAirline);
             AirlineCompany second_airline = administratorFacade.GetAirlineById(2);
             Assert.AreEqual(additionalAirline, second_airline);
+
         }
 
 
@@ -82,7 +85,9 @@ namespace FinalProjectTestCore
         public void CreateCustomer()
         {
             Customer additionalCustomer = new Customer("2customer_first_name", "2customer_last_name", "2customer_address", "2customer_phone_no", "2customer_credit_card_no", 4);
-            Customer second_customer = anonymousUserFacade.GetCustomerById(2);
+            additionalCustomer.Id = 2;
+            administratorFacade.CreateNewCustomer(admin_token, additionalCustomer);
+            Customer second_customer = administratorFacade.GetCustomerById(2);
             Assert.AreEqual(additionalCustomer, second_customer);
         }
 
@@ -135,6 +140,8 @@ namespace FinalProjectTestCore
         public void CreateAdmin()
         {
             Administrator additionalAdmin = new Administrator("adminfirst_name", "admin_last_name", 1, 1);
+            additionalAdmin.Id = 2;
+            administratorFacade.CreateAdmin(admin_token, additionalAdmin);
             Administrator second_admin = administratorFacade.GetAdminById(2);
             Assert.AreEqual(additionalAdmin, second_admin);
         }
