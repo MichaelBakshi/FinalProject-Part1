@@ -59,7 +59,7 @@ namespace FinalProjectTestCore
         {
             Ticket expectedTicket = new Ticket(1, 1);
             List<Ticket> list_of_tickets = (List<Ticket>)airlineFacade.GetAllTickets(airlineToken);
-            List<Ticket> expected_list_of_tickets = null;
+            List<Ticket> expected_list_of_tickets = new List<Ticket>();
             expected_list_of_tickets.Add(expectedTicket);
             CollectionAssert.AreEqual(list_of_tickets, expected_list_of_tickets);
         }
@@ -69,7 +69,7 @@ namespace FinalProjectTestCore
         {
             Flight expectedFlight = new Flight(1, 1, 1, DateTime.Now, DateTime.Now, 1);
             List<Flight> list_of_flights = (List<Flight>)airlineFacade.GetAllFlights();
-            List<Flight> expected_list_of_flights = null;
+            List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
             // כאשר משווים רשימות להשתמש בזה
             CollectionAssert.AreEqual(list_of_flights, expected_list_of_flights);
