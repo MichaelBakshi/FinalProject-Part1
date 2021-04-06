@@ -12,6 +12,7 @@ namespace FinalProjectTestCore
         LoggedInAirlineFacade airlineFacade;
         AnonymousUserFacade anonymousUserFacade;
         LoginToken<AirlineCompany> airlineToken;
+        
 
         [TestInitialize]
         public void TryLogin()
@@ -103,8 +104,11 @@ namespace FinalProjectTestCore
         [TestMethod]
         public void ChangeMyPassword()
         {
-           //like modify
-            
+            AirlineCompany airline_before_modification = airlineFacade.GetAirlineById(1);
+            string old_password = airline_before_modification.user.Password;
+            airlineFacade.ChangeMyPassword(airlineToken, "airline_passsword", "new_airline_passsword");
+            string new_password = "new_airline_passsword";
+            Assert.AreNotEqual(old_password, new_password);
         }
 
         //modify airline details
