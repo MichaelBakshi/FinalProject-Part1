@@ -34,5 +34,11 @@ namespace FinalProject_Part1.DAOPGSQL
             }
             return result;
         }
+
+        public void Add(User u)
+        {
+
+            ExecuteNonQuery($"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});");
+        }
     }
 }

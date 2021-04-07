@@ -9,7 +9,7 @@ namespace FinalProject_Part1.LogIn
     public class TestingGlobalConfig
     {
         private static ConfigJson configJson;
-        static TestingGlobalConfig()
+         static TestingGlobalConfig()
         {
             string configFile = File.ReadAllText("C:\\Users\\Michael Bakshi\\source\\repos\\FinalProject-Part1\\testing_config.json");
             configJson = JsonConvert.DeserializeObject<ConfigJson>(configFile);
