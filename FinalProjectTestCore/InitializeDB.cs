@@ -26,7 +26,7 @@ namespace FinalProjectTestCore
         {
             LoginToken<Administrator> adminToken = new LoginToken<Administrator>()
             {
-                User = new Administrator("adminy", "monro", 3, 500)
+                User = new Administrator("admin", "monro", 3, 500)
             };
 
             administratorFacade.CreateUser(adminToken, new User("admin_username", "admin_password", "admin_email", 1));
