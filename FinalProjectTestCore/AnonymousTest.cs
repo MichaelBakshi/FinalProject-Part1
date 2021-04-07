@@ -10,13 +10,13 @@ namespace FinalProjectTestCore
     public class AnonymousTest
     {
 
-        AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade();
+        AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(true);
         TestingFacade testingFacade = new TestingFacade();
 
         [TestInitialize]
-        public void ClearDB ()
+        public void Init ()
         {
-            testingFacade.ClearDB();
+            GlobalConfig.GetConfiguration(true);
         }
 
 

@@ -8,6 +8,11 @@ namespace FinalProject_Part1
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        public LoggedInAdministratorFacade(bool testMode) : base(testMode)
+        {
+            GlobalConfig.GetConfiguration(testMode);
+        }
+
         public IList<Customer> GetAllCustomers(LoginToken<Administrator> token)
         {
             //if (token != null)

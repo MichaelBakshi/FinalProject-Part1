@@ -3,7 +3,6 @@ using FinalProject_Part1;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using FinalProject_Part1.LogIn;
 
 namespace FinalProject_Part1.DAOPGSQL
 {
@@ -13,7 +12,7 @@ namespace FinalProject_Part1.DAOPGSQL
 
         public TestingDAOPGSQL()
         {
-            test_conn_string = TestingGlobalConfig.TestConnectionString;
+            test_conn_string = "Host=localhost;Username=postgres;Password=admin;Database=TestDatabase";
         }
 
 
@@ -35,10 +34,5 @@ namespace FinalProject_Part1.DAOPGSQL
             return result;
         }
 
-        public void Add(User u)
-        {
-
-            ExecuteNonQuery($"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});");
-        }
     }
 }

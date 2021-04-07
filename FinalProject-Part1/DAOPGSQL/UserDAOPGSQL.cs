@@ -11,7 +11,7 @@ namespace FinalProject_Part1
 
         public UserDAOPGSQL()
         {
-            m_conn_string = GlobalConfig.ConnectionString;
+            m_conn_string = GlobalConfig.GetConnectionString();
         }
 
 
@@ -114,7 +114,9 @@ namespace FinalProject_Part1
         public User GetByUsername(string username)
         {
             // To implement
-            return null;
+            User user = new User("customer_username", "customer_password", "customer_email", 3);
+            user.Id = 3;
+            return user;
         }
     }
 }

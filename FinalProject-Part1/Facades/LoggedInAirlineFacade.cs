@@ -6,6 +6,10 @@ namespace FinalProject_Part1
 {
     public class LoggedInAirlineFacade : AnonymousUserFacade, ILoggedInAirlineFacade
     {
+        public LoggedInAirlineFacade(bool testMode) : base(testMode)
+        {
+            GlobalConfig.GetConfiguration(testMode);
+        }
         public IList<Ticket> GetAllTickets(LoginToken<AirlineCompany> token)
         {
             if (token != null)

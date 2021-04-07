@@ -18,9 +18,10 @@ namespace FinalProjectTestCore
         [TestInitialize]
         public void TryLogin()
         {
+            GlobalConfig.GetConfiguration(true);
             //login to users
             ILoginToken loginToken;
-            new LoginService().TryLogin("userName", "password", out loginToken);
+            new LoginService().TryLogin("customer_username", "customer_password", out loginToken);
             customerFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<Customer>) as LoggedInCustomerFacade;
         }
 

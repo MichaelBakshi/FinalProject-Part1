@@ -11,7 +11,7 @@ namespace FinalProject_Part1
 
         public TicketDAOPGSQL()
         {
-            m_conn_string = GlobalConfig.ConnectionString;
+            m_conn_string = GlobalConfig.GetConnectionString();
         }
 
         // get tickets by airline id

@@ -17,6 +17,7 @@ namespace FinalProjectTestCore
         [TestInitialize]
         public void TryLogin()
         {
+            GlobalConfig.GetConfiguration(true);
             //login to users
             ILoginToken loginToken;
             new LoginService().TryLogin("userName", "password", out loginToken);

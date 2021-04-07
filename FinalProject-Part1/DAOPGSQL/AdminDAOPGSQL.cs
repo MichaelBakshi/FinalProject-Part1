@@ -11,14 +11,8 @@ namespace FinalProject_Part1
 
         public AdminDAOPGSQL()
         {
-            //if (!testMode)
-            //{
-                m_conn_string = GlobalConfig.ConnectionString;
-            //}
-            //else
-            //{
-            //    m_conn_string = GlobalConfig.TestConnectionString;
-            //}
+                m_conn_string = GlobalConfig.GetConnectionString();
+           
         }
 
 
@@ -44,7 +38,7 @@ namespace FinalProject_Part1
         public void Add(Administrator a)
         {
 
-            ExecuteNonQuery($"call sp_insert_administrator('{a.First_Name}', '{a.Last_Name}', '{a.Level}', '{a.User_Id}');");
+            ExecuteNonQuery($"call sp_insert_administrator('{a.First_Name}', '{a.Last_Name}', {a.Level}, {a.User_Id});");
         }
 
         public Administrator GetById(int id)

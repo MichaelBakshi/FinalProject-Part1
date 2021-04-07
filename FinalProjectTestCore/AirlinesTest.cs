@@ -17,6 +17,7 @@ namespace FinalProjectTestCore
         [TestInitialize]
         public void TryLogin()
         {
+            GlobalConfig.GetConfiguration(true);
             ILoginToken loginToken;
             new LoginService().TryLogin("userName", "password", out loginToken);
             airlineToken = (LoginToken<AirlineCompany>)loginToken;

@@ -59,7 +59,7 @@ namespace FinalProject_Part1
                         }
                         if (user.User_Role == 3)
                         {
-                            Customer customer = _customerDAO.GetById(user.Id);
+                            Customer customer = _customerDAO.GetCustomerByUsername(user.Username);
                             customer.user = user;
                             token = new LoginToken<Customer>()
                             {

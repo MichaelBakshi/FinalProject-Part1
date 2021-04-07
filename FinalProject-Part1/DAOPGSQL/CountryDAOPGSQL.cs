@@ -12,7 +12,7 @@ namespace FinalProject_Part1
 
         public CountryDAOPGSQL()
         {
-            m_conn_string = GlobalConfig.ConnectionString;
+            m_conn_string = GlobalConfig.GetConnectionString();
         }
 
 

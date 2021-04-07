@@ -6,6 +6,11 @@ namespace FinalProject_Part1
 {
     public class LoggedInCustomerFacade: AnonymousUserFacade, ILoggedInCustomerFacade
     {
+        public LoggedInCustomerFacade(bool testMode) : base(testMode)
+        {
+            GlobalConfig.GetConfiguration(testMode);
+        }
+
         public IList<Flight> GetAllMyFlights(LoginToken<Customer> token)
         {
             if (token != null)

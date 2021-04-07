@@ -6,7 +6,10 @@ namespace FinalProject_Part1
 {
     public class AnonymousUserFacade : FacadeBase, IAnonymousUserFacade
     {
-        
+        public AnonymousUserFacade(bool testMode) : base(testMode)
+        {
+            GlobalConfig.GetConfiguration(testMode);
+        }
         public IList<Flight> GetAllFlights()
         {
             return _flightDAO.GetAll();
