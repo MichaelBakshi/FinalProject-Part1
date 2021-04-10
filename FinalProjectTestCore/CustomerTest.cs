@@ -11,9 +11,9 @@ namespace FinalProjectTestCore
     {
         LoggedInCustomerFacade customerFacade;
         LoggedInAdministratorFacade administratorFacade;
-        LoggedInAirlineFacade airlineFacade;
+        LoggedInAirlineFacade airlineFacade = new LoggedInAirlineFacade(true);
         AnonymousUserFacade anonymousUserFacade;
-        LoginToken<Customer> customer_token;
+        LoginToken<Customer> customer_token ;
 
         [TestInitialize]
         public void TryLogin()
@@ -22,6 +22,7 @@ namespace FinalProjectTestCore
             //login to users
             ILoginToken loginToken;
             new LoginService().TryLogin("customer_username", "customer_password", out loginToken);
+            customer_token = (LoginToken<Customer>)loginToken;
             customerFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<Customer>) as LoggedInCustomerFacade;
         }
 
@@ -70,6 +71,7 @@ namespace FinalProjectTestCore
         public void GetAllMyFlights()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             List<Flight> list_of_flights = (List<Flight>)customerFacade.GetAllFlights(); // why there is no need for token here?
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -78,12 +80,12 @@ namespace FinalProjectTestCore
 
         //purchase ticket
         [TestMethod]
-        public void PurchasTicket()
+        public void PurchaseTicket()
         {
             Flight additionalFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
-            additionalFlight.Id = 2;
+            additionalFlight.Id = 1;
             customerFacade.PurchaseTicket(customer_token, additionalFlight); 
-            Flight new_flight = airlineFacade.GetFlightById(2);
+            Flight new_flight = airlineFacade.GetFlightById(1);
             Assert.AreEqual(additionalFlight, new_flight);
         }
 

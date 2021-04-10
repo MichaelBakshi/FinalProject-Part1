@@ -53,10 +53,10 @@ namespace FinalProject_Part1
             //t1.Start();
             //Task.Run(() => UpdateHistoryOfTicketsAndFlights.UpdateHistory());
 
-            Task.Factory.StartNew(() =>
-            {
-                UpdateHistoryOfTicketsAndFlights.UpdateHistory();
-            }, TaskCreationOptions.LongRunning);
+            //Task.Factory.StartNew(() =>
+            //{
+            //    UpdateHistoryOfTicketsAndFlights.UpdateHistory();
+            //}, TaskCreationOptions.LongRunning);
             
         }
 

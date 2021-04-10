@@ -25,6 +25,7 @@ namespace FinalProjectTestCore
         {
             Flight flight = anonymousUserFacade.GetFlightById(1);
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             Assert.AreEqual(flight, expectedFlight);
         }
 
@@ -32,6 +33,7 @@ namespace FinalProjectTestCore
         public void GetAllFlights()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             List<Flight> list_of_flights  = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>
             {
@@ -44,6 +46,7 @@ namespace FinalProjectTestCore
         public void GetAllAirlineCompanies()
         {
             AirlineCompany expected_airline_company = new AirlineCompany("airline_name", 3, 2);
+            expected_airline_company.Id = 1;
             List<AirlineCompany> list_of_airline_companies = (List < AirlineCompany >) anonymousUserFacade.GetAllAirlineCompanies();
             List<AirlineCompany> expected_list_of_airlines = new List<AirlineCompany>();
             expected_list_of_airlines.Add(expected_airline_company);
@@ -64,6 +67,7 @@ namespace FinalProjectTestCore
         public void GetFlightsByDepartureDate()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -74,6 +78,7 @@ namespace FinalProjectTestCore
         public void GetFlightsByLandingDate()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -84,6 +89,7 @@ namespace FinalProjectTestCore
         public void GetFlightsByOriginCountry()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -94,6 +100,7 @@ namespace FinalProjectTestCore
         public void GetFlightsByDestinationCountry()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             List<Flight> list_of_flights = (List<Flight>)anonymousUserFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);

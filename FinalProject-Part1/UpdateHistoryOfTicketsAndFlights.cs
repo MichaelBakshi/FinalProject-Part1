@@ -42,10 +42,10 @@ namespace FinalProject_Part1
             {
                 //if (DateTime.Now.ToString("HH:mm") == "00:00")
                 //{
-                    UpdateTicketsHistory();
-                    Thread.Sleep(5000);
-                    UpdateFlightsHistory();
-                    Thread.Yield();
+                UpdateTicketsHistory();
+                Thread.Sleep(5000);
+                UpdateFlightsHistory();
+                Thread.Yield();
                 //}
             }
 

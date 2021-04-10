@@ -82,7 +82,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_customer_by_username({_username})";
+                    cmd.CommandText = $"select * from sp_get_customer_by_username('{_username}')";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 

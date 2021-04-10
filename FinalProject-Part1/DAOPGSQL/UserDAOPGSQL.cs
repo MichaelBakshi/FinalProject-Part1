@@ -111,12 +111,34 @@ namespace FinalProject_Part1
             int result = ExecuteNonQuery($"call sp_update_user( {u.Id}, '{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role})");
         }
 
-        public User GetByUsername(string username)
+        public User GetUserByUsername(string _username)
         {
-            // To implement
-            User user = new User("customer_username", "customer_password", "customer_email", 3);
-            user.Id = 3;
-            return user;
+            User result = null;
+
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+                {
+                    cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select * from sp_get_user_by_username('{_username}')";
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        result = new User
+                        {
+                            Id = (int)reader["id"],
+                            Username = reader["username"].ToString(),
+                            Password = reader["password"].ToString(),
+                            Email = reader["email"].ToString(),
+                            User_Role = (int)reader["user_role"]
+                        };
+                    }
+                }
+            }
+            return result;
         }
     }
 }
