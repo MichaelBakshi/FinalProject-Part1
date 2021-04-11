@@ -29,7 +29,7 @@ namespace FinalProject_Part1
                     User user;
                     try
                     {
-                        user = _userDAO.GetByUsername(userName);
+                        user = _userDAO.GetUserByUsername(userName);
                     }
                     catch (Exception e)
                     {
@@ -50,7 +50,7 @@ namespace FinalProject_Part1
                         }
                         if (user.User_Role == 2)
                         {
-                            AirlineCompany airline = _airlineDAO.GetById(user.Id);
+                            AirlineCompany airline = _airlineDAO.GetAirlineByUsername(user.Username);
                             airline.user = user;
                             token = new LoginToken<AirlineCompany>()
                             {

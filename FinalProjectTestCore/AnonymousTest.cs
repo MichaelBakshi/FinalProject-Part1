@@ -57,6 +57,7 @@ namespace FinalProjectTestCore
         public void GetAllFlightsVacancy()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 1);
+            expectedFlight.Id = 1;
             Dictionary<Flight, int> flights_vacancy = anonymousUserFacade.GetAllFlightsVacancy();
             Dictionary<Flight, int> expected_flights_vacancy = new Dictionary<Flight, int>();
             expected_flights_vacancy.Add(expectedFlight, 1);
