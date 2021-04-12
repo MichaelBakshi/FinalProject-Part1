@@ -64,8 +64,14 @@ namespace FinalProject_Part1
                             User_Id = (int)reader["user_id"]
                         };
                     }
+
                 }
             }
+
+            UserDAOPGSQL userDAOPGSQL = new UserDAOPGSQL();
+            result.user = userDAOPGSQL.GetById(result.User_Id);
+
+
             return result;
         }
 
@@ -79,7 +85,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_airline_by_username({_username})";
+                    cmd.CommandText = $"select * from sp_get_airline_by_username('{_username}')";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 

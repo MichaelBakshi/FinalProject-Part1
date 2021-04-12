@@ -20,7 +20,7 @@ namespace FinalProjectTestCore
             GlobalConfig.GetConfiguration(true);
             //login to users
             ILoginToken loginToken;
-            new LoginService().TryLogin("userName", "password", out loginToken);
+            new LoginService().TryLogin("admin_username", "admin_password", out loginToken);
             administratorFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<Administrator>) as LoggedInAdministratorFacade;
         }
 

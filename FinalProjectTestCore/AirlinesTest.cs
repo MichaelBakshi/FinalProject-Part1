@@ -74,6 +74,7 @@ namespace FinalProjectTestCore
         public void GetAllTickets()
         {
             Ticket expectedTicket = new Ticket(1, 1);
+            expectedTicket.Id = 1;
             List<Ticket> list_of_tickets = (List<Ticket>)airlineFacade.GetAllTickets(airlineToken);
             List<Ticket> expected_list_of_tickets = new List<Ticket>();
             expected_list_of_tickets.Add(expectedTicket);
@@ -84,7 +85,7 @@ namespace FinalProjectTestCore
         public void GetAllFlights()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime (2000, 01, 01), new DateTime(2000, 01, 01), 1);
-            expectedFlight.Id = 1;
+            expectedFlight.Id = 2;
             List<Flight> list_of_flights = (List<Flight>)airlineFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
@@ -143,9 +144,9 @@ namespace FinalProjectTestCore
         public void Modify_flight_details()
         {
             Flight additionalFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 20);
-            additionalFlight.Id = 1;
+            additionalFlight.Id = 2;
             airlineFacade.UpdateFlight(airlineToken,additionalFlight);
-            Flight flight_before_modification = airlineFacade.GetFlightById(1);
+            Flight flight_before_modification = airlineFacade.GetFlightById(2);
             Assert.AreEqual(additionalFlight, flight_before_modification);
         }
 
