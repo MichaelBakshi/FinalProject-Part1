@@ -149,9 +149,9 @@ namespace FinalProjectTestCore
         public void CreateAdmin()
         {
             Administrator additionalAdmin = new Administrator("adminfirst_name", "admin_last_name", 1, 1);
-            additionalAdmin.Id = 2;
+            additionalAdmin.Id = 1;
             administratorFacade.CreateAdmin(admin_token, additionalAdmin);
-            Administrator second_admin = administratorFacade.GetAdminById(2);
+            Administrator second_admin = administratorFacade.GetAdminById(1);
             Assert.AreEqual(additionalAdmin, second_admin);
         }
 
