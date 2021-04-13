@@ -19,6 +19,8 @@ namespace FinalProject_Part1
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.CommandText = $"call sp_update_tickets_history()";
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -33,6 +35,8 @@ namespace FinalProject_Part1
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.CommandText = $"call * sp_update_flights_history()";
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -40,13 +44,14 @@ namespace FinalProject_Part1
         {
             while (true)
             {
-                //if (DateTime.Now.ToString("HH:mm") == "00:00")
-                //{
-                UpdateTicketsHistory();
-                Thread.Sleep(5000);
-                UpdateFlightsHistory();
-                Thread.Yield();
-                //}
+                if (DateTime.Now.ToString("HH:mm") == "00:00")
+                {
+                    UpdateTicketsHistory();
+                    Thread.Sleep(5000);
+                    UpdateFlightsHistory();
+                    Thread.Yield();
+                }
+                Thread.Sleep(1000 * 60);
             }
 
         }

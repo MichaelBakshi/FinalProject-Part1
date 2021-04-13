@@ -27,7 +27,6 @@ namespace FinalProjectTestCore
 
 
         [TestMethod]
-        //[ExpectedException()]
         public void CheckNullToken()
         {
             Assert.ThrowsException<Exception>(() =>

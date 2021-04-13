@@ -46,9 +46,13 @@ namespace FinalProject_Part1
         }
         public void CreateFlight(LoginToken<AirlineCompany> token, Flight flight)
         {
-            if (token!=null)
+            if (token != null)
             {
                 _flightDAO.Add(flight);
+            }
+            else
+            {
+                throw new Exception("There is a problem to get all flights. Please check your login details.");
             }
         }
         public void UpdateFlight(LoginToken<AirlineCompany> token, Flight flight)
@@ -77,6 +81,10 @@ namespace FinalProject_Part1
                     throw new WrongCredentialsException("The old password is incorrect. Please try again.");
                     //log4net
                 }
+            }
+            else
+            {
+                throw new Exception("There is a problem to get all flights. Please check your login details.");
             }
         }
         public void MofidyAirlineDetails(LoginToken<AirlineCompany> token, AirlineCompany airline)
