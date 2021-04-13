@@ -130,9 +130,9 @@ namespace FinalProjectTestCore
         public void Modify_flight_details()
         {
             Flight additionalFlight = new Flight(1, 1, 1, new DateTime(2000, 01, 01), new DateTime(2000, 01, 01), 20);
-            additionalFlight.Id = 2;
+            additionalFlight.Id = 1;
             airlineFacade.UpdateFlight(airlineToken,additionalFlight);
-            Flight flight_before_modification = airlineFacade.GetFlightById(2);
+            Flight flight_before_modification = airlineFacade.GetFlightById(1);
             Assert.AreEqual(additionalFlight, flight_before_modification);
         }
 
