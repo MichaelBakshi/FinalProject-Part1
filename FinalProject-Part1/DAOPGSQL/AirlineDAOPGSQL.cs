@@ -68,8 +68,8 @@ namespace FinalProject_Part1
                 }
             }
 
-            UserDAOPGSQL userDAOPGSQL = new UserDAOPGSQL();
-            result.user = userDAOPGSQL.GetById(result.User_Id);
+            //UserDAOPGSQL userDAOPGSQL = new UserDAOPGSQL();
+            //result.user = userDAOPGSQL.GetById(result.User_Id);
 
 
             return result;

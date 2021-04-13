@@ -33,7 +33,7 @@ namespace FinalProjectTestCore
             administratorFacade.CreateUser(adminToken, new User("airline_username", "airline_passsword", "airline_email", 2));
             administratorFacade.CreateUser(adminToken, new User("customer_username", "customer_password", "customer_email", 3));
 
-            administratorFacade.CreateAdmin(adminToken, new Administrator("adminfirst_name", "admin_last_name", 1, 1));
+            administratorFacade.CreateAdmin(adminToken, new Administrator("adminfirst_name", "admin_last_name", 3, 1));
             administratorFacade.CreateNewAirline(adminToken, new AirlineCompany("airline_name", 3, 2));
             administratorFacade.CreateNewCustomer(adminToken, new Customer("customer_first_name", "customer_last_name", "customer_address", "customer_phone_no", "customer_credit_card_no", 3));
 

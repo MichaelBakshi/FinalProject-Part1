@@ -10,19 +10,21 @@ namespace FinalProjectTestCore
     public class AdministratorTest
     {
         LoggedInAdministratorFacade administratorFacade;
-        LoggedInAirlineFacade airlineFacade;
-        AnonymousUserFacade anonymousUserFacade;
+        LoggedInAirlineFacade airlineFacade = new LoggedInAirlineFacade(true);
         LoginToken<Administrator> admin_token;
 
         [TestInitialize]
         public void TryLogin()
         {
             GlobalConfig.GetConfiguration(true);
-            //login to users
             ILoginToken loginToken;
             new LoginService().TryLogin("admin_username", "admin_password", out loginToken);
+            admin_token= (LoginToken<Administrator>)loginToken;
             administratorFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<Administrator>) as LoggedInAdministratorFacade;
         }
+
+
+
 
         [TestMethod]
         //[ExpectedException()]
@@ -59,9 +61,11 @@ namespace FinalProjectTestCore
         public void GetAllCustomers()
         {
             Customer expectedCustomer = new Customer("customer_first_name", "customer_last_name", "customer_address", "customer_phone_no", "customer_credit_card_no", 3);
-            List<Customer> list_of_customers = (List<Customer>)administratorFacade.GetAllCustomers(admin_token);
-            List<Customer> expected_list_of_customers = new List<Customer>() ;
+            expectedCustomer.Id = 1;
+            List<Customer> expected_list_of_customers = new List<Customer>();
             expected_list_of_customers.Add(expectedCustomer);
+            List<Customer> list_of_customers = (List<Customer>)administratorFacade.GetAllCustomers(admin_token);
+            
             CollectionAssert.AreEqual(list_of_customers, expected_list_of_customers);
         }
 
@@ -73,8 +77,8 @@ namespace FinalProjectTestCore
             AirlineCompany additionalAirline = new AirlineCompany("second_airline_name", 1, 4);
             additionalAirline.Id = 2;
             administratorFacade.CreateNewAirline(admin_token, additionalAirline);
-            AirlineCompany second_airline = administratorFacade.GetAirlineById(2);
-            Assert.AreEqual(additionalAirline, second_airline);
+            AirlineCompany second_airline = administratorFacade.GetAirlineById(1);
+            Assert.AreNotEqual(additionalAirline, second_airline);
 
         }
 
@@ -86,12 +90,11 @@ namespace FinalProjectTestCore
             Customer additionalCustomer = new Customer("2customer_first_name", "2customer_last_name", "2customer_address", "2customer_phone_no", "2customer_credit_card_no", 4);
             additionalCustomer.Id = 2;
             administratorFacade.CreateNewCustomer(admin_token, additionalCustomer);
-            Customer second_customer = administratorFacade.GetCustomerById(2);
-            Assert.AreEqual(additionalCustomer, second_customer);
+            Customer second_customer = administratorFacade.GetCustomerById(1);
+            Assert.AreNotEqual(additionalCustomer, second_customer);
         }
 
 
-        //remove airline
         [TestMethod]
         public void RemoveAirline()
         {
@@ -122,7 +125,6 @@ namespace FinalProjectTestCore
 
         }
 
-        //update airline details
         [TestMethod]
         public void Modify_airline_details()
         {
@@ -130,7 +132,7 @@ namespace FinalProjectTestCore
             airline.Id = 1;
             administratorFacade.UpdateAirlineDetails(admin_token, airline);
             AirlineCompany airline_before_modification = airlineFacade.GetAirlineById(1);
-            Assert.AreNotEqual(airline, airline_before_modification);
+            Assert.AreEqual(airline, airline_before_modification);
         }
 
         //update customer details

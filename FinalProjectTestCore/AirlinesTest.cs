@@ -24,21 +24,7 @@ namespace FinalProjectTestCore
             airlineFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<AirlineCompany>) as LoggedInAirlineFacade;
         }
 
-        //LoggedInCustomerFacade customerFacade;
-        //LoggedInAdministratorFacade administratorFacade;
-        //LoggedInAirlineFacade airlineFacade = new LoggedInAirlineFacade(true);
-        //AnonymousUserFacade anonymousUserFacade;
-        //LoginToken<Customer> customer_token;
 
-        //[TestInitialize]
-        //public void TryLogin()
-        //{
-        //    GlobalConfig.GetConfiguration(true);
-        //    ILoginToken loginToken;
-        //    new LoginService().TryLogin("customer_username", "customer_password", out loginToken);
-        //    customer_token = (LoginToken<Customer>)loginToken;
-        //    customerFacade = FlightsCenterSystem.Instance.GetFacade(loginToken as LoginToken<Customer>) as LoggedInCustomerFacade;
-        //}
 
         [TestMethod]
         //[ExpectedException()]
@@ -85,7 +71,7 @@ namespace FinalProjectTestCore
         public void GetAllFlights()
         {
             Flight expectedFlight = new Flight(1, 1, 1, new DateTime (2000, 01, 01), new DateTime(2000, 01, 01), 1);
-            expectedFlight.Id = 2;
+            expectedFlight.Id = 1;
             List<Flight> list_of_flights = (List<Flight>)airlineFacade.GetAllFlights();
             List<Flight> expected_list_of_flights = new List<Flight>();
             expected_list_of_flights.Add(expectedFlight);
