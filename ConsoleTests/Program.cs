@@ -75,6 +75,9 @@ namespace ConsoleTests
             //    });
             //}
             //Console.ReadLine();
+
+            LoggedInAdministratorFacade loggedInAdministratorFacade = new LoggedInAdministratorFacade(false);
+            loggedInAdministratorFacade.GetAllCustomers(token, );
         }
     }
 }
