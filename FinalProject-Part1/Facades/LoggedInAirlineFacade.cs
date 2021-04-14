@@ -21,7 +21,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to get all tickets. Please check your login details.");
+                throw new NullTokenException("There is a problem to get all tickets. Please check your login details. Token is null.");
             }
         }
         public IList<Flight> GetAllFlights(LoginToken<AirlineCompany> token)
@@ -33,7 +33,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to get all flights. Please check your login details.");
+                throw new NullTokenException("There is a problem to get all flights. Please check your login details.Token is null.");
             }
         }
         public void CancelFlight(LoginToken<AirlineCompany> token, Flight flight)
@@ -45,7 +45,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to get all flights. Please check your login details.");
+                throw new NullTokenException("There is a problem to cancel the flight. Please check your login details.Token is null.");
             }
         }
         public void CreateFlight(LoginToken<AirlineCompany> token, Flight flight)
@@ -57,7 +57,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to get all flights. Please check your login details.");
+                throw new NullTokenException("There is a problem to create a flight. Please check your login details.Token is null.");
             }
         }
         public void UpdateFlight(LoginToken<AirlineCompany> token, Flight flight)
@@ -69,7 +69,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to get all flights. Please check your login details.");
+                throw new NullTokenException("There is a problem to update a flight. Please check your login details.Token is null.");
             }
         }
         public void ChangeMyPassword(LoginToken<AirlineCompany> token, string oldPassword, string newPassword)
@@ -84,14 +84,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
+                    logger.Debug($"Attempt to change Password for airline {token.User.Name} has failed. ");
                     throw new WrongCredentialsException("The old password is incorrect. Please try again.");
-                    //log4net
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to get all flights. Please check your login details.");
+                throw new NullTokenException($"There is a problem to to change Password for airline {token.User.Name}. Please check your login details.Token is null.");
             }
         }
         public void MofidyAirlineDetails(LoginToken<AirlineCompany> token, AirlineCompany airline)
@@ -103,7 +103,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to get all flights. Please check your login details.");
+                throw new NullTokenException("There is a problem to Mofidy airline details. Please check your login details.Token is null.");
             }
         }
 
