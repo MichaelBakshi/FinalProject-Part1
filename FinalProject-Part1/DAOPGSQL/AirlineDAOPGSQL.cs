@@ -63,18 +63,20 @@ namespace FinalProject_Part1
                             Country_Id = (int)reader["country_id"],
                             User_Id = (int)reader["user_id"]
                         };
-                        //result.user = new User
-                        //{
-                        //    Id = (int)reader["user_id"],
-                        //    // למלא את כל השדות
-                        //};
+                        result.user = new User
+                        {
+                            Id = (int)reader["id"],
+                            Username = reader["username"].ToString(),
+                            Password = reader["password"].ToString(),
+                            Email = reader["email"].ToString(),
+                            User_Role = (int)reader["user_role"]
+                        };
                     }
-
                 }
             }
 
-            UserDAOPGSQL userDAOPGSQL = new UserDAOPGSQL();
-            result.user = userDAOPGSQL.GetById(result.User_Id);
+            //UserDAOPGSQL userDAOPGSQL = new UserDAOPGSQL();
+            //result.user = userDAOPGSQL.GetById(result.User_Id);
 
 
             return result;

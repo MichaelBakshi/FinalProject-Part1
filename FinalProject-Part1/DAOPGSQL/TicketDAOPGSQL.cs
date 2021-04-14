@@ -14,7 +14,6 @@ namespace FinalProject_Part1
             m_conn_string = GlobalConfig.GetConnectionString();
         }
 
-        // get tickets by airline id
 
         private int ExecuteNonQuery(string query)
         {
@@ -68,6 +67,37 @@ namespace FinalProject_Part1
             }
             return result;
         }
+
+        // get tickets by airline id
+        //public List<Ticket> GetAllTicketsByAirlineId(int id)
+        //{
+        //    List<Ticket> result = new List<Ticket>();
+
+        //    using (NpgsqlCommand cmd = new NpgsqlCommand())
+        //    {
+        //        using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+        //        {
+        //            cmd.Connection.Open();
+        //            cmd.CommandType = System.Data.CommandType.Text;
+        //            cmd.CommandText = "select * from sp_get_all_tickets_by_airline_id()";
+
+        //            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                Ticket c = new Ticket
+        //                {
+        //                    Id = (int)reader["id"],
+        //                    Flight_Id = (int)reader["id"],
+        //                    Customer_Id = (int)reader["id"]
+        //                };
+        //                result.Add(c);
+        //            }
+        //        }
+        //    }
+        //    return result;
+        //}
+
 
         public List<Ticket> GetAll()
         {

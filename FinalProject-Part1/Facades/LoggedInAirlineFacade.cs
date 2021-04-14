@@ -15,8 +15,9 @@ namespace FinalProject_Part1
         {
             if (token != null)
             {
-                return _ticketDAO.GetAll(); // get tickets by airline id
-                // return _ticketDAO.GetTicketsByAirlineId(token.User.Id);
+                return _ticketDAO.GetAll();
+                // get tickets by airline id
+                //return _ticketDAO.GetTicketsByAirlineId(token.User.Id);
             }
             else
             {
@@ -103,7 +104,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new NullTokenException("There is a problem to Mofidy airline details. Please check your login details.Token is null.");
+                throw new NullTokenException("There is a problem to mofidy airline details. Please check your login details.Token is null.");
             }
         }
 
