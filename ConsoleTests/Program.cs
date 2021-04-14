@@ -20,7 +20,8 @@ namespace ConsoleTests
 
             //Console.WriteLine("Hello World!");
 
-            //log.Info("test");
+            log.Info("info test");
+            log.Debug("debug test");
             //CountryDAOPGSQL dao = new CountryDAOPGSQL("Host=localhost;Username=postgres;Password=admin;Database=postgres");
             //dao.AddCountry(new Country("China"));
             //Country result_of_get = dao.GetCountryById(5);
@@ -76,8 +77,8 @@ namespace ConsoleTests
             //}
             //Console.ReadLine();
 
-            LoggedInAdministratorFacade loggedInAdministratorFacade = new LoggedInAdministratorFacade(false);
-            loggedInAdministratorFacade.GetAllCustomers(token, );
+            //LoggedInAdministratorFacade loggedInAdministratorFacade = new LoggedInAdministratorFacade(false);
+            //loggedInAdministratorFacade.GetAllCustomers(token, );
         }
     }
 }

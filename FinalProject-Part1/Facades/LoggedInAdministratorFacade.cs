@@ -22,7 +22,7 @@ namespace FinalProject_Part1
                     return _customerDAO.GetAll();
                 }
                 logger.Debug("This administrator level is not authorized to get all customers.");
-                throw new Exception("This administrator level is not authorized to get all customers. Access is denied.");
+                throw new WrongLevelOfAccessException("This administrator level is not authorized to get all customers. Access is denied.");
             }
             else
             {
@@ -60,14 +60,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to update airline details.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to update airline details.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to update airline details. Access is denied.");
             }
         }
         public void RemoveAirline(LoginToken<Administrator> token, AirlineCompany airline)
@@ -80,14 +80,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to remove airline.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to remove airline.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to remove airline. Access is denied.");
             }
         }
         public void CreateNewCustomer(LoginToken<Administrator> token, Customer customer)
@@ -100,14 +100,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to create a new customer.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new customer.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to create new customer. Access is denied.");
             }
         }
         public void UpdateCustomerDetails(LoginToken<Administrator> token, Customer customer)
@@ -120,14 +120,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to update customer details.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to update customer details.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to update customer details. Access is denied.");
             }
         }
         public void RemoveCustomer(LoginToken<Administrator> token, Customer customer)
@@ -140,14 +140,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to remove customer.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to remove customer.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to remove customer. Access is denied.");
             }
         }
         public void CreateAdmin(LoginToken<Administrator> token, Administrator admin)
@@ -163,14 +163,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to create a new admin.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create a new admin.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to create a new admin. Access is denied.");
             }
         }
         public void UpdateAdmin(LoginToken<Administrator> token, Administrator admin)
@@ -183,14 +183,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to update administrator details.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to update administrator details.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to update administrator details. Access is denied.");
             }
         }
         public void RemoveAdmin(LoginToken<Administrator> token, Administrator admin)
@@ -203,14 +203,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to remove administrator.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to remove administrator.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to remove administrator. Access is denied.");
             }
         }
 
@@ -224,14 +224,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to create a new user.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new user.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to create new user. Access is denied.");
             }
         }
 
@@ -245,14 +245,14 @@ namespace FinalProject_Part1
                 }
                 else
                 {
-                    logger.Debug("This administrator level is not authorized to create a new airline.");
-                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                    logger.Debug("This administrator level is not authorized to create a new ticket.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new ticket.");
                 }
             }
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new Exception("There is a problem to create new ticket. Access is denied.");
             }
         }
 
