@@ -27,7 +27,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("Access is denied. You have no authorization to get all customers.");
+                throw new NullTokenException("Access is denied. You have no authorization to get all customers.");
             }
         }
         public void CreateNewAirline(LoginToken<Administrator> token, AirlineCompany airline)
@@ -47,7 +47,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new airline. Access is denied.");
+                throw new NullTokenException("There is a problem to create new airline. Access is denied.");
             }
         }
         public void UpdateAirlineDetails(LoginToken<Administrator> token, AirlineCompany airline)
@@ -67,7 +67,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to update airline details. Access is denied.");
+                throw new NullTokenException("There is a problem to update airline details. Access is denied.");
             }
         }
         public void RemoveAirline(LoginToken<Administrator> token, AirlineCompany airline)
@@ -87,7 +87,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to remove airline. Access is denied.");
+                throw new NullTokenException("There is a problem to remove airline. Access is denied.");
             }
         }
         public void CreateNewCustomer(LoginToken<Administrator> token, Customer customer)
@@ -107,7 +107,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new customer. Access is denied.");
+                throw new NullTokenException("There is a problem to create new customer. Access is denied.");
             }
         }
         public void UpdateCustomerDetails(LoginToken<Administrator> token, Customer customer)
@@ -127,7 +127,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to update customer details. Access is denied.");
+                throw new NullTokenException("There is a problem to update customer details. Access is denied.");
             }
         }
         public void RemoveCustomer(LoginToken<Administrator> token, Customer customer)
@@ -147,7 +147,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to remove customer. Access is denied.");
+                throw new NullTokenException("There is a problem to remove customer. Access is denied.");
             }
         }
         public void CreateAdmin(LoginToken<Administrator> token, Administrator admin)
@@ -170,7 +170,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create a new admin. Access is denied.");
+                throw new NullTokenException("There is a problem to create a new admin. Access is denied.");
             }
         }
         public void UpdateAdmin(LoginToken<Administrator> token, Administrator admin)
@@ -190,7 +190,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to update administrator details. Access is denied.");
+                throw new NullTokenException("There is a problem to update administrator details. Access is denied.");
             }
         }
         public void RemoveAdmin(LoginToken<Administrator> token, Administrator admin)
@@ -210,7 +210,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to remove administrator. Access is denied.");
+                throw new NullTokenException("There is a problem to remove administrator. Access is denied.");
             }
         }
 
@@ -231,7 +231,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new user. Access is denied.");
+                throw new NullTokenException("There is a problem to create new user. Access is denied.");
             }
         }
 
@@ -252,7 +252,7 @@ namespace FinalProject_Part1
             else
             {
                 logger.Error("Error - token is null");
-                throw new Exception("There is a problem to create new ticket. Access is denied.");
+                throw new NullTokenException("There is a problem to create new ticket. Access is denied.");
             }
         }
 
