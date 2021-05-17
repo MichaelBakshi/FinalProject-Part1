@@ -7,9 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <Label Margin="50,44,600,496"/>
+        <Label Content="Airline Companies" Margin="50,44,600,496"/>
         <TextBox  Margin="217,44,433,496"/>
-        <Label Height="26" Margin="50,0,600,20"/>
-        <Label Height="26" Margin="50,0,600,20"/>
+        <Label Content="Customers" Margin="50,100,600,435"/>
+        <TextBox  Margin="217,100,433,440"/>
+        <Label Content="Administrators" Margin="50,152,600,391"/>
+        <TextBox  Margin="217,149,433,391"/>
+        <Label Content="Flights Per Company" Margin="50,208,600,334"/>
+        <TextBox  Margin="217,206,433,334"/>
+        <Label Content="Tickets Per Customer" Margin="50,254,600,284"/>
+        <TextBox  Margin="217,254,433,284"/>
+        <Label Content="Countries" Margin="50,305,600,231"/>
+        <TextBox  Margin="217,305,433,231"/>
+        <Button Content="Add to DB" HorizontalAlignment="Left" Margin="433,130,0,0" VerticalAlignment="Top" Width="107" Height="45"/>
+        <Button Content="Replace DB" HorizontalAlignment="Left" Margin="433,211,0,0" VerticalAlignment="Top" Width="107" Height="45"/>
+
+
     </Grid>
 </Window>
