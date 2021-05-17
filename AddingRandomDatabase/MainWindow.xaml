@@ -8,19 +8,23 @@
         Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Label Content="Airline Companies" Margin="50,44,600,496"/>
-        <TextBox  Margin="217,44,433,496"/>
-        <Label Content="Customers" Margin="50,100,600,435"/>
-        <TextBox  Margin="217,100,433,440"/>
-        <Label Content="Administrators" Margin="50,152,600,391"/>
-        <TextBox  Margin="217,149,433,391"/>
-        <Label Content="Flights Per Company" Margin="50,208,600,334"/>
-        <TextBox  Margin="217,206,433,334"/>
-        <Label Content="Tickets Per Customer" Margin="50,254,600,284"/>
-        <TextBox  Margin="217,254,433,284"/>
-        <Label Content="Countries" Margin="50,305,600,231"/>
-        <TextBox  Margin="217,305,433,231"/>
-        <Button Content="Add to DB" HorizontalAlignment="Left" Margin="433,130,0,0" VerticalAlignment="Top" Width="107" Height="45"/>
-        <Button Content="Replace DB" HorizontalAlignment="Left" Margin="433,211,0,0" VerticalAlignment="Top" Width="107" Height="45"/>
+        <TextBox  Margin="238,44,412,496"/>
+        <Label Content="Customers" Margin="50,82,600,453"/>
+        <TextBox  Margin="238,82,412,458"/>
+        <Label Content="Administrators" Margin="50,121,600,422"/>
+        <TextBox  Margin="238,118,412,422"/>
+        <Label Content="Flights Per Company" Margin="50,160,600,382"/>
+        <TextBox  Margin="238,152,412,388"/>
+        <Label Content="Tickets Per Customer" Margin="50,192,600,346"/>
+        <TextBox  Margin="238,186,412,352"/>
+        <Label Content="Countries" Margin="50,228,600,308"/>
+        <TextBox  Margin="238,222,412,314"/>
+        <Button Content="Add to DB" HorizontalAlignment="Left" Margin="478,94,0,0" VerticalAlignment="Top" Width="169" Height="45"/>
+        <Button Content="Replace DB" HorizontalAlignment="Left" Margin="478,165,0,0" VerticalAlignment="Top" Width="169" Height="45"/>
+        <ProgressBar HorizontalAlignment="Left" Height="16" Margin="50,332,0,0" VerticalAlignment="Top" Width="690"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="50,290,0,0" TextWrapping="Wrap" Text="  Complete" VerticalAlignment="Top" Width="142" Height="26"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="50,366,0,0" TextWrapping="Wrap" Text="Logging:" VerticalAlignment="Top" Width="142" Height="26"/>
+        <StatusBar HorizontalAlignment="Left" Height="148" Margin="50,398,0,0" VerticalAlignment="Top" Width="690"/>
 
 
     </Grid>
