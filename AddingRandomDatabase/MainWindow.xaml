@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AddingRandomDatabase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        
-    </StackPanel>
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <Label Margin="50,44,600,496"/>
+        <TextBox  Margin="217,44,433,496"/>
+        <Label Height="26" Margin="50,0,600,20"/>
+        <Label Height="26" Margin="50,0,600,20"/>
+    </Grid>
 </Window>
