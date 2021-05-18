@@ -24,7 +24,7 @@
         <ProgressBar HorizontalAlignment="Left" Height="16" Margin="50,332,0,0" VerticalAlignment="Top" Width="690"/>
         <TextBlock  HorizontalAlignment="Left" Margin="50,290,0,0" TextWrapping="Wrap" Text="  Complete" VerticalAlignment="Top" Width="142" Height="26"/>
         <TextBlock  HorizontalAlignment="Left" Margin="50,366,0,0" TextWrapping="Wrap" Text="Logging:" VerticalAlignment="Top" Width="142" Height="26"/>
-        <StatusBar HorizontalAlignment="Left" Height="148" Margin="50,398,0,0" VerticalAlignment="Top" Width="690"/>
+        <ListBox HorizontalAlignment="Left" Height="148" Margin="50,398,0,0" VerticalAlignment="Top" Width="690"/>
 
 
     </Grid>
