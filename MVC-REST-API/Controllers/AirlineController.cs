@@ -28,7 +28,7 @@ namespace MVC_REST_API.Controllers
         }
 
 
-        [HttpGet("getallflights/{}")]
+        [HttpGet("getallflights/")]
         public async Task<ActionResult<Flight>> GetAllFlights()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
