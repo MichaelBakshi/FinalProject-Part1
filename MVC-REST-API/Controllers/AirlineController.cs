@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject_Part1;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,41 @@ namespace MVC_REST_API.Controllers
     [ApiController]
     public class AirlineController : ControllerBase
     {
-        // GET: api/<AirlineController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        private void AuthenticateAndGetTokenAndGetFacade(out
+            LoginToken<AirlineCompany> token_airline, out LoggedInAirlineFacade facade)
         {
-            return new string[] { "value1", "value2" };
+            GlobalConfig.GetConfiguration(false);
+
+            ILoginToken token;
+            LoginService loginService = new LoginService();
+            loginService.TryLogin("United", "united", out token);
+
+            token_airline = token as LoginToken<AirlineCompany>;
+            facade = FlightsCenterSystem.Instance.GetFacade(token_airline) as LoggedInAirlineFacade;
+        }
+
+
+        [HttpGet("getallflights/{}")]
+        public async Task<ActionResult<Flight>> GetAllFlights()
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            IList <Flight> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllFlights());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
         }
 
         // GET api/<AirlineController>/5
