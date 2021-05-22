@@ -37,7 +37,7 @@ namespace MVC_REST_API.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        [HttpGet("getflight/{flightid}")]
+        [HttpGet("getflightbyid/{flightid}")]
         public async Task<ActionResult<Flight>> GetFlightById(int flightid)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>

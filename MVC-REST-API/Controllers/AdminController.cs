@@ -43,9 +43,25 @@ namespace MVC_REST_API.Controllers
 
         // POST api/<AdminController>
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //public async Task<ActionResult<AirlineCompany>> AddNewAirline([from body] airline)
+        //{
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+        //            token_admin, out LoggedInAdministratorFacade facade);
+
+        //    try
+        //    {
+        //        await Task.Run(() => facade.CreateNewAirline(token_admin, airline));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+        //    }
+        //    if (result == null)
+        //    {
+        //        return StatusCode(204, "{ }");
+        //    }
+        //    return Ok(result);
+        //}
 
         // PUT api/<AdminController>/5
         [HttpPut("{id}")]
@@ -55,7 +71,7 @@ namespace MVC_REST_API.Controllers
 
         // DELETE api/<AdminController>/5
         [HttpDelete("removeairline/")]
-        public async Task<ActionResult<Administrator>> RemoveAirline(AirlineCompany airlineCompany)
+        public async Task<ActionResult<Administrator>> RemoveAirline([FromBody] AirlineCompany airlineCompany)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);

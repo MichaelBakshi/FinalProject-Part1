@@ -12,6 +12,7 @@ namespace FinalProjectTestCore
         LoggedInAdministratorFacade administratorFacade;
         LoggedInAirlineFacade airlineFacade = new LoggedInAirlineFacade(true);
         LoginToken<Administrator> admin_token;
+       
 
         [TestInitialize]
         public void TryLogin()
