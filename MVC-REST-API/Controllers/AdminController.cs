@@ -42,26 +42,23 @@ namespace MVC_REST_API.Controllers
         }
 
         // POST api/<AdminController>
-        [HttpPost]
-        //public async Task<ActionResult<AirlineCompany>> AddNewAirline([from body] airline)
-        //{
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-        //            token_admin, out LoggedInAdministratorFacade facade);
+        [HttpPost("AddNewAirline")]
+        public async Task<ActionResult<AirlineCompany>> AddNewAirline([FromBody] AirlineCompany airline)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
 
-        //    try
-        //    {
-        //        await Task.Run(() => facade.CreateNewAirline(token_admin, airline));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
-        //    }
-        //    if (result == null)
-        //    {
-        //        return StatusCode(204, "{ }");
-        //    }
-        //    return Ok(result);
-        //}
+            try
+            {
+                await Task.Run(() => facade.CreateNewAirline(token_admin, airline));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
 
         // PUT api/<AdminController>/5
         [HttpPut("{id}")]
