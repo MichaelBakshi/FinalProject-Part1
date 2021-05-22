@@ -79,6 +79,7 @@ namespace ConsoleTests
 
             //LoggedInAdministratorFacade loggedInAdministratorFacade = new LoggedInAdministratorFacade(false);
             //loggedInAdministratorFacade.GetAllCustomers(token, );
+
         }
     }
 }
