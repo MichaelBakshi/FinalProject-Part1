@@ -42,8 +42,27 @@ namespace MVC_REST_API.Controllers
         }
 
         // POST api/<AdminController>
+        [HttpPost("AddNewUser")]
+        public async Task<ActionResult> AddNewUser([FromBody] User user)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CreateUser(token_admin, user));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        // POST api/<AdminController>
         [HttpPost("AddNewAirline")]
-        public async Task<ActionResult<AirlineCompany>> AddNewAirline([FromBody] AirlineCompany airline)
+        public async Task<ActionResult> AddNewAirline([FromBody] AirlineCompany airline)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);
@@ -61,9 +80,22 @@ namespace MVC_REST_API.Controllers
         }
 
         // PUT api/<AdminController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("UpdateAirline")]
+        public async Task<ActionResult> UpdateAirline([FromBody] AirlineCompany airline)
         {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.UpdateAirlineDetails(token_admin, airline));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
         }
 
         // DELETE api/<AdminController>/5

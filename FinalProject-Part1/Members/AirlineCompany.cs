@@ -6,7 +6,7 @@ namespace FinalProject_Part1
 {
     public class AirlineCompany : IPoco, IUser
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public int Country_Id { get; set; }
         public int User_Id { get; set; }
