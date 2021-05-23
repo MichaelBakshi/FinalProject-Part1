@@ -74,9 +74,22 @@ namespace MVC_REST_API.Controllers
         }
 
         // POST api/<AirlineController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("AddNewFlight")]
+        public async Task<ActionResult> AddNewFlight([FromBody] Flight flight)
         {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CreateFlight(token_airline, flight));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
         }
 
         // PUT api/<AirlineController>/5
