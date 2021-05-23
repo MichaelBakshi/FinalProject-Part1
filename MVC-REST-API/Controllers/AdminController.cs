@@ -51,10 +51,26 @@ namespace MVC_REST_API.Controllers
         }
 
         // GET api/<AdminController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("getadminbyid/{adminid}")]
+        public async Task<ActionResult<Flight>> GetAdminById(int adminid)
         {
-            return "value";
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            Administrator result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAdminById(adminid));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
         }
 
         // POST api/<AdminController>

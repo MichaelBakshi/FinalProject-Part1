@@ -21,7 +21,7 @@ namespace MVC_REST_API.Controllers
 
             ILoginToken token;
             LoginService loginService = new LoginService();
-            loginService.TryLogin("United", "united", out token);
+            loginService.TryLogin("EL-AL", "elal", out token);
 
             token_airline = token as LoginToken<AirlineCompany>;
             facade = FlightsCenterSystem.Instance.GetFacade(token_airline) as LoggedInAirlineFacade;
@@ -51,10 +51,26 @@ namespace MVC_REST_API.Controllers
         }
 
         // GET api/<AirlineController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("getairlinebyid/{airlineid}")]
+        public async Task<ActionResult<AirlineCompany>> GetAirlineById(int airlineid)
         {
-            return "value";
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            AirlineCompany result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAirlineById(airlineid));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
         }
 
         // POST api/<AirlineController>
