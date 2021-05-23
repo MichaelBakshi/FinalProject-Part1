@@ -28,10 +28,26 @@ namespace MVC_REST_API.Controllers
         }
 
         // GET: api/<AdminController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("getallcustomers/")]
+        public async Task<ActionResult<Administrator>> GetAllCustomers()
         {
-            return new string[] { "value1", "value2" };
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            IList<Customer> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllCustomers(token_admin));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
         }
 
         // GET api/<AdminController>/5
