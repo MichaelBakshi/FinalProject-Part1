@@ -93,9 +93,22 @@ namespace MVC_REST_API.Controllers
         }
 
         // PUT api/<AirlineController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("UpdateFlight")]
+        public async Task<ActionResult> UpdateFlight([FromBody] Flight flight)
         {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.UpdateFlight(token_airline, flight));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
         }
 
         // DELETE api/<AirlineController>/5
