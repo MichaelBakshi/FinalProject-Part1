@@ -100,9 +100,22 @@ namespace MVC_REST_API.Controllers
         }
 
         // DELETE api/<CustomerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("cancelticket/")]
+        public async Task<ActionResult<Customer>> CancelTicket([FromBody] Ticket ticket)
         {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
+                    token_customer, out LoggedInCustomerFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CancelTicket(token_customer, ticket));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
         }
     }
 }
