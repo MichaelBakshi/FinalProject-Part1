@@ -19,6 +19,7 @@ namespace FinalProject_Part1
         {
             return _airlineDAO.GetAll();
         }
+
         public Dictionary<Flight, int> GetAllFlightsVacancy()
         {
             return _flightDAO.GetAllFlightsVacancy();

@@ -26,6 +26,7 @@ namespace FinalProject_Part1
             }
         }
 
+
         public IList<Flight> GetAllFlightsByCustomer(LoginToken<Customer> token, Customer customer)
         {
             if (token != null)
