@@ -75,10 +75,22 @@ namespace MVC_REST_API.Controllers
         }
 
         // POST api/<CustomerController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("purchaseticket")]
+        public async Task<ActionResult> PurchaseTicket([FromBody] Flight flight)
         {
-            //new LoggedInCustomerFacade().PurchaseTicket(token,flight);
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
+                    token_customer, out LoggedInCustomerFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.PurchaseTicket(token_customer, flight));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
         }
 
         // PUT api/<CustomerController>/5
