@@ -1,4 +1,5 @@
 ﻿using FinalProject_Part1;
+using FinalProject_Part1.Members;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -74,34 +75,35 @@ namespace MVC_REST_API.Controllers
         }
 
         // POST api/<AdminController>
-        [HttpPost("AddNewUser")]
-        public async Task<ActionResult> AddNewUser([FromBody] User user)
-        {
-            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-                    token_admin, out LoggedInAdministratorFacade facade);
+        //[HttpPost("AddNewUser")]
+        //public async Task<ActionResult> AddNewUser([FromBody] User user)
+        //{
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+        //            token_admin, out LoggedInAdministratorFacade facade);
 
-            try
-            {
-                await Task.Run(() => facade.CreateUser(token_admin, user));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
-            }
+        //    try
+        //    {
+        //        await Task.Run(() => facade.CreateUser(token_admin, user));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         // POST api/<AdminController>
         [HttpPost("AddNewAirline")]
-        public async Task<ActionResult> AddNewAirline([FromBody] AirlineCompany airline)
+        public async Task<ActionResult> AddNewAirline([FromBody] AirlineUser airline)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);
 
             try
             {
-                await Task.Run(() => facade.CreateNewAirline(token_admin, airline));
+                await Task.Run(() => facade.CreateUser(token_admin, airline.UserDetails));
+                await Task.Run(() => facade.CreateNewAirline(token_admin, airline.AirlineCompanyDetails));
             }
             catch (Exception ex)
             {

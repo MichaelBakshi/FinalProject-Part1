@@ -112,9 +112,22 @@ namespace MVC_REST_API.Controllers
         }
 
         // DELETE api/<AirlineController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("cancelflight/")]
+        public async Task<ActionResult<AirlineCompany>> CancelFlight([FromBody] Flight flight)
         {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CancelFlight(token_airline, flight));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
         }
     }
 }
