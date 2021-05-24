@@ -14,13 +14,26 @@ namespace MVC_REST_API.Controllers
     public class AnonymousController : ControllerBase
     {
 
-        
-
         // GET: api/<AnonymousController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("getallairlinecompanies/")]
+        public async Task<ActionResult<AirlineCompany>> GetAllAirlineCompanies()
         {
-            return new string[] { "value1", "value2" };
+             AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            IList<AirlineCompany> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllAirlineCompanies());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
         }
 
         [HttpGet("getflight/{flight_id}")]
