@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 namespace MVC_REST_API.Controllers
 {
-
-
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -31,10 +29,26 @@ namespace MVC_REST_API.Controllers
 
 
         // GET: api/<CustomerController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("getallflightsbycustomer/")]
+        public async Task<ActionResult<Customer>> GetAllFlightsByCustomer([FromBody]Customer customer)
         {
-            return new string[] { "value1", "value2" };
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
+                    token_customer, out LoggedInCustomerFacade facade);
+
+            IList<Flight> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer, customer ));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
         }
 
         [HttpGet("getflightbyid/{flightid}")]

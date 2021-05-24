@@ -25,6 +25,21 @@ namespace FinalProject_Part1
                 throw new NullTokenException("There is a problem to get all flights. Please check your login details. Token is null.");
             }
         }
+
+        public IList<Flight> GetAllFlightsByCustomer(LoginToken<Customer> token, Customer customer)
+        {
+            if (token != null)
+            {
+                return _flightDAO.GetFlightsByCustomer(customer);
+            }
+            else
+            {
+                logger.Error("Error - token is null");
+                throw new NullTokenException("There is a problem to get all customer flights. Please check your login details. Token is null.");
+            }
+        }
+
+
         public Ticket PurchaseTicket(LoginToken<Customer> token, Flight flight)
         {
             if (token != null)
