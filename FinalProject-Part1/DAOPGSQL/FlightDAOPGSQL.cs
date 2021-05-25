@@ -248,7 +248,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_flights_by_destination_country('{countryCode}')";
+                    cmd.CommandText = $"select * from sp_get_flights_by_destination_country({countryCode})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 

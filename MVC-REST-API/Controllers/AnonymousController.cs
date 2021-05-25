@@ -36,26 +36,25 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getflight/{flight_id}")]
-        public async Task<ActionResult<Flight>> GetFlightById(int flightid)
+        [HttpGet("getflightsbydestinationcountry/{countrycode}")]
+        public async Task<ActionResult<Flight>> GetFlightsByDestinationCountry(int countrycode)
         {
-            return null;
-            //Flight result = null;
-            //try
-            //{
-            //    result = await Task.Run(() => facade.GetFlightById(flight_id));
-            //}
-            //catch (IllegalFlightParameter ex)
-            //{
-            //    return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
-            //    // same as: return BadRequest($"{{ error: {ex.Message} }}"); 
-            //}
-            //if (result == null)
-            //{
-            //    return StatusCode(204, "{ }");
-            //}
-            //return Ok(result);
-            //// same as: return StatusCode(200, result);
+            AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            IList<Flight> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetFlightsByDestinationCountry(countrycode));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
         }
 
 
