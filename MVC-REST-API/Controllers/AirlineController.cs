@@ -50,6 +50,30 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getalltickets/")]
+        public async Task<ActionResult<AirlineCompany>> GetAllTickets()
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            IList<Ticket> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllTickets(token_airline));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
+        }
+
+
+
         // GET api/<AirlineController>/5
         [HttpGet("getairlinebyid/{airlineid}")]
         public async Task<ActionResult<AirlineCompany>> GetAirlineById(int airlineid)
@@ -129,5 +153,25 @@ namespace MVC_REST_API.Controllers
 
             return Ok();
         }
+
+        [HttpPut("changepassword")]
+        public async Task<ActionResult> ChangePassword([FromBody] AirlineCompany airline)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.ChangeMyPassword(token_airline, "elal", "elalelal"));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+
     }
 }

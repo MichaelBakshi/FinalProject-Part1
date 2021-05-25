@@ -80,7 +80,7 @@ namespace FinalProject_Part1
                 if (oldPassword == token.User.user.Password)
                 {
                     token.User.user.Password = newPassword;
-                    _airlineDAO.Update(token.User);
+                    _userDAO.Update(token.User.user);
                     //log4net
                 }
                 else
