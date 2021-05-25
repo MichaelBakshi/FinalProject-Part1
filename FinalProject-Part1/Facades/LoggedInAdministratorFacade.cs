@@ -235,6 +235,27 @@ namespace FinalProject_Part1
             }
         }
 
+        public void RemoveUser(LoginToken<Administrator> token, User user)
+        {
+            if (token != null)
+            {
+                if (token.User.Level == 3)
+                {
+                    _userDAO.Remove(user);
+                }
+                else
+                {
+                    logger.Debug("This administrator level is not authorized to remove user.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to remove user.");
+                }
+            }
+            else
+            {
+                logger.Error("Error - token is null");
+                throw new NullTokenException("There is a problem to remove administrator. Access is denied.");
+            }
+        }
+
         public void CreateTicket(LoginToken<Administrator> token, Ticket ticket)
         {
             if (token != null)

@@ -134,14 +134,15 @@ namespace MVC_REST_API.Controllers
 
         // DELETE api/<AdminController>/5
         [HttpDelete("removeairline/")]
-        public async Task<ActionResult<Administrator>> RemoveAirline([FromBody] AirlineCompany airlineCompany)
+        public async Task<ActionResult<Administrator>> RemoveAirline([FromBody] AirlineUser airline)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);
 
             try
             {
-                 await Task.Run(() => facade.RemoveAirline(token_admin, airlineCompany));
+                 await Task.Run(() => facade.RemoveUser(token_admin, airline.UserDetails));
+                await Task.Run(() => facade.RemoveAirline(token_admin, airline.AirlineCompanyDetails));
             }
             catch (Exception ex)
             {
