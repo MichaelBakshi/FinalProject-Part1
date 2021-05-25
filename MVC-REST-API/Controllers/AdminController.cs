@@ -141,8 +141,8 @@ namespace MVC_REST_API.Controllers
 
             try
             {
-                 await Task.Run(() => facade.RemoveUser(token_admin, airline.UserDetails));
                 await Task.Run(() => facade.RemoveAirline(token_admin, airline.AirlineCompanyDetails));
+                await Task.Run(() => facade.RemoveUser(token_admin, airline.UserDetails));
             }
             catch (Exception ex)
             {
@@ -151,5 +151,174 @@ namespace MVC_REST_API.Controllers
             
             return Ok();
         }
+
+        [HttpPost("createnewcustomer")]
+        public async Task<ActionResult> CreateNewCustomer([FromBody] CustomerUser customer)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CreateUser(token_admin, customer.UserDetails));
+                await Task.Run(() => facade.CreateNewCustomer(token_admin, customer.CustomerDetails));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("UpdateCustomerDetails")]
+        public async Task<ActionResult> UpdateCustomerDetails([FromBody] Customer customer)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.UpdateCustomerDetails(token_admin, customer));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("removecustomer/")]
+        public async Task<ActionResult<Administrator>> RemoveCustomer([FromBody] CustomerUser customer)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.RemoveCustomer(token_admin, customer.CustomerDetails));
+                await Task.Run(() => facade.RemoveUser(token_admin, customer.UserDetails));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("createnewadministrator")]
+        public async Task<ActionResult> CreateNewAdministrator([FromBody] AdminUser admin)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CreateUser(token_admin, admin.UserDetails));
+                await Task.Run(() => facade.CreateAdmin(token_admin, admin.AdministratorDetails));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("UpdateAdminDetails")]
+        public async Task<ActionResult> UpdateAdminDetails([FromBody] Administrator administrator)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CreateAdmin(token_admin, administrator));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("removeadministrator/")]
+        public async Task<ActionResult<Administrator>> RemoveAdministrator([FromBody] AdminUser admin)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.RemoveAdmin(token_admin, admin.AdministratorDetails));
+                await Task.Run(() => facade.RemoveUser(token_admin, admin.UserDetails));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("createnewuser")]
+        public async Task<ActionResult> CreateNewUser([FromBody] User user)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CreateUser(token_admin, user));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("removeuser/")]
+        public async Task<ActionResult<Administrator>> RemoveUser([FromBody] User user)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.RemoveUser(token_admin, user));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("createticket")]
+        public async Task<ActionResult> CreateNewTicket([FromBody] Ticket ticket)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.CreateTicket(token_admin, ticket));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
+
+
     }
 }
