@@ -13,7 +13,7 @@ namespace FinalProject_Part1
         Flight GetFlightById(int id);
         IList<Flight> GetFlightsByOriginCountry(int countryCode);
         IList<Flight> GetFlightsByDestinationCountry(int countryCode);
-        IList<Flight> GetFlightsByDepatrureDate(DateTime departureDate);
+        IList<Flight> GetFlightsByDepartureDate(DateTime departureDate);
         IList<Flight> GetFlightsByLandingDate(DateTime landingDate);
     }
 }

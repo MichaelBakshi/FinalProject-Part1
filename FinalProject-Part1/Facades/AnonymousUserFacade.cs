@@ -53,7 +53,7 @@ namespace FinalProject_Part1
         {
             return _flightDAO.GetFlightsByDestinationCountry(countryCode);
         }
-        public IList<Flight> GetFlightsByDepatrureDate(DateTime departureDate)
+        public IList<Flight> GetFlightsByDepartureDate(DateTime departureDate)
         {
             return _flightDAO.GetFlightsByDepartureDate(departureDate);
         }

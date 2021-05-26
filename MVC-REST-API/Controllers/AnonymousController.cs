@@ -162,6 +162,26 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getflightsbyorigincountry/{countrycode}")]
+        public async Task<ActionResult<Flight>> GetFlightsByOriginCountry(int countrycode)
+        {
+            AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            IList<Flight> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetFlightsByOriginCountry(countrycode));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
+        }
 
 
         [HttpGet("getflightsbydestinationcountry/{countrycode}")]
@@ -185,6 +205,49 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("getflightsbydeparturedate/{datetime}")]
+        public async Task<ActionResult<Flight>> GetFlightsByDepartureDate(DateTime dateTime)
+        {
+            AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            IList<Flight> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetFlightsByDepartureDate(dateTime));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
+        }
+
+
+        [HttpGet("getflightsbylandingdate/{datetime}")]
+        public async Task<ActionResult<Flight>> GetFlightsByLandingDate(DateTime dateTime)
+        {
+            AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            IList<Flight> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetFlightsByLandingDate(dateTime));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
+        }
 
 
         // POST api/<AnonymousController>
