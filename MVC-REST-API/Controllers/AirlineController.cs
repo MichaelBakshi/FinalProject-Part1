@@ -172,6 +172,24 @@ namespace MVC_REST_API.Controllers
             return Ok();
         }
 
+        [HttpPut("modifyairlinedetails")]
+        public async Task<ActionResult> ModifyAirlineDetails([FromBody] AirlineCompany airline)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.MofidyAirlineDetails(token_airline, airline));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+            }
+
+            return Ok();
+        }
+
 
     }
 }
