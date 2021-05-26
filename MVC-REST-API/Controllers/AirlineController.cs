@@ -21,7 +21,7 @@ namespace MVC_REST_API.Controllers
 
             ILoginToken token;
             LoginService loginService = new LoginService();
-            loginService.TryLogin("EL-AL", "elal", out token);
+            loginService.TryLogin("EL-AL", "elalelal", out token);
 
             token_airline = token as LoginToken<AirlineCompany>;
             facade = FlightsCenterSystem.Instance.GetFacade(token_airline) as LoggedInAirlineFacade;
@@ -162,7 +162,7 @@ namespace MVC_REST_API.Controllers
 
             try
             {
-                await Task.Run(() => facade.ChangeMyPassword(token_airline, "elal", "elalelal"));
+                await Task.Run(() => facade.ChangeMyPassword(token_airline, "elalelal", "vvys"));
             }
             catch (Exception ex)
             {
