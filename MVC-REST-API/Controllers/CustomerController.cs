@@ -27,6 +27,27 @@ namespace MVC_REST_API.Controllers
             facade = FlightsCenterSystem.Instance.GetFacade(token_customer) as LoggedInCustomerFacade;
         }
 
+        [HttpGet("getallflights/")]
+        public async Task<ActionResult<Flight>> GetAllFlights()
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
+                    token_customer, out LoggedInCustomerFacade facade);
+
+            IList<Flight> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllFlights());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
+        }
 
         // GET: api/<CustomerController>
         [HttpGet("getallflightsbycustomer/")]
