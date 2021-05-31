@@ -36,8 +36,9 @@ namespace FinalProject_Part1
 
         public void Add(User u)
         {
-
+            //cancel executenonquery
             ExecuteNonQuery($"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});");
+            // u.Id = 
         }
 
         public User GetById(int id)

@@ -103,6 +103,7 @@ namespace MVC_REST_API.Controllers
             try
             {
                 await Task.Run(() => facade.CreateUser(token_admin, airline.UserDetails));
+                airline.AirlineCompanyDetails.User_Id = airline.UserDetails.Id;
                 await Task.Run(() => facade.CreateNewAirline(token_admin, airline.AirlineCompanyDetails));
             }
             catch (Exception ex)
