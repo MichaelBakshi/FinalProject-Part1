@@ -2,15 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>MVC_REST_API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.13" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FinalProject-Part1\FinalProject-Part1.csproj" />
   </ItemGroup>
 
 </Project>

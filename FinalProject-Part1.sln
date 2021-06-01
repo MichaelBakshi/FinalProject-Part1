@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProjectTestCore", "Fin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddingRandomDatabase", "AddingRandomDatabase\AddingRandomDatabase.csproj", "{7B285242-CBA8-4D6B-B1E4-3676E55637B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC-REST-API", "MVC-REST-API\MVC-REST-API.csproj", "{FB42A490-45F4-424D-8057-64FE4BAB7AA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC-REST-API", "MVC-REST-API\MVC-REST-API.csproj", "{FB42A490-45F4-424D-8057-64FE4BAB7AA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenAuthentication", "TokenAuthentication\TokenAuthentication.csproj", "{162509F4-4973-43A3-8BFB-C9D8E092C2DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{FB42A490-45F4-424D-8057-64FE4BAB7AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB42A490-45F4-424D-8057-64FE4BAB7AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB42A490-45F4-424D-8057-64FE4BAB7AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162509F4-4973-43A3-8BFB-C9D8E092C2DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162509F4-4973-43A3-8BFB-C9D8E092C2DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162509F4-4973-43A3-8BFB-C9D8E092C2DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162509F4-4973-43A3-8BFB-C9D8E092C2DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
