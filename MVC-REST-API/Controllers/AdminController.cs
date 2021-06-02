@@ -12,6 +12,7 @@ namespace MVC_REST_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "Administrator")]
 
 
     public class AdminController : ControllerBase
@@ -105,7 +106,7 @@ namespace MVC_REST_API.Controllers
             try
             {
                 await Task.Run(() => facade.CreateUser(token_admin, airline.UserDetails));
-                airline.AirlineCompanyDetails.User_Id = airline.UserDetails.Id;
+                //airline.AirlineCompanyDetails.User_Id = airline.UserDetails.Id;
                 await Task.Run(() => facade.CreateNewAirline(token_admin, airline.AirlineCompanyDetails));
             }
             catch (Exception ex)
