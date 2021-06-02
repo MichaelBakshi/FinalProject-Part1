@@ -1,6 +1,5 @@
 ﻿using FinalProject_Part1;
 using FinalProject_Part1.Members;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,20 +10,9 @@ using System.Threading.Tasks;
 
 namespace MVC_REST_API.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrator")]
-    //public class AdminController : ControllerBase
-    //{
-    //    [HttpPost("createnewairline")]
-    //    public async Task<ActionResult<Airline>> AddNewAirline
-    //                                             (Airline newAirline)
-    //    {
-    //        // add airline -- add auto-generated id into newAirline
-    //        return Created("ur_for_get_method/new_airline_id", newAirline);
-    //    }
-    //}
+
 
     public class AdminController : ControllerBase
     {
