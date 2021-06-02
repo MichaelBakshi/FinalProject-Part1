@@ -1,4 +1,5 @@
 ﻿using FinalProject_Part1;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace MVC_REST_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "Airline")]
+
     public class AirlineController : ControllerBase
     {
 

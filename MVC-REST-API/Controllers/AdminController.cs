@@ -114,7 +114,7 @@ namespace MVC_REST_API.Controllers
                 return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return  Created("ur_for_get_method/new_airline_id", airline);
         }
 
         // PUT api/<AdminController>/5
