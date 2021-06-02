@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MVC_REST_API
@@ -23,7 +26,33 @@ namespace MVC_REST_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllers();
+            string securityKey = "this_is_our_supper_long_security_key_for_token_validation_project";
+
+            var symmetricSecurityKey = new
+               SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme =
+                     JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme =
+                     JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new
+                     TokenValidationParameters
+                {
+                    //  what to validate
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    // setup validate data
+                    ValidIssuer = "issuer_of_flight_project",
+                    ValidAudience = "flight_project_users",
+                    IssuerSigningKey = symmetricSecurityKey
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
