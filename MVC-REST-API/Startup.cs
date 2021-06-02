@@ -26,8 +26,15 @@ namespace MVC_REST_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            string securityKey = "this_is_our_supper_long_security_key_for_token_validation_project";
+            services.AddControllersWithViews();
+
+            // ...
+            //if (MyConfig.UseMicroServices)
+            //   services.AddScoped<IAdminFacade, MicroServiceAdminFacade>();
+            //else
+            services.AddScoped<IAdminFacade, AdminFacade>(); // prepare DI
+
+            string securityKey = "this_is_our_supper_long_security_key_for_token_validation_project_2018_09_07$smesk.in";
 
             var symmetricSecurityKey = new
                SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
@@ -44,16 +51,57 @@ namespace MVC_REST_API
                      TokenValidationParameters
                 {
                     //  what to validate
+                    //  what to validate
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
                     // setup validate data
-                    ValidIssuer = "issuer_of_flight_project",
-                    ValidAudience = "flight_project_users",
+                    ValidIssuer = "smesk.in",
+                    ValidAudience = "readers",
                     IssuerSigningKey = symmetricSecurityKey
                 };
             });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title =
+               "FlightsManagmentSystemWebAPI",
+                    Version = "v1"
+                });
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Name = "JWT Authentication",
+                    Description = "Please insert JWT with Bearer into field",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer", // must be lower case
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id =
+                        JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                c.AddSecurityDefinition(securityScheme.Reference.Id,
+                 securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                    {securityScheme, new string[] { }}
+                });
+
+                // make this work
+                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //c.IncludeXmlComments(xmlPath);
+            });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

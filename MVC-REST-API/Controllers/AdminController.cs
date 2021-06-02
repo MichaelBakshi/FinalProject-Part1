@@ -1,5 +1,6 @@
 ﻿using FinalProject_Part1;
 using FinalProject_Part1.Members;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,76 @@ namespace MVC_REST_API.Controllers
     [ApiController]
     //[Authorize(Roles = "Administrator")]
 
-
-    public class AdminController : ControllerBase
+    public class AdminController : FlightControllerBase<Administrator>
     {
+
+        //private IAdminFacade m_facade;
+        //private readonly IMapper m_mapper;
+
+        //the DI goes here
+
+        // 1. i can choose to wrok with DI or not...
+        // 2. we get here the admin facade
+        //    it could be AdminFacade or AdminFacade Micro service
+
+        //public AdminController(IAdminFacade adminFacade, IMapper mapper)
+        //{
+        //    m_facade = new AdminFacade();
+
+        //    m_facade = adminFacade;
+        //    m_mapper = mapper;
+        //}
+
+        /// <summary>
+        /// Get list of all the tickets belonging to the logged-in airline company
+        /// add xml config in order for this responses to show in the swagger page
+        /// </summary>
+        /// <param name = "airlineCompanyCreationDTO" ></ param >
+        /// < returns > List of all the tickets</returns>
+        /// <response code = "200" > Returns the list of tickets</response>
+        /// <response code = "204" > If the list of tickets is empty</response>
+        //   / <response code = "401" > If the user is not authenticated as airline company</response> 
+
+        //   [HttpPost("createairline")]
+        //public async Task<IActionResult> CreateAirline(AirlineCompanyCreationDTO airlineCompanyCreationDTO)
+        //{
+        //    AirlineCompany company = new AirlineCompany()
+        //    {
+        //        Id = 1,
+        //        CountryId = 12,
+        //        Name = "El-Al"
+        //    };
+        //    LoginToken<Administrator> token = GetLoginToken();
+
+        //    m_facade.CreateAirline(token, company);
+        //    ...
+        //      return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
+        //    return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
+        //}
+
+        //[HttpGet("getairline")]
+        //public async Task<ActionResult<AirlineCompanyDTO>> GetFlight()
+        //{
+        //    access facade
+        //     reqauest flight
+        //     let's pretend this flight was returned
+        //    AirlineCompany company = new AirlineCompany()
+        //    {
+        //        CountryId = 1,
+        //        Id = 2,
+        //        Name = "El-al",
+        //        Password = "LikeHome12345678"
+        //    };
+        //    LoginToken<Administrator> token = GetLoginToken();
+
+        //    AirlineCompanyDTO airlineCompanyDTO = m_mapper.Map<AirlineCompanyDTO>(company);
+
+        //    return Ok(JsonConvert.SerializeObject(airlineCompanyDTO));
+
+        //}
+
+
+
 
         private void AuthenticateAndGetTokenAndGetFacade(out
             LoginToken<Administrator> token_admin, out LoggedInAdministratorFacade facade)
