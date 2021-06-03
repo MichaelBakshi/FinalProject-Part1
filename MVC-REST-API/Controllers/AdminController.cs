@@ -1,4 +1,5 @@
-﻿using FinalProject_Part1;
+﻿using AutoMapper;
+using FinalProject_Part1;
 using FinalProject_Part1.Members;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,8 @@ namespace MVC_REST_API.Controllers
     public class AdminController : FlightControllerBase<Administrator>
     {
 
-        //private IAdminFacade m_facade;
-        //private readonly IMapper m_mapper;
+        private ILoggedInAdministratorFacade m_facade;
+        private readonly IMapper m_mapper;
 
         //the DI goes here
 
@@ -27,13 +28,13 @@ namespace MVC_REST_API.Controllers
         // 2. we get here the admin facade
         //    it could be AdminFacade or AdminFacade Micro service
 
-        //public AdminController(IAdminFacade adminFacade, IMapper mapper)
-        //{
-        //    m_facade = new AdminFacade();
+        public AdminController(ILoggedInAdministratorFacade adminFacade, IMapper mapper)
+        {
+            m_facade = new LoggedInAdministratorFacade(false);
 
-        //    m_facade = adminFacade;
-        //    m_mapper = mapper;
-        //}
+            m_facade = adminFacade;
+            m_mapper = mapper;
+        }
 
         /// <summary>
         /// Get list of all the tickets belonging to the logged-in airline company
@@ -45,22 +46,7 @@ namespace MVC_REST_API.Controllers
         /// <response code = "204" > If the list of tickets is empty</response>
         //   / <response code = "401" > If the user is not authenticated as airline company</response> 
 
-        //   [HttpPost("createairline")]
-        //public async Task<IActionResult> CreateAirline(AirlineCompanyCreationDTO airlineCompanyCreationDTO)
-        //{
-        //    AirlineCompany company = new AirlineCompany()
-        //    {
-        //        Id = 1,
-        //        CountryId = 12,
-        //        Name = "El-Al"
-        //    };
-        //    LoginToken<Administrator> token = GetLoginToken();
-
-        //    m_facade.CreateAirline(token, company);
-        //    ...
-        //      return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
-        //    return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
-        //}
+        
 
         //[HttpGet("getairline")]
         //public async Task<ActionResult<AirlineCompanyDTO>> GetFlight()
@@ -162,6 +148,24 @@ namespace MVC_REST_API.Controllers
         //    }
 
         //    return Ok();
+        //}
+
+
+        //   [HttpPost("createairline")]
+        //public async Task<IActionResult> CreateAirline(AirlineCompanyCreationDTO airlineCompanyCreationDTO)
+        //{
+        //    AirlineCompany company = new AirlineCompany()
+        //    {
+        //        Id = 1,
+        //        CountryId = 12,
+        //        Name = "El-Al"
+        //    };
+        //    LoginToken<Administrator> token = GetLoginToken();
+
+        //    m_facade.CreateAirline(token, company);
+        //    ...
+        //      return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
+        //    return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
         //}
 
         // POST api/<AdminController>

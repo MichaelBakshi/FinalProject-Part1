@@ -15,6 +15,9 @@ namespace FinalProject_Part1
         public int User_Id { get; set; }
         public User user { get; set; }
 
+        public string Username { get; set; }
+        public string Password { get; set; }
+
         public Customer()
         {
                 

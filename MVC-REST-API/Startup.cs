@@ -1,3 +1,4 @@
+using FinalProject_Part1;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,11 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace MVC_REST_API
 {
@@ -32,7 +35,12 @@ namespace MVC_REST_API
             //if (MyConfig.UseMicroServices)
             //   services.AddScoped<IAdminFacade, MicroServiceAdminFacade>();
             //else
-            services.AddScoped<IAdminFacade, AdminFacade>(); // prepare DI
+
+            //services.AddScoped<ILoggedInAdministratorFacade, LoggedInAdministratorFacade>(); // prepare DI
+
+            services.AddSingleton<ILoggedInAdministratorFacade>(x =>
+                new LoggedInAdministratorFacade(false));
+                
 
             string securityKey = "this_is_our_supper_long_security_key_for_token_validation_project_2018_09_07$smesk.in";
 

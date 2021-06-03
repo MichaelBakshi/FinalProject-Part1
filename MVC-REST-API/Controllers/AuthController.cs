@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject_Part1;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using MVC_REST_API.DTO;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -21,40 +23,64 @@ namespace MVC_REST_API.Controllers
         {
             // 1) try login, with userDetails
 
-            // await call FlightSystemCenter.Login(userDetails.Name, userDetails.Password);
-            // 1 login failed
-            //if (loginResult == false)
-            //{
-            //return Unauthorized("login failed");
-            //}
-            // 2 success 
-            //   facade, LoginToken<T>, role 
+            ILoginToken token;
 
-            // 2) create key
-            string securityKey = "this_is_our_supper_long_security_key_for_token_validation_project";
+            bool loginSuccess = new LoginService().TryLogin(userDetails.Name, userDetails.Password, out token);
+
+            // 1 login failed
+
+            if (!loginSuccess)
+            {
+                return Unauthorized("login falied");
+            }
+
+            string securityKey = "(*&gH7*T(*O&YT*O&GT*O&GT*&T";
 
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
 
             var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
 
-            // 3) create claim for specific role
-            // add claims
             var claims = new List<Claim>();
 
-            claims.Add(new Claim(ClaimTypes.Role, "Administrator")); // --> here use the role from the login result
-            claims.Add(new Claim("user_id", "1")); // --> here use the user_id from the result
-            claims.Add(new Claim("username", "admin1")); // --> here use the name from the login result
+            LoginToken<Administrator> token1 = token as LoginToken<Administrator>;
+            LoginToken<AirlineCompany> token2 = token as LoginToken<AirlineCompany>;
+            LoginToken<Customer> token3 = token as LoginToken<Customer>;
+
+            string userRole = "";
+
+            if (token1 != null)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
+                claims.Add(new Claim("userid", token1.User.Id.ToString()));
+                claims.Add(new Claim("username", token1.User.user.Username));
+            }
+            if (token2 == null)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "AirlineCompany"));
+                claims.Add(new Claim("userid", token2.User.Id.ToString()));
+                claims.Add(new Claim("username", token2.User.user.Username));
+            }
+            if (token3 == null)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "Customer"));
+                claims.Add(new Claim("userid", token3.User.Id.ToString()));
+                claims.Add(new Claim("username", token3.User.user.Username));
+            }
+            else
+            {
+                return Unauthorized("user not recognized");
+            }
 
             // 4) create token
-            var token = new JwtSecurityToken(
+            var jwtToken = new JwtSecurityToken(
             issuer: "issuer_of_flight_project", 
             audience: "flight_project_users", 
-            expires: DateTime.Now.AddHours(1), // should be configurable
+            expires: DateTime.Now.AddDays(14), // TTL configure
             signingCredentials: signingCredentials,
             claims: claims);
 
             // 5) return token
-            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+            return Ok(new JwtSecurityTokenHandler().WriteToken(jwtToken));
         }
 
     }
