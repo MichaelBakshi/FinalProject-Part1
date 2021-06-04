@@ -3,6 +3,8 @@ using FinalProject_Part1;
 using FinalProject_Part1.Members;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC_REST_API.DTO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,28 +48,28 @@ namespace MVC_REST_API.Controllers
         /// <response code = "204" > If the list of tickets is empty</response>
         //   / <response code = "401" > If the user is not authenticated as airline company</response> 
 
-        
 
-        //[HttpGet("getairline")]
-        //public async Task<ActionResult<AirlineCompanyDTO>> GetFlight()
-        //{
-        //    access facade
-        //     reqauest flight
-        //     let's pretend this flight was returned
-        //    AirlineCompany company = new AirlineCompany()
-        //    {
-        //        CountryId = 1,
-        //        Id = 2,
-        //        Name = "El-al",
-        //        Password = "LikeHome12345678"
-        //    };
-        //    LoginToken<Administrator> token = GetLoginToken();
 
-        //    AirlineCompanyDTO airlineCompanyDTO = m_mapper.Map<AirlineCompanyDTO>(company);
+        [HttpGet("getairline")]
+        public async Task<ActionResult<AirlineDTO>> GetFlight()
+        {
+             //access facade
+             //request flight
+             //let's pretend this flight was returned
+            AirlineCompany company = new AirlineCompany()
+            {
+                Country_Id = 1,
+                Id = 2,
+                Name = "El-al",
+                Password = "LikeHome12345678"
+            };
+            LoginToken<Administrator> token = GetLoginToken();
 
-        //    return Ok(JsonConvert.SerializeObject(airlineCompanyDTO));
+            AirlineDTO airlineCompanyDTO = m_mapper.Map<AirlineDTO>(company);
 
-        //}
+            return Ok(JsonConvert.SerializeObject(airlineCompanyDTO));
+
+        }
 
 
 
@@ -178,7 +180,6 @@ namespace MVC_REST_API.Controllers
             try
             {
                 await Task.Run(() => facade.CreateUser(token_admin, airline.UserDetails));
-                //airline.AirlineCompanyDetails.User_Id = airline.UserDetails.Id;
                 await Task.Run(() => facade.CreateNewAirline(token_admin, airline.AirlineCompanyDetails));
             }
             catch (Exception ex)
