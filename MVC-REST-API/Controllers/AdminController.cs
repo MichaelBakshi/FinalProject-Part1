@@ -65,9 +65,9 @@ namespace MVC_REST_API.Controllers
             };
             LoginToken<Administrator> token = GetLoginToken();
 
-            AirlineDTO airlineCompanyDTO = m_mapper.Map<AirlineDTO>(company);
+            AirlineDTO airlineDTO = m_mapper.Map<AirlineDTO>(company);
 
-            return Ok(JsonConvert.SerializeObject(airlineCompanyDTO));
+            return Ok(JsonConvert.SerializeObject(airlineDTO));
 
         }
 
