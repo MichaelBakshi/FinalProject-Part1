@@ -25,7 +25,7 @@ namespace MVC_REST_API.Controllers
 
             ILoginToken token;
 
-            bool loginSuccess = new LoginService().TryLogin(userDetails.Name, userDetails.Password, out token);
+            bool loginSuccess = new LoginService().TryLogin(userDetails.UserName, userDetails.Password, out token);
 
             // 1 login failed
 
@@ -54,13 +54,13 @@ namespace MVC_REST_API.Controllers
                 claims.Add(new Claim("userid", token1.User.Id.ToString()));
                 claims.Add(new Claim("username", token1.User.user.Username));
             }
-            if (token2 == null)
+            else if (token2 != null)
             {
                 claims.Add(new Claim(ClaimTypes.Role, "AirlineCompany"));
                 claims.Add(new Claim("userid", token2.User.Id.ToString()));
                 claims.Add(new Claim("username", token2.User.user.Username));
             }
-            if (token3 == null)
+            else if (token3 != null)
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Customer"));
                 claims.Add(new Claim("userid", token3.User.Id.ToString()));

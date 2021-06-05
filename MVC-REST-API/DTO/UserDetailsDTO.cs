@@ -10,7 +10,7 @@ namespace MVC_REST_API.DTO
     {
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 3)]
-        public string Name { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 3)]

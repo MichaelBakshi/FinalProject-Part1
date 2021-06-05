@@ -32,7 +32,7 @@ namespace MVC_REST_API.Controllers
 
         public AdminController(ILoggedInAdministratorFacade adminFacade, IMapper mapper)
         {
-            m_facade = new LoggedInAdministratorFacade(false);
+            //m_facade = new LoggedInAdministratorFacade(false);
 
             m_facade = adminFacade;
             m_mapper = mapper;
@@ -74,6 +74,7 @@ namespace MVC_REST_API.Controllers
 
 
 
+
         private void AuthenticateAndGetTokenAndGetFacade(out
             LoginToken<Administrator> token_admin, out LoggedInAdministratorFacade facade)
         {
@@ -81,7 +82,7 @@ namespace MVC_REST_API.Controllers
 
             ILoginToken token;
             LoginService loginService = new LoginService();
-            loginService.TryLogin("John_Doe", "johndoe", out token);
+            loginService.TryLogin("John_Doe", "johndoe", out token);    // TODO fix this later
 
             token_admin = token as LoginToken<Administrator>;
             facade = FlightsCenterSystem.Instance.GetFacade(token_admin) as LoggedInAdministratorFacade;

@@ -22,6 +22,7 @@ namespace MVC_REST_API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            GlobalConfig.GetConfiguration(false);
         }
 
         public IConfiguration Configuration { get; }

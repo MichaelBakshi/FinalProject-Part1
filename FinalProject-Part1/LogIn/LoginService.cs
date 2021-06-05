@@ -50,7 +50,7 @@ namespace FinalProject_Part1
                         }
                         if (user.User_Role == 2)
                         {
-                            AirlineCompany airline = _airlineDAO.GetAirlineByUsername(user.Username);
+                            AirlineCompany airline = _airlineDAO.GetAirlineByUsername(user.Username); //TODO check if null
                             airline.user = user;
                             token = new LoginToken<AirlineCompany>()
                             {
