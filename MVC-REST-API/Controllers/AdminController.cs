@@ -32,7 +32,7 @@ namespace MVC_REST_API.Controllers
 
         public AdminController(ILoggedInAdministratorFacade adminFacade, IMapper mapper)
         {
-            //m_facade = new LoggedInAdministratorFacade(false);
+            m_facade = new LoggedInAdministratorFacade(false);
 
             m_facade = adminFacade;
             m_mapper = mapper;
@@ -48,6 +48,22 @@ namespace MVC_REST_API.Controllers
         /// <response code = "204" > If the list of tickets is empty</response>
         //   / <response code = "401" > If the user is not authenticated as airline company</response> 
 
+        [HttpPost("createairline")]
+        public async Task<IActionResult> CreateAirline(AirlineCreationDTO airlineCompanyCreationDTO)
+        {
+            AirlineCompany company = new AirlineCompany()
+            {
+                Id = 1,
+                Country_Id = 12,
+                Name = "El-Al"
+            };
+            LoginToken<Administrator> token = GetLoginToken();
+
+            m_facade.CreateNewAirline(token, company);
+            // ...
+            //  return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
+            return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
+        }
 
 
         [HttpGet("getairline")]
@@ -81,9 +97,9 @@ namespace MVC_REST_API.Controllers
             GlobalConfig.GetConfiguration(false);
 
             ILoginToken token;
-            LoginService loginService = new LoginService();
-            loginService.TryLogin("John_Doe", "johndoe", out token);    // TODO fix this later
-
+//            LoginService loginService = new LoginService();
+            //loginService.TryLogin("John_Doe", "johndoe", out token);    // TODO fix this later
+            token = GetLoginToken();
             token_admin = token as LoginToken<Administrator>;
             facade = FlightsCenterSystem.Instance.GetFacade(token_admin) as LoggedInAdministratorFacade;
         }

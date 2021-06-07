@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,8 +13,16 @@ namespace MVC_REST_API.Controllers
     {
         protected LoginToken<T> GetLoginToken()
         {
-            string userName = User.Claims.First(_ => _.Type == "username").Value;
-            int id = Convert.ToInt32(User.Claims.First(_ => _.Type == "userid").Value);
+            string jwtToken = Request.Headers["Authorization"];
+
+            jwtToken = jwtToken.Replace("Bearer ", "");
+
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(jwtToken);
+            var decodedJwt = jsonToken as JwtSecurityToken;
+
+            string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
+            int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
 
             LoginToken<T> login_token = new LoginToken<T>()
             {
