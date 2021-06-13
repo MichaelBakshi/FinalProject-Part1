@@ -53,8 +53,8 @@ namespace MVC_REST_API.Controllers
         {
             AirlineCompany company = new AirlineCompany()
             {
-                Id = 1,
-                Country_Id = 12,
+                Id = 9,
+                Country_Id = 1,
                 Name = "El-Al"
             };
             LoginToken<Administrator> token = GetLoginToken();

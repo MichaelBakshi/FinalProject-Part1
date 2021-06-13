@@ -53,6 +53,7 @@ namespace MVC_REST_API.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
                 claims.Add(new Claim("userid", token1.User.Id.ToString()));
                 claims.Add(new Claim("username", token1.User.user.Username));
+                claims.Add(new Claim("level", token1.User.Level.ToString()));
             }
             else if (token2 != null)
             {

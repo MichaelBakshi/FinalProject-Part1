@@ -36,6 +36,7 @@ namespace FinalProject_Part1
             {
                 if (token.User.Level == 2 || token.User.Level == 3)
                 {
+                    _userDAO.Add(airline.user);
                     _airlineDAO.Add(airline);
                 }
                 else
@@ -158,6 +159,7 @@ namespace FinalProject_Part1
             {
                 if (token.User.Level == 3)
                 {
+                    //_userDAO.Add(admin.user);
                     _adminDAO.Add(admin);
 
                 }

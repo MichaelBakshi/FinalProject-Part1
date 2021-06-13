@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace MVC_REST_API.Controllers
 {
@@ -23,6 +24,7 @@ namespace MVC_REST_API.Controllers
 
             string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
             int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
+            
 
             LoginToken<T> login_token = new LoginToken<T>()
             {
@@ -32,7 +34,13 @@ namespace MVC_REST_API.Controllers
                     Username = userName,
                     Password = "no password. created from JWT"
                 }
+               
             };
+            if (typeof(T) == typeof( Administrator))
+            {
+                int admin_level = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "level").Value);
+                (login_token.User as Administrator).Level = admin_level;
+            }
             return login_token;
         }
     }
