@@ -46,7 +46,7 @@ namespace MVC_REST_API.Controllers
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{ The list is empty. Nothing to display. }");
             }
             return Ok(result);
         }

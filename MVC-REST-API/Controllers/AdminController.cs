@@ -49,7 +49,7 @@ namespace MVC_REST_API.Controllers
         //   / <response code = "401" > If the user is not authenticated as airline company</response> 
 
         [HttpPost("createairline")]
-        public async Task<IActionResult> CreateAirline(AirlineCreationDTO airlineCompanyCreationDTO)
+        public async Task<IActionResult> CreateAirline(AirlineDTO airlineDTO)
         {
             AirlineCompany company = new AirlineCompany()
             {

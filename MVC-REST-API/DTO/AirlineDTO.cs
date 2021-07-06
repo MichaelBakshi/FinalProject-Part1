@@ -7,7 +7,7 @@ namespace MVC_REST_API.DTO
 {
     public class AirlineDTO
     {
-        public long Id;
+        public int Id;
         public string CompanyName;
         public string CountryId;
         public string CountryName;
