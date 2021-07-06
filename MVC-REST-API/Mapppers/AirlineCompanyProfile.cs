@@ -12,18 +12,21 @@ namespace MVC_REST_API.Mapppers
     {
         public AirlineCompanyProfile()
         {
-            // read from db or cache
-            Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>()
-            {
-                { 1, "Israel" }
-            };
+            Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
 
-            // 1. auto each with SAME NAME will be mapped from one object to another
-            // 2. you can customize the mappings!
+            List<Country> countries = new CountryDAOPGSQL().GetAll();
+
+            foreach(Country country in countries)
+            {
+                map_countryid_to_name.Add(country.Id, country.Name);
+            }
+
             CreateMap<AirlineCompany, AirlineDTO>()
                 .ForMember(dest => dest.CountryName,
                             opt => opt.MapFrom(src => map_countryid_to_name[src.Country_Id]))
-                .ForMember(dest => dest.CompanyName,
+                .ForMember(dest => dest.Id,
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.Name));
         }
 

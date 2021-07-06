@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,13 +20,24 @@ namespace MVC_REST_API.Controllers
         private void AuthenticateAndGetTokenAndGetFacade(out
             LoginToken<Customer> token_customer, out LoggedInCustomerFacade facade)
         {
-            GlobalConfig.GetConfiguration(false);
+            string jwtToken = Request.Headers["Authorization"];
 
-            ILoginToken token;
-            LoginService loginService = new LoginService();
-            loginService.TryLogin("AsafCohen", "asafcohen", out token);
-            
-            token_customer = token as LoginToken<Customer>;
+            jwtToken = jwtToken.Replace("Bearer ", "");
+
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(jwtToken);
+            var decodedJwt = jsonToken as JwtSecurityToken;
+
+            string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
+            int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
+
+            Customer customer = new CustomerDAOPGSQL().GetCustomerByUsername(userName);
+
+            token_customer = new LoginToken<Customer>()
+            {
+                User = customer
+            };
+
             facade = FlightsCenterSystem.Instance.GetFacade(token_customer) as LoggedInCustomerFacade;
         }
 
@@ -104,16 +116,18 @@ namespace MVC_REST_API.Controllers
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
 
+            Ticket ticket = null;
+
             try
             {
-                await Task.Run(() => facade.PurchaseTicket(token_customer, flight));
+                ticket = await Task.Run(() => facade.PurchaseTicket(token_customer, flight));
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok(new { ticket });
         }
 
         // PUT api/<CustomerController>/5

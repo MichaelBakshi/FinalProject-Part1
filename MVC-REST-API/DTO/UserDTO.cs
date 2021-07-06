@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVC_REST_API.DTO
 {
-    public class UserDetailsDTO
+    public class UserDTO
     {
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 3)]

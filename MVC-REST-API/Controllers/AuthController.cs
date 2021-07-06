@@ -19,7 +19,7 @@ namespace MVC_REST_API.Controllers
     public class AuthController : ControllerBase
     {
         [HttpPost("token")]
-        public async Task<ActionResult> GetToken([FromBody] UserDetailsDTO userDetails)
+        public async Task<ActionResult> GetToken([FromBody] UserDTO userDetails)
         {
             // 1) try login, with userDetails
 
