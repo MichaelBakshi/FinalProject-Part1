@@ -12,8 +12,6 @@ namespace MVC_REST_API.DTO
         public string Destination_Country_Name { get; set; }
         public DateTime Departure_Time { get; set; }
         public DateTime Landing_Time { get; set; }
-        public int Remaining_Tickets { get; set; }
-        public AirlineDTO airlineCompany { get; set; }
 
     }
 }
