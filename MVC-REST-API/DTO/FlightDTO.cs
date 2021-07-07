@@ -8,6 +8,7 @@ namespace MVC_REST_API.DTO
     public class FlightDTO
     {
         public int Id { get; set; }
+        public string Airline_Company_Name { get; set; }
         public string Origin_Country_Name { get; set; }
         public string Destination_Country_Name { get; set; }
         public DateTime Departure_Time { get; set; }
