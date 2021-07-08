@@ -251,12 +251,12 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ Error: Couldn't get the list of customers \"{ex.Message}\" }}");
                 //logger.Error("Couldn't get all customers");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{The list of customers is empty.}");
             }
             return Ok(result);
         }
@@ -275,9 +275,9 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(501, $"{{ error: can't create new airline \"{ex.Message}\" }}");
             }
-            return Ok();
+            return Ok(airline);
             //return Created("ur_for_get_method/new_airline_id", airline);
         }
 
@@ -294,10 +294,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(501, $"{{ error: can't update airline details \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok(airline);
         }
 
         // DELETE api/<AdminController>/5
@@ -314,10 +314,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't remove airline from the list. \"{ex.Message}\" }}");
             }
             
-            return Ok();
+            return Ok("Deleted");
         }
 
         [HttpPost("createnewcustomer")]
@@ -333,10 +333,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't create new customer \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok(customer);
         }
 
         [HttpPut("UpdateCustomerDetails")]
@@ -351,10 +351,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't update customer details \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Updated: " + customer);
         }
 
         [HttpDelete("removecustomer/")]
@@ -370,10 +370,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't remove customer \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Deleted");
         }
 
         [HttpPost("createnewadministrator")]
@@ -389,10 +389,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't create new administrator \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok(admin);
         }
 
         [HttpPut("UpdateAdminDetails")]
@@ -407,10 +407,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't update administrator details \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Updated: " + administrator);
         }
 
         [HttpDelete("removeadministrator/")]
@@ -426,10 +426,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't remove administrator \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Deleted");
         }
 
         [HttpPost("createnewuser")]
@@ -444,10 +444,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't create new user \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok(user);
         }
 
         [HttpDelete("removeuser/")]
@@ -462,10 +462,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't remove the user \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Deleted");
         }
 
         [HttpPost("createticket")]
@@ -480,10 +480,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't create ticket \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok(ticket);
         }
 
 
