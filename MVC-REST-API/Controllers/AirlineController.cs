@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,10 +18,25 @@ namespace MVC_REST_API.Controllers
     public class AirlineController : ControllerBase
     {
 
-        private void AuthenticateAndGetTokenAndGetFacade(out
-            LoginToken<AirlineCompany> token_airline, out LoggedInAirlineFacade facade)
+        private void AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany> token_airline, out LoggedInAirlineFacade facade)
         {
-            //
+            string jwtToken = Request.Headers["Authorization"];
+
+            jwtToken = jwtToken.Replace("Bearer ", "");
+
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(jwtToken);
+            var decodedJwt = jsonToken as JwtSecurityToken;
+
+            string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
+            int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
+
+            AirlineCompany airline = new AirlineDAOPGSQL().GetAirlineByUsername(userName);
+
+            token_airline = new LoginToken<AirlineCompany>()
+            {
+                User = airline
+            };
 
             facade = FlightsCenterSystem.Instance.GetFacade(token_airline) as LoggedInAirlineFacade;
         }
