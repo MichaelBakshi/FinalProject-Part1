@@ -7,6 +7,7 @@ using MVC_REST_API.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,15 +19,43 @@ namespace MVC_REST_API.Controllers
     [ApiController]
     //[Authorize(Roles = "Administrator")]
 
-    public class AdminController : FlightControllerBase<Administrator>
+    public class AdminController : ControllerBase
     {
+
+        private void AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator> token_admin, out LoggedInAdministratorFacade facade)
+        {
+            string jwtToken = Request.Headers["Authorization"];
+
+            jwtToken = jwtToken.Replace("Bearer ", "");
+
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(jwtToken);
+            var decodedJwt = jsonToken as JwtSecurityToken;
+
+            string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
+            int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
+
+            Administrator administrator = new AdminDAOPGSQL().GetAdminByUsername(userName);
+
+            token_admin = new LoginToken<Administrator>()
+            {
+                User = administrator
+            };
+
+            facade = FlightsCenterSystem.Instance.GetFacade(token_admin) as LoggedInAdministratorFacade;
+        }
+
+
+
+
+
 
         private ILoggedInAdministratorFacade m_facade;
         private readonly IMapper m_mapper;
 
         //the DI goes here
 
-        // 1. i can choose to wrok with DI or not...
+        // 1. i can choose to work with DI or not...
         // 2. we get here the admin facade
         //    it could be AdminFacade or AdminFacade Micro service
 
@@ -48,84 +77,33 @@ namespace MVC_REST_API.Controllers
         /// <response code = "204" > If the list of tickets is empty</response>
         //   / <response code = "401" > If the user is not authenticated as airline company</response> 
 
-        [HttpPost("createairline")]
-        public async Task<IActionResult> CreateAirline(AirlineDTO airlineDTO)
-        {
-            AirlineCompany company = new AirlineCompany()
-            {
-                Id = 9,
-                Country_Id = 1,
-                Name = "El-Al"
-            };
-            LoginToken<Administrator> token = GetLoginToken();
+        //[HttpPost("createairline")]
+        //public async Task<IActionResult> CreateAirline([FromBody]  AirlineCompany airline)
+        //{
 
-            m_facade.CreateNewAirline(token, company);
-            // ...
-            //  return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
-            return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
-        }
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+        //            token_admin, out LoggedInAdministratorFacade facade);
 
+        //    try
+        //    {
+        //        await Task.Run(() => facade.CreateNewAirline(token_admin, airline));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+        //    }
 
-        [HttpGet("getairline")]
-        public async Task<ActionResult<AirlineDTO>> GetFlight()
-        {
-             //access facade
-             //request flight
-             //let's pretend this flight was returned
-            AirlineCompany company = new AirlineCompany()
-            {
-                Country_Id = 1,
-                Id = 2,
-                Name = "El-al",
-                Password = "LikeHome12345678"
-            };
-            LoginToken<Administrator> token = GetLoginToken();
-
-            AirlineDTO airlineDTO = m_mapper.Map<AirlineDTO>(company);
-
-            return Ok(JsonConvert.SerializeObject(airlineDTO));
-
-        }
+        //    return Ok(new { airline});
 
 
 
+        //    //m_facade.CreateNewAirline(token, company);
+        //    //// ...
+        //    ////  return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
+        //    //return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
+        //}
 
 
-        private void AuthenticateAndGetTokenAndGetFacade(out
-            LoginToken<Administrator> token_admin, out LoggedInAdministratorFacade facade)
-        {
-            GlobalConfig.GetConfiguration(false);
-
-            ILoginToken token;
-//            LoginService loginService = new LoginService();
-            //loginService.TryLogin("John_Doe", "johndoe", out token);    // TODO fix this later
-            token = GetLoginToken();
-            token_admin = token as LoginToken<Administrator>;
-            facade = FlightsCenterSystem.Instance.GetFacade(token_admin) as LoggedInAdministratorFacade;
-        }
-
-        // GET: api/<AdminController>
-        [HttpGet("getallcustomers/")]
-        public async Task<ActionResult<Administrator>> GetAllCustomers()
-        {
-            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-                    token_admin, out LoggedInAdministratorFacade facade);
-
-            IList<Customer> result = null;
-            try
-            {
-                result = await Task.Run(() => facade.GetAllCustomers(token_admin));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
-            }
-            if (result == null)
-            {
-                return StatusCode(204, "{ }");
-            }
-            return Ok(result);
-        }
 
         // GET api/<AdminController>/5
         [HttpGet("getadminbyid/{adminid}")]
@@ -149,6 +127,68 @@ namespace MVC_REST_API.Controllers
             }
             return Ok(result);
         }
+
+
+
+        //public async Task<ActionResult> AddNewFlight([FromBody] Flight flight)
+        //{
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+        //            token_airline, out LoggedInAirlineFacade facade);
+
+        //    try
+        //    {
+        //        await Task.Run(() => facade.CreateFlight(token_airline, flight));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+        //    }
+
+        //    return Ok();
+        //}
+
+
+        //[HttpGet("getairline")]
+        //public async Task<ActionResult<AirlineDTO>> GetAirline()
+        //{
+        //     //access facade
+        //     //request flight
+        //     //let's pretend this flight was returned
+        //    AirlineCompany company = new AirlineCompany()
+        //    {
+        //        Country_Id = 1,
+        //        Id = 2,
+        //        Name = "El-al",
+        //        Password = "LikeHome12345678"
+        //    };
+        //    LoginToken<Administrator> token = GetLoginToken();
+
+        //    AirlineDTO airlineDTO = m_mapper.Map<AirlineDTO>(company);
+
+        //    return Ok(JsonConvert.SerializeObject(airlineDTO));
+
+        //}
+
+
+
+
+
+        //        private void AuthenticateAndGetTokenAndGetFacade(out
+        //            LoginToken<Administrator> token_admin, out LoggedInAdministratorFacade facade)
+        //        {
+        //            GlobalConfig.GetConfiguration(false);
+
+        //            ILoginToken token;
+        ////            LoginService loginService = new LoginService();
+        //            //loginService.TryLogin("John_Doe", "johndoe", out token);    // TODO fix this later
+        //            token = GetLoginToken();
+        //            token_admin = token as LoginToken<Administrator>;
+        //            facade = FlightsCenterSystem.Instance.GetFacade(token_admin) as LoggedInAdministratorFacade;
+        //        }
+
+
+
+
 
         // POST api/<AdminController>
         //[HttpPost("AddNewUser")]
@@ -186,6 +226,39 @@ namespace MVC_REST_API.Controllers
         //      return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
         //    return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
         //}
+
+
+
+
+
+
+
+
+
+
+
+        // GET: api/<AdminController>
+        [HttpGet("getallcustomers/")]
+        public async Task<ActionResult<Administrator>> GetAllCustomers()
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            IList<Customer> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllCustomers(token_admin));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
+        }
 
         // POST api/<AdminController>
         [HttpPost("AddNewAirline")]

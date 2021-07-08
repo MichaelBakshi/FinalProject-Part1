@@ -71,6 +71,39 @@ namespace FinalProject_Part1
             return result;
         }
 
+        public Administrator GetAdminByUsername(string _username)
+        {
+            Administrator result = null;
+
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+                {
+                    cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select * from sp_get_admin_by_username('{_username}')";
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        result = new Administrator
+                        {
+                            Id = (int)reader["id"],
+                            First_Name = reader["first_name"].ToString(),
+                            Last_Name = reader["last_name"].ToString(),
+                            Level = (int)reader["level"],
+                            User_Id = (int)reader["user_id"],
+
+                        };
+                    }
+                }
+            }
+            return result;
+        }
+
+
+
         public List<Administrator> GetAll()
         {
             List<Administrator> result = new List<Administrator>();
