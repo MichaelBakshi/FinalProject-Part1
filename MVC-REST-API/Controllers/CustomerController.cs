@@ -17,8 +17,7 @@ namespace MVC_REST_API.Controllers
     public class CustomerController : ControllerBase
     {
 
-        private void AuthenticateAndGetTokenAndGetFacade(out
-            LoginToken<Customer> token_customer, out LoggedInCustomerFacade facade)
+        private void AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer> token_customer, out LoggedInCustomerFacade facade)
         {
             string jwtToken = Request.Headers["Authorization"];
 

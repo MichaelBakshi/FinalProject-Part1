@@ -20,13 +20,8 @@ namespace MVC_REST_API.Controllers
         private void AuthenticateAndGetTokenAndGetFacade(out
             LoginToken<AirlineCompany> token_airline, out LoggedInAirlineFacade facade)
         {
-            GlobalConfig.GetConfiguration(false);
+            //
 
-            ILoginToken token;
-            LoginService loginService = new LoginService();
-            loginService.TryLogin("EL-AL", "elalelal", out token);
-
-            token_airline = token as LoginToken<AirlineCompany>;
             facade = FlightsCenterSystem.Instance.GetFacade(token_airline) as LoggedInAirlineFacade;
         }
 
