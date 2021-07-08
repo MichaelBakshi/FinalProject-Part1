@@ -252,6 +252,7 @@ namespace MVC_REST_API.Controllers
             catch (Exception ex)
             {
                 return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                //logger.Error("Couldn't get all customers");
             }
             if (result == null)
             {
