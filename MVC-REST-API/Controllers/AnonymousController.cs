@@ -27,11 +27,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get all airline comapnies \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{The list is empty. No result to return }");
             }
             return Ok(result);
         }
@@ -48,11 +48,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get all flights \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{The list of flight is empty. Nothing to return. }");
             }
             return Ok(result);
         }
@@ -69,11 +69,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get flight by this id \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{No flight by this id. }");
             }
             return Ok(result);
         }
@@ -90,11 +90,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get airline by id \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{No airline by this id }");
             }
             return Ok(result);
         }
@@ -111,11 +111,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get customer by id \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{No customer by this id. }");
             }
             return Ok(result);
         }
@@ -132,11 +132,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get administrator by id \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{No administrator by this id. }");
             }
             return Ok(result);
         }
@@ -153,11 +153,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get ticket by id \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There is no ticket by this id }");
             }
             return Ok(result);
         }
@@ -174,11 +174,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get flights by origin country \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There are no flights by this origin country }");
             }
             return Ok(result);
         }
@@ -196,11 +196,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get flights by destination country \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There are no flights by this destination country }");
             }
             return Ok(result);
         }
@@ -218,11 +218,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get flights by departure date \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There are no flights by this departure date }");
             }
             return Ok(result);
         }
@@ -240,11 +240,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get flights by landing date \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There are no flights by this departure date }");
             }
             return Ok(result);
         }

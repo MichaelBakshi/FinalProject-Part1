@@ -76,11 +76,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get flights by customer \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There are no flights by this customer. The list is empty. }");
             }
             return Ok(result);
         }
@@ -99,11 +99,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get flight by id \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There is no flight by this id }");
             }
             return Ok(result);
         }
@@ -123,7 +123,7 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: failed to purchase ticket \"{ex.Message}\" }}");
             }
 
             return Ok(new { ticket });
@@ -148,10 +148,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: failed to cancel ticket \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Ticket has been canceled");
         }
     }
 }

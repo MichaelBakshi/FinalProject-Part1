@@ -55,11 +55,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get all flights \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{The list is empty.}");
             }
             return Ok(result);
         }
@@ -102,11 +102,11 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't get airline by id \"{ex.Message}\" }}");
             }
             if (result == null)
             {
-                return StatusCode(204, "{ }");
+                return StatusCode(204, "{There's no airline by this id. }");
             }
             return Ok(result);
         }
@@ -124,10 +124,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't add new flight \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok(flight);
         }
 
         // PUT api/<AirlineController>/5
@@ -143,10 +143,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't update flight details \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Updated: " + flight);
         }
 
         // DELETE api/<AirlineController>/5
@@ -162,10 +162,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(400, $"{{ error: can't cancel the filght \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Flight is cancelled");
         }
 
         [HttpPut("changepassword")]
@@ -180,10 +180,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't change the password\"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("New password has been created" );
         }
 
         [HttpPut("modifyairlinedetails")]
@@ -198,10 +198,10 @@ namespace MVC_REST_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
+                return StatusCode(500, $"{{ error: can't modify airline details \"{ex.Message}\" }}");
             }
 
-            return Ok();
+            return Ok("Updated " + airline);
         }
 
 
