@@ -1,9 +1,12 @@
-﻿using FinalProject_Part1;
+﻿
+using FinalProject_Part1;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MVC_REST_API.DTO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -18,6 +21,14 @@ namespace MVC_REST_API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IConfiguration Configuration;
+
+        public AuthController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+
         [HttpPost("token")]
         public async Task<ActionResult> GetToken([FromBody] UserDTO userDetails)
         {
@@ -76,7 +87,7 @@ namespace MVC_REST_API.Controllers
             var jwtToken = new JwtSecurityToken(
             issuer: "issuer_of_flight_project", 
             audience: "flight_project_users", 
-            expires: DateTime.Now.AddDays(14), // TTL configure
+            expires: DateTime.Now.AddDays(double.Parse(Configuration["JWTTTL"])), 
             signingCredentials: signingCredentials,
             claims: claims);
 

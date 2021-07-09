@@ -89,7 +89,7 @@ namespace MVC_REST_API.Controllers
 
 
         // GET api/<AirlineController>/5
-        [HttpGet("getairlinebyid/{airlineid}")]
+        [HttpGet("getairlinebyid")]
         public async Task<ActionResult<AirlineCompany>> GetAirlineById(int airlineid)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
@@ -176,7 +176,7 @@ namespace MVC_REST_API.Controllers
 
             try
             {
-                await Task.Run(() => facade.ChangeMyPassword(token_airline, "elalelal", "vvys"));
+                await Task.Run(() => facade.ChangeMyPassword(token_airline, airline.Password, airline.NewPassword));
             }
             catch (Exception ex)
             {
