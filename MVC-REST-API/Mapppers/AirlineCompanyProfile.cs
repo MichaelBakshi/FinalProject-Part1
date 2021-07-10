@@ -10,9 +10,11 @@ namespace MVC_REST_API.Mapppers
 {
     public class AirlineCompanyProfile : Profile
     {
+        Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
+
         public AirlineCompanyProfile()
         {
-            Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
+            //Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
 
             List<Country> countries = new CountryDAOPGSQL().GetAll();
 
@@ -20,6 +22,8 @@ namespace MVC_REST_API.Mapppers
             {
                 map_countryid_to_name.Add(country.Id, country.Name);
             }
+
+            //TODO: get airline company from outside
 
             CreateMap<AirlineCompany, AirlineDTO>()
                 .ForMember(dest => dest.CountryName,

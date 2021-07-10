@@ -1,5 +1,6 @@
 ﻿using FinalProject_Part1;
 using Microsoft.AspNetCore.Mvc;
+using MVC_REST_API.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getflightbyid/{flightid}")]
+        [HttpGet("getflightbyid")]
         public async Task<ActionResult<Flight>> GetFlightById(int flightid)
         {
             AnonymousUserFacade facade = new AnonymousUserFacade(false);
@@ -65,7 +66,8 @@ namespace MVC_REST_API.Controllers
             Flight result = null;
             try
             {
-                result = await Task.Run(() => facade.GetFlightById(flightid));
+                Flight flight = await Task.Run(() => facade.GetFlightById(flightid));
+               
             }
             catch (Exception ex)
             {

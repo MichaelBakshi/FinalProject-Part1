@@ -1,6 +1,7 @@
 ﻿using FinalProject_Part1;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC_REST_API.Mapppers;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -45,6 +46,8 @@ namespace MVC_REST_API.Controllers
         [HttpGet("getallflights/")]
         public async Task<ActionResult<AirlineCompany>> GetAllFlights()
         {
+            AirlineCompanyProfile profile = new AirlineCompanyProfile();
+
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
 
