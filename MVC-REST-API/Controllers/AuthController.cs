@@ -25,6 +25,7 @@ namespace MVC_REST_API.Controllers
 
         public AuthController(IConfiguration configuration)
         {
+
             Configuration = configuration;
         }
 

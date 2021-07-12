@@ -67,85 +67,7 @@ namespace MVC_REST_API.Controllers
             m_mapper = mapper;
         }
 
-        /// <summary>
-        /// Get list of all the tickets belonging to the logged-in airline company
-        /// add xml config in order for this responses to show in the swagger page
-        /// </summary>
-        /// <param name = "airlineCompanyCreationDTO" ></ param >
-        /// < returns > List of all the tickets</returns>
-        /// <response code = "200" > Returns the list of tickets</response>
-        /// <response code = "204" > If the list of tickets is empty</response>
-        //   / <response code = "401" > If the user is not authenticated as airline company</response> 
-
-        //[HttpPost("createairline")]
-        //public async Task<IActionResult> CreateAirline([FromBody]  AirlineCompany airline)
-        //{
-
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-        //            token_admin, out LoggedInAdministratorFacade facade);
-
-        //    try
-        //    {
-        //        await Task.Run(() => facade.CreateNewAirline(token_admin, airline));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
-        //    }
-
-        //    return Ok(new { airline});
-
-
-
-        //    //m_facade.CreateNewAirline(token, company);
-        //    //// ...
-        //    ////  return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
         //    //return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
-        //}
-
-
-
-        // GET api/<AdminController>/5
-        [HttpGet("getadminbyid/{adminid}")]
-        public async Task<ActionResult<Flight>> GetAdminById(int adminid)
-        {
-            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-                    token_admin, out LoggedInAdministratorFacade facade);
-
-            Administrator result = null;
-            try
-            {
-                result = await Task.Run(() => facade.GetAdminById(adminid));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
-            }
-            if (result == null)
-            {
-                return StatusCode(204, "{ }");
-            }
-            return Ok(result);
-        }
-
-
-
-        //public async Task<ActionResult> AddNewFlight([FromBody] Flight flight)
-        //{
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
-        //            token_airline, out LoggedInAirlineFacade facade);
-
-        //    try
-        //    {
-        //        await Task.Run(() => facade.CreateFlight(token_airline, flight));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
-        //    }
-
-        //    return Ok();
-        //}
 
 
         //[HttpGet("getairline")]
@@ -168,66 +90,6 @@ namespace MVC_REST_API.Controllers
         //    return Ok(JsonConvert.SerializeObject(airlineDTO));
 
         //}
-
-
-
-
-
-        //        private void AuthenticateAndGetTokenAndGetFacade(out
-        //            LoginToken<Administrator> token_admin, out LoggedInAdministratorFacade facade)
-        //        {
-        //            GlobalConfig.GetConfiguration(false);
-
-        //            ILoginToken token;
-        ////            LoginService loginService = new LoginService();
-        //            //loginService.TryLogin("John_Doe", "johndoe", out token);    // TODO fix this later
-        //            token = GetLoginToken();
-        //            token_admin = token as LoginToken<Administrator>;
-        //            facade = FlightsCenterSystem.Instance.GetFacade(token_admin) as LoggedInAdministratorFacade;
-        //        }
-
-
-
-
-
-        // POST api/<AdminController>
-        //[HttpPost("AddNewUser")]
-        //public async Task<ActionResult> AddNewUser([FromBody] User user)
-        //{
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-        //            token_admin, out LoggedInAdministratorFacade facade);
-
-        //    try
-        //    {
-        //        await Task.Run(() => facade.CreateUser(token_admin, user));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"{{ error: \"{ex.Message}\" }}");
-        //    }
-
-        //    return Ok();
-        //}
-
-
-        //   [HttpPost("createairline")]
-        //public async Task<IActionResult> CreateAirline(AirlineCompanyCreationDTO airlineCompanyCreationDTO)
-        //{
-        //    AirlineCompany company = new AirlineCompany()
-        //    {
-        //        Id = 1,
-        //        CountryId = 12,
-        //        Name = "El-Al"
-        //    };
-        //    LoginToken<Administrator> token = GetLoginToken();
-
-        //    m_facade.CreateAirline(token, company);
-        //    ...
-        //      return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
-        //    return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
-        //}
-
-
 
 
 
@@ -394,6 +256,33 @@ namespace MVC_REST_API.Controllers
 
             return Ok(admin);
         }
+
+
+        // GET api/<AdminController>/5
+        [HttpGet("getadminbyid/{adminid}")]
+        public async Task<ActionResult<Flight>> GetAdminById(int adminid)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            Administrator result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAdminById(adminid));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{ }");
+            }
+            return Ok(result);
+        }
+
+
+
 
         [HttpPut("UpdateAdminDetails")]
         public async Task<ActionResult> UpdateAdminDetails([FromBody] Administrator administrator)
