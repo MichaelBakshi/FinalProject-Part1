@@ -1,6 +1,8 @@
-﻿using FinalProject_Part1;
+﻿using AutoMapper;
+using FinalProject_Part1;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC_REST_API.DTO;
 using MVC_REST_API.Mapppers;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,15 @@ namespace MVC_REST_API.Controllers
 
     public class AirlineController : ControllerBase
     {
+        //added
+        private readonly IMapper m_mapper;
+        
+        public AirlineController(IMapper mapper)
+        {
+            m_mapper = mapper;
+        }
+        //added - END
+
 
         private void AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany> token_airline, out LoggedInAirlineFacade facade)
         {
@@ -34,6 +45,11 @@ namespace MVC_REST_API.Controllers
 
             AirlineCompany airline = new AirlineDAOPGSQL().GetAirlineByUsername(userName);
 
+            if (airline == null)
+            {
+                throw new Exception("Token not correct");
+            }
+
             token_airline = new LoginToken<AirlineCompany>()
             {
                 User = airline
@@ -43,18 +59,28 @@ namespace MVC_REST_API.Controllers
         }
 
 
-        [HttpGet("getallflights/")]
-        public async Task<ActionResult<AirlineCompany>> GetAllFlights()
+        [HttpGet("getallflights")]
+        public async Task<ActionResult<IList<FlightDTO>>> GetAllFlights()
         {
             AirlineCompanyProfile profile = new AirlineCompanyProfile();
 
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
 
-            IList <Flight> result = null;
+            List<FlightDTO> result = null;
             try
             {
-                result = await Task.Run(() => facade.GetAllFlights());
+                
+                List<Flight> list = await Task.Run(() => facade.GetAllFlights()) as List<Flight>;
+                List<FlightDTO> flightDTOList = new List<FlightDTO>();
+
+                foreach(Flight flight in list)
+                {
+                    //added our own m_mapper
+                    FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+                    flightDTOList.Add(flightDTO);
+                }
+                result = flightDTOList;
             }
             catch (Exception ex)
             {
@@ -67,7 +93,7 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getalltickets/")]
+        [HttpGet("getalltickets")]
         public async Task<ActionResult<AirlineCompany>> GetAllTickets()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
@@ -92,7 +118,7 @@ namespace MVC_REST_API.Controllers
 
 
         // GET api/<AirlineController>/5
-        [HttpGet("getairlinebyid")]
+        [HttpGet("getairlinebyid/{airlineId}")]
         public async Task<ActionResult<AirlineCompany>> GetAirlineById(int airlineid)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>

@@ -10,6 +10,8 @@ namespace MVC_REST_API.Mapppers
 {
     public class FlightProfile : Profile
     {
+             
+
         public FlightProfile()
         {
             Dictionary<int, string> map_airline_id_to_name = new Dictionary<int, string>();
@@ -21,15 +23,6 @@ namespace MVC_REST_API.Mapppers
                 map_airline_id_to_name.Add(airline.Id, airline.Name);
             }
 
-            CreateMap<AirlineCompany, FlightDTO>()
-                .ForMember(dest => dest.Airline_Company_Name,
-                            opt => opt.MapFrom(src => map_airline_id_to_name[src.Country_Id]));
-                //.ForMember(dest => dest.Id,
-                //            opt => opt.MapFrom(src => src.Id))
-                //.ForMember(dest => dest.Name,
-                //            opt => opt.MapFrom(src => src.Name));
-
-
             Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
 
             List<Country> countries = new CountryDAOPGSQL().GetAll();
@@ -39,12 +32,23 @@ namespace MVC_REST_API.Mapppers
                 map_countryid_to_name.Add(country.Id, country.Name);
             }
 
-            CreateMap<Country, FlightDTO>()
+            CreateMap<Flight, FlightDTO>()
+                .ForMember(dest => dest.Id,
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Airline_Company_Name,
+                            opt => opt.MapFrom(src => map_airline_id_to_name[src.Airline_Company_Id]))
                 .ForMember(dest => dest.Origin_Country_Name,
-                            opt => opt.MapFrom(src => map_countryid_to_name[src.Id]))
+                            opt => opt.MapFrom(src => map_countryid_to_name[src.Origin_Country_Id]))
                 .ForMember(dest => dest.Destination_Country_Name,
-                            opt => opt.MapFrom(src => map_countryid_to_name[src.Id]));
-                
+                            opt => opt.MapFrom(src => map_countryid_to_name[src.Destination_Country_Id]))
+                .ForMember(dest => dest.Departure_Time,
+                            opt => opt.MapFrom(src => src.Departure_Time))
+                .ForMember(dest => dest.Landing_Time,
+                            opt => opt.MapFrom(src => src.Landing_Time));
+
+
+
+
         }
 
     }

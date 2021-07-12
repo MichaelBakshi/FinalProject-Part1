@@ -129,11 +129,7 @@ namespace MVC_REST_API.Controllers
             return Ok(new { ticket });
         }
 
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+
 
         // DELETE api/<CustomerController>/5
         [HttpDelete("cancelticket/")]
