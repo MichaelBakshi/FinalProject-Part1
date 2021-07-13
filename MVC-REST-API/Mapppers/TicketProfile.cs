@@ -10,33 +10,25 @@ namespace MVC_REST_API.Mapppers
 {
     public class TicketProfile: Profile
     {
-        public TicketProfile()
-        {
-            Dictionary<int, string> map_airline_id_to_name = new Dictionary<int, string>();
+        //public TicketProfile()
+        //{
 
-            List<AirlineCompany> airlines = new AirlineDAOPGSQL().GetAll();
+        //    Dictionary<int, string> map_customerid_to_name = new Dictionary<int, string>();
 
-            foreach (AirlineCompany airline in airlines)
-            {
-                map_airline_id_to_name.Add(airline.Id, airline.Name);
-            }
+        //    List<Customer> customers = new CustomerDAOPGSQL().GetAll();
 
-            Dictionary<int, string> map_customerid_to_name = new Dictionary<int, string>();
+        //    foreach (Customer customer in customers)
+        //    {
+        //        map_customerid_to_name.Add(customer.Id, customer.First_Name);
+        //    }
 
-            List<Customer> customers = new CustomerDAOPGSQL().GetAll();
+        //    CreateMap<Ticket, TicketDTO>()
+        //        .ForMember(dest => dest.Id,
+        //                    opt => opt.MapFrom(src => src.Id))
 
-            foreach (Customer customer in customers)
-            {
-                map_customerid_to_name.Add(customer.Id, customer.First_Name);
-            }
+        //        .ForMember(dest => dest.Customer_Name,
+        //                    opt => opt.MapFrom(src => map_customerid_to_name[src.Customer_Id]));
 
-            CreateMap<Ticket, TicketDTO>()
-                .ForMember(dest => dest.Id,
-                            opt => opt.MapFrom(src => src.Id))
-
-                .ForMember(dest => dest.Customer_Name,
-                            opt => opt.MapFrom(src => map_customerid_to_name[src.Customer_Id]));
-
-        }
+        //}
     }
 }

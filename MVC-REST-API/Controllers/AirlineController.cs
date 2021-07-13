@@ -96,24 +96,24 @@ namespace MVC_REST_API.Controllers
         [HttpGet("getalltickets")]
         public async Task<ActionResult<AirlineCompany>> GetAllTickets()
         {
-            TicketProfile profile = new TicketProfile();
+            //TicketProfile profile = new TicketProfile();
 
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
 
-            IList<TicketDTO> result = null;
+            IList<Ticket> result = null;
             try
             {
-                List<Ticket> list = await Task.Run(() => facade.GetAllTickets(token_airline)) as List<Ticket>;
-                List<TicketDTO> ticketDTOList = new List<TicketDTO>();
+                result = await Task.Run(() => facade.GetAllTickets(token_airline));
+                //List<TicketDTO> ticketDTOList = new List<TicketDTO>();
 
-                foreach (Ticket ticket in list)
-                {
-                    //added our own m_mapper
-                    TicketDTO ticketDTO = m_mapper.Map<Ticket, TicketDTO>(ticket);
-                    ticketDTOList.Add(ticketDTO);
-                }
-                result = ticketDTOList;
+                //foreach (Ticket ticket in list)
+                //{
+                //    //added our own m_mapper
+                //    TicketDTO ticketDTO = m_mapper.Map<Ticket, TicketDTO>(ticket);
+                //    ticketDTOList.Add(ticketDTO);
+                //}
+                //result = ticketDTOList;
             }
             catch (Exception ex)
             {
