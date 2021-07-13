@@ -10,28 +10,27 @@ namespace MVC_REST_API.Mapppers
 {
     public class AirlineCompanyProfile : Profile
     {
-        Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
+        //Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
 
         public AirlineCompanyProfile()
         {
-            //Dictionary<int, string> map_countryid_to_name = new Dictionary<int, string>();
 
-            List<Country> countries = new CountryDAOPGSQL().GetAll();
+            //List<Country> countries = new CountryDAOPGSQL().GetAll();
 
-            foreach(Country country in countries)
-            {
-                map_countryid_to_name.Add(country.Id, country.Name);
-            }
+            //foreach(Country country in countries)
+            //{
+            //    map_countryid_to_name.Add(country.Id, country.Name);
+            //}
 
-            //TODO: get airline company from outside
+            ////TODO: get airline company from outside
 
-            CreateMap<AirlineCompany, AirlineDTO>()
-                .ForMember(dest => dest.CountryName,
-                            opt => opt.MapFrom(src => map_countryid_to_name[src.Country_Id]))
-                .ForMember(dest => dest.Id,
-                            opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Name,
-                            opt => opt.MapFrom(src => src.Name));
+            //CreateMap<AirlineCompany, AirlineDTO>()
+            //    .ForMember(dest => dest.CountryName,
+            //                opt => opt.MapFrom(src => map_countryid_to_name[src.Country_Id]))
+            //    .ForMember(dest => dest.Id,
+            //                opt => opt.MapFrom(src => src.Id))
+            //    .ForMember(dest => dest.Name,
+            //                opt => opt.MapFrom(src => src.Name));
         }
 
     }

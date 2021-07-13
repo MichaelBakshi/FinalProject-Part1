@@ -10,6 +10,5 @@ namespace MVC_REST_API.DTO
     {
         public int Id { get; set; }
         public string Customer_Name { get; set; }
-        public Flight flight { get; set; }
     }
 }
