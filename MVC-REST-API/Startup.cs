@@ -116,14 +116,16 @@ namespace MVC_REST_API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //To add:
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c => {
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json",
-            //           "FlightsManagmentSystemWebAPI v1");
-            //    c.DocumentTitle = "Flights Managment System API";
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                       "FlightsManagmentSystemWebAPI v1");
+                c.DocumentTitle = "Flights Managment System API";
+            });
 
-
-                if (env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

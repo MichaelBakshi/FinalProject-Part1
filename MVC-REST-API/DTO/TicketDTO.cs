@@ -8,7 +8,8 @@ namespace MVC_REST_API.DTO
 {
     public class TicketDTO
     {
-        //public int Id { get; set; }
-        //public string Customer_Name { get; set; }
+        public int Id { get; set; }
+        public int Flight_Id { get; set; }
+        public int Customer_Id { get; set; }
     }
 }

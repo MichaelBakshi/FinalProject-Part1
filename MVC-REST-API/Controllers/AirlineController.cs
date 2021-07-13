@@ -96,8 +96,6 @@ namespace MVC_REST_API.Controllers
         [HttpGet("getalltickets")]
         public async Task<ActionResult<AirlineCompany>> GetAllTickets()
         {
-            //TicketProfile profile = new TicketProfile();
-
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
 
@@ -105,15 +103,6 @@ namespace MVC_REST_API.Controllers
             try
             {
                 result = await Task.Run(() => facade.GetAllTickets(token_airline));
-                //List<TicketDTO> ticketDTOList = new List<TicketDTO>();
-
-                //foreach (Ticket ticket in list)
-                //{
-                //    //added our own m_mapper
-                //    TicketDTO ticketDTO = m_mapper.Map<Ticket, TicketDTO>(ticket);
-                //    ticketDTOList.Add(ticketDTO);
-                //}
-                //result = ticketDTOList;
             }
             catch (Exception ex)
             {
@@ -126,7 +115,26 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+        //[HttpGet("getallairlinecompanies/")]
+        //public async Task<ActionResult<AirlineCompany>> GetAllAirlineCompanies()
+        //{
+        //    AnonymousUserFacade facade = new AnonymousUserFacade(false);
 
+        //    IList<AirlineCompany> result = null;
+        //    try
+        //    {
+        //        result = await Task.Run(() => facade.GetAllAirlineCompanies());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(400, $"{{ error: can't get all airline comapnies \"{ex.Message}\" }}");
+        //    }
+        //    if (result == null)
+        //    {
+        //        return StatusCode(204, "{The list is empty. No result to return }");
+        //    }
+        //    return Ok(result);
+        //}
 
         // GET api/<AirlineController>/5
         [HttpGet("getairlinebyid/{airlineId}")]
