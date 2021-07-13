@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MVC_REST_API.Mapppers
 {
-    public class TicketProfile: Profile
+    public class TicketProfile
     {
         //public TicketProfile()
         //{
