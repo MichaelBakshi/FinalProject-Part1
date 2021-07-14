@@ -11,7 +11,6 @@ namespace MVC_REST_API.Mapppers
     public class FlightProfile : Profile
     {
              
-
         public FlightProfile()
         {
             Dictionary<int, string> map_airline_id_to_name = new Dictionary<int, string>();
@@ -45,9 +44,6 @@ namespace MVC_REST_API.Mapppers
                             opt => opt.MapFrom(src => src.Departure_Time))
                 .ForMember(dest => dest.Landing_Time,
                             opt => opt.MapFrom(src => src.Landing_Time));
-
-
-
 
         }
 
