@@ -118,8 +118,8 @@ namespace FinalProject_Part1
                         Ticket c = new Ticket
                         {
                             Id = (int)reader["id"],
-                            Flight_Id = (int)reader["id"],
-                            Customer_Id = (int)reader["id"]
+                            Flight_Id = (int)reader["flight_id"],
+                            Customer_Id = (int)reader["customer_id"]
                         };
                         result.Add(c);
                     }
