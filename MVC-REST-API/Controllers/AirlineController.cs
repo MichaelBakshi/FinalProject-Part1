@@ -109,7 +109,6 @@ namespace MVC_REST_API.Controllers
 
                 foreach (Ticket ticket in list)
                 {
-                    //added our own m_mapper
                     TicketDTO ticketDTO = m_mapper.Map<Ticket, TicketDTO>(ticket);
                     ticketDTOList.Add(ticketDTO);
                 }
