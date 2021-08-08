@@ -168,6 +168,8 @@ namespace MVC_REST_API.Controllers
             }
             return Ok(result);
         }
+        //  return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
+        //return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
 
         // POST api/<AirlineController>
         [HttpPost("AddNewFlight")]
