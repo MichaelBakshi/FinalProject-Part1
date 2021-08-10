@@ -53,7 +53,7 @@ namespace FinalProject_Part1
             }
         }
 
-        public void AddNewAirlineToAwaitingList(LoginToken<Administrator> token, AwaitingConfirmation confirm)
+        public void AddNewAirlineToAwaitingList(LoginToken<Administrator> token, AirlineAwaitingConfirmation confirm)
         {
             _airlineDAO.AddToAwaitingList(confirm);
             //if (token != null)

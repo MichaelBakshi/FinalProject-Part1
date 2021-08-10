@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProject_Part1.Members
 {
-    public class AwaitingConfirmation
+    public class AirlineAwaitingConfirmation
     {
         public string Name { get; set; }
         public int Country_Id { get; set; }

@@ -10,7 +10,7 @@ namespace FinalProject_Part1
     public interface IAirlineDAO : IBasicDb<AirlineCompany>
     {
         AirlineCompany GetAirlineByUsername(string _username);
-        void AddToAwaitingList(AwaitingConfirmation newItem);
+        void AddToAwaitingList(AirlineAwaitingConfirmation newItem);
         IList<AirlineCompany> GetAllAirlinesByCountry(int country_id);
     }
 }
