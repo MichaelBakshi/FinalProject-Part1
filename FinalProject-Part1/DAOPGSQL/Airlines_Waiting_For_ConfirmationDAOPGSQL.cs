@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FinalProject_Part1.DAOPGSQL
 {
-    class Airlines_Waiting_For_ConfirmationDAOPGSQL
+    public class Airlines_Waiting_For_ConfirmationDAOPGSQL
     {
         private string m_conn_string;
 

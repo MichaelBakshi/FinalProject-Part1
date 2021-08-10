@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using FinalProject_Part1.Members;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -38,6 +39,12 @@ namespace FinalProject_Part1
         {
 
             ExecuteNonQuery($"call sp_insert_airline('{a.Name}', {a.Country_Id}, {a.User_Id});");
+        }
+
+        public void Add(AwaitingConfirmation c)
+        {
+
+            ExecuteNonQuery($"call sp_insert_airline_to_confirmation_list('{c.Name}', {c.Country_Id}, {c.UserName}, {c.Password}, {c.Email});");
         }
 
         public AirlineCompany GetById(int id)
