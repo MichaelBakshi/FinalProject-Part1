@@ -44,7 +44,7 @@ namespace FinalProject_Part1
         public void AddToAwaitingList(AirlineAwaitingConfirmation c)
         {
 
-            ExecuteNonQuery($"call sp_insert_airline_to_confirmation_list('{c.Name}', {c.Country_Id}, {c.UserName}, {c.Password}, {c.Email});");
+            ExecuteNonQuery($"call sp_insert_airline_to_awaiting_for_confirmation_list('{c.Name}', {c.Country_Id}, {c.UserName}, {c.Password}, {c.Email});");
         }
 
         public AirlineCompany GetById(int id)

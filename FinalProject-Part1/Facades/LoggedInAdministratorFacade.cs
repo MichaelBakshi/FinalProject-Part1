@@ -55,25 +55,24 @@ namespace FinalProject_Part1
 
         public void AddNewAirlineToAwaitingList(LoginToken<Administrator> token, AirlineAwaitingConfirmation confirm)
         {
-            _airlineDAO.AddToAwaitingList(confirm);
-            //if (token != null)
-            //{
-            //    if (token.User.Level == 2 || token.User.Level == 3)
-            //    {
-            //        _userDAO.Add(airline.user);
-            //        _airlineDAO.Add(airline);
-            //    }
-            //    else
-            //    {
-            //        logger.Debug("This administrator level is not authorized to create a new airline.");
-            //        throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
-            //    }
-            //}
-            //else
-            //{
-            //    logger.Error("Error - token is null");
-            //    throw new NullTokenException("There is a problem to create new airline. Access is denied.");
-            //}
+            
+            if (token != null)
+            {
+                if (token.User.Level == 2 || token.User.Level == 3)
+                {
+                    _airlineDAO.AddToAwaitingList(confirm);
+                }
+                else
+                {
+                    logger.Debug("This administrator level is not authorized to create a new airline.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                }
+            }
+            else
+            {
+                logger.Error("Error - token is null");
+                throw new NullTokenException("There is a problem to add new airline. Access is denied.");
+            }
         }
 
         public void UpdateAirlineDetails(LoginToken<Administrator> token, AirlineCompany airline)
