@@ -68,6 +68,7 @@ namespace FinalProject_Part1
                     throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
                 }
             }
+
             else
             {
                 logger.Error("Error - token is null");
