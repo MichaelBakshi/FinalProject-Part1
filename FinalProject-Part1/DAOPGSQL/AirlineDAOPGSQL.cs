@@ -179,9 +179,51 @@ namespace FinalProject_Part1
             return result;
         }
 
+
+
+        public List<AirlineAwaitingConfirmation> GetAllAirlineCompaniesFromAwaitingList()
+        {
+            List<AirlineAwaitingConfirmation> result = new List<AirlineAwaitingConfirmation>();
+
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+                {
+                    cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = "select * from sp_get_all_airline_companies_from_awaiting_list()";
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        AirlineAwaitingConfirmation airlineAwaiting = new AirlineAwaitingConfirmation
+                        {
+                            Name = reader["name"].ToString(),
+                            Country_Id = (int)reader["country_id"],
+                            UserName = reader["username"].ToString(),
+                            Password = reader["password"].ToString(),
+                            Email = reader["email"].ToString()
+                        };
+                        result.Add(airlineAwaiting);
+                    }
+                }
+            }
+            return result;
+        }
+
+
+
+
+
         public void Remove(AirlineCompany airline)
         {
             int result = ExecuteNonQuery($"call  sp_delete_airline_company ({airline.Id})");
+        }
+
+        public void Remove_from_awaiting_for_confirmation_list(AirlineCompany airline)
+        {
+            int result = ExecuteNonQuery($"call  sp_delete_airline_company_from_awaiting_for_confirmation_list ('{airline.Name}')");
         }
 
         public void Update(AirlineCompany airline)
