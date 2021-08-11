@@ -11,7 +11,7 @@ namespace FinalProject_Part1
     {
         AirlineCompany GetAirlineByUsername(string _username);
         void AddToAwaitingList(AirlineAwaitingConfirmation newItem);
-        List<AirlineAwaitingConfirmation> GetAllAirlineCompaniesFromAwaitingList();
+        IList<AirlineAwaitingConfirmation> GetAllAirlineCompaniesFromAwaitingList();
         IList<AirlineCompany> GetAllAirlinesByCountry(int country_id);
     }
 }

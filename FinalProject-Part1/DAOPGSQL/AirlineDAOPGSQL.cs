@@ -181,7 +181,7 @@ namespace FinalProject_Part1
 
 
 
-        public List<AirlineAwaitingConfirmation> GetAllAirlineCompaniesFromAwaitingList()
+        public IList<AirlineAwaitingConfirmation> GetAllAirlineCompaniesFromAwaitingList()
         {
             List<AirlineAwaitingConfirmation> result = new List<AirlineAwaitingConfirmation>();
 

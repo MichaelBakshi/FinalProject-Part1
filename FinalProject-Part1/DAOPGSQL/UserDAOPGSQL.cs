@@ -41,6 +41,15 @@ namespace FinalProject_Part1
             // u.Id = 
         }
 
+
+        public void AddUserForConfirmedAirline(User u)
+        {
+            //cancel executenonquery
+            ExecuteNonQuery($"call sp_insert_user_for_confirmed_airline('{u.Username}', '{u.Password}', '{u.Email}');");
+            // u.Id = 
+        }
+
+
         public User GetById(int id)
         {
             User result = null;
