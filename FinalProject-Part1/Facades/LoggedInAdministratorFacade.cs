@@ -68,13 +68,21 @@ namespace FinalProject_Part1
                     throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
                 }
             }
-
             else
             {
                 logger.Error("Error - token is null");
                 throw new NullTokenException("There is a problem to add new airline. Access is denied.");
             }
         }
+
+
+        public IList<AirlineAwaitingConfirmation> GetAllAwaitingAirlineCompanies()
+        {
+            return _airlineDAO.GetAllAirlineCompaniesFromAwaitingList();
+        }
+
+
+
 
         public void UpdateAirlineDetails(LoginToken<Administrator> token, AirlineCompany airline)
         {
