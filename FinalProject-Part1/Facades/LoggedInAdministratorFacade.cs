@@ -86,6 +86,7 @@ namespace FinalProject_Part1
                 {
                     User user = new User(airlineAwaitingConfirmation.UserName, airlineAwaitingConfirmation.Password,
                         airlineAwaitingConfirmation.Email, 2);
+                    _userDAO.Add(user);
                     int user_id = user.Id;
                     AirlineCompany airlineCompany = new AirlineCompany(airlineAwaitingConfirmation.Name, airlineAwaitingConfirmation.Country_Id,
                        user_id);

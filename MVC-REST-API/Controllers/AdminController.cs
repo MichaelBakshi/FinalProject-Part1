@@ -123,6 +123,34 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+
+        // GET: api/<AdminController>
+        [HttpGet("getallawaitingairlines/")]
+        public async Task<ActionResult<Administrator>> GetAllAwaitingAirlines()
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            IList<AirlineAwaitingConfirmation> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllAwaitingAirlineCompanies());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ Error: Couldn't get the list of airlines awaiting for confirmation by administrator \"{ex.Message}\" }}");
+                //logger.Error("Couldn't get all customers");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{The list of airlines awaiting for confirmation is empty.}");
+            }
+            return Ok(result);
+        }
+
+
+
+
         // POST api/<AdminController>
         [HttpPost("AddNewAirline")]
         public async Task<ActionResult> AddNewAirline([FromBody] AirlineUser airline)
@@ -164,6 +192,24 @@ namespace MVC_REST_API.Controllers
         }
 
 
+        // POST api/<AdminController>
+        [HttpPost("AddConfirmedAirlineCompany")]
+        public async Task<ActionResult> AddConfirmedAirlineCompany([FromBody] AirlineAwaitingConfirmation airlineAwaitingConfirmation)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.AddConfirmedAirlineCompany(token_admin, airlineAwaitingConfirmation));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, $"{{ error: can't confirm airline and add it to final list\"{ex.Message}\" }}");
+            }
+            return Ok(airlineAwaitingConfirmation);
+            //return Created("ur_for_get_method/new_airline_id", airline);
+        }
 
 
         // PUT api/<AdminController>/5
@@ -204,6 +250,10 @@ namespace MVC_REST_API.Controllers
             
             return Ok("Deleted");
         }
+
+
+
+
 
         [HttpPost("createnewcustomer")]
         public async Task<ActionResult> CreateNewCustomer([FromBody] CustomerUser customer)
