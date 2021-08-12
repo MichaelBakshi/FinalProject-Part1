@@ -221,9 +221,9 @@ namespace FinalProject_Part1
             int result = ExecuteNonQuery($"call  sp_delete_airline_company ({airline.Id})");
         }
 
-        public void Remove_from_awaiting_for_confirmation_list(AirlineCompany airline)
+        public void Remove_from_awaiting_for_confirmation_list(AirlineAwaitingConfirmation airlineAwaitingConfirmation)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_airline_company_from_awaiting_for_confirmation_list ('{airline.Name}')");
+            int result = ExecuteNonQuery($"call  sp_delete_airline_company_from_awaiting_for_confirmation_list ('{airlineAwaitingConfirmation.Name}')");
         }
 
         public void Update(AirlineCompany airline)

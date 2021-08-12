@@ -53,14 +53,14 @@ namespace FinalProject_Part1
             }
         }
 
-        public void AddNewAirlineToAwaitingList(LoginToken<Administrator> token, AirlineAwaitingConfirmation confirm)
+        public void AddNewAirlineToAwaitingList(LoginToken<Administrator> token, AirlineAwaitingConfirmation airlineAwaitingConfirmation)
         {
             
             if (token != null)
             {
                 if (token.User.Level == 2 || token.User.Level == 3)
                 {
-                    _airlineDAO.AddToAwaitingList(confirm);
+                    _airlineDAO.AddToAwaitingList(airlineAwaitingConfirmation);
                 }
                 else
                 {
@@ -76,10 +76,43 @@ namespace FinalProject_Part1
         }
 
 
+
+        public void AddConfirmedAirlineCompany(LoginToken<Administrator> token, AirlineAwaitingConfirmation airlineAwaitingConfirmation)
+        {
+
+            if (token != null)
+            {
+                if (token.User.Level == 2 || token.User.Level == 3)
+                {
+                    User user = new User(airlineAwaitingConfirmation.UserName, airlineAwaitingConfirmation.Password,
+                        airlineAwaitingConfirmation.Email, 2);
+                    int user_id = user.Id;
+                    AirlineCompany airlineCompany = new AirlineCompany(airlineAwaitingConfirmation.Name, airlineAwaitingConfirmation.Country_Id,
+                       user_id);
+                    _airlineDAO.Add(airlineCompany);
+                    _airlineDAO.Remove_from_awaiting_for_confirmation_list(airlineAwaitingConfirmation);
+                }
+                else
+                {
+                    logger.Debug("This administrator level is not authorized to create a new airline.");
+                    throw new WrongLevelOfAccessException("Access is denied. You have no authorization to create new airline.");
+                }
+            }
+            else
+            {
+                logger.Error("Error - token is null");
+                throw new NullTokenException("There is a problem to add new airline. Access is denied.");
+            }
+        }
+
+
+
+
         public IList<AirlineAwaitingConfirmation> GetAllAwaitingAirlineCompanies()
         {
             return _airlineDAO.GetAllAirlineCompaniesFromAwaitingList();
         }
+
 
 
 
