@@ -143,6 +143,29 @@ namespace MVC_REST_API.Controllers
             //return Created("ur_for_get_method/new_airline_id", airline);
         }
 
+
+        // POST api/<AdminController>
+        [HttpPost("AddAirlineToWaitingList")]
+        public async Task<ActionResult> AddAirlineToWaitingList([FromBody] AirlineAwaitingConfirmation airlineAwaitingConfirmation)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.AddNewAirlineToAwaitingList(token_admin, airlineAwaitingConfirmation));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, $"{{ error: can't add new airline to awaiting list\"{ex.Message}\" }}");
+            }
+            return Ok(airlineAwaitingConfirmation);
+            //return Created("ur_for_get_method/new_airline_id", airline);
+        }
+
+
+
+
         // PUT api/<AdminController>/5
         [HttpPut("UpdateAirline")]
         public async Task<ActionResult> UpdateAirline([FromBody] AirlineCompany airline)
