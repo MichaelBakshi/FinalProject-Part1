@@ -252,6 +252,29 @@ namespace MVC_REST_API.Controllers
         }
 
 
+        [HttpPost("SignUp")]
+        public async Task<ActionResult> SignUp([FromBody] Customer customer)
+        {
+            //AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+            //        token_admin, out LoggedInAdministratorFacade facade);
+
+            AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(false);
+
+            try
+            {
+                await Task.Run(() => anonymousUserFacade.SignUp(customer));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, $"{{ error: can't sign up a new customer\"{ex.Message}\" }}");
+            }
+            return Ok(customer);
+            //return Created("ur_for_get_method/new_airline_id", airline);
+        }
+
+
+
+
         // POST api/<AnonymousController>
         [HttpPost]
         public void Post([FromBody] string value)
