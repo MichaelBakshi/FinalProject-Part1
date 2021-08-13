@@ -61,5 +61,13 @@ namespace FinalProject_Part1
         {
             return _flightDAO.GetFlightsByLandingDate(landingDate);
         }
+
+
+        public void SignUp(Customer customer)
+        {
+                    _customerDAO.Add(customer);
+        }
+
+
     }
 }
