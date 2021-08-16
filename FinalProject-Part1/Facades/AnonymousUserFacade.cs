@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FinalProject_Part1
@@ -65,9 +66,11 @@ namespace FinalProject_Part1
 
         public void SignUp(Customer customer)
         {
-                    _customerDAO.Add(customer);
+            _userDAO.Add(customer.user);
+            customer.User_Id = _userDAO.GetAll().OrderByDescending(x => x.Id).ToList()[0].Id;
+            _customerDAO.Add(customer);
         }
-
+      
 
     }
 }
