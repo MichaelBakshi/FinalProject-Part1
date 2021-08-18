@@ -255,20 +255,56 @@ namespace MVC_REST_API.Controllers
         [HttpPost("SignUpCustomer")]
         public async Task<ActionResult> SignUp([FromBody] Customer customer)
         {
-            //AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-            //        token_admin, out LoggedInAdministratorFacade facade);
 
             AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(false);
 
             try
             {
-                await Task.Run(() => anonymousUserFacade.SignUp(customer));
+                await Task.Run(() => anonymousUserFacade.SignUpCustomer(customer));
             }
             catch (Exception ex)
             {
                 return StatusCode(501, $"{{ error: can't sign up a new customer\"{ex.Message}\" }}");
             }
             return Ok(customer);
+            //return Created("ur_for_get_method/new_airline_id", airline);
+        }
+
+
+        [HttpPost("SignUpAirline")]
+        public async Task<ActionResult> SignUpAirline([FromBody] AirlineCompany airline)
+        {
+
+            AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(false);
+
+            try
+            {
+                await Task.Run(() => anonymousUserFacade.SignUpAirline(airline));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, $"{{ error: can't sign up a new airline\"{ex.Message}\" }}");
+            }
+            return Ok(airline);
+            //return Created("ur_for_get_method/new_airline_id", airline);
+        }
+
+
+        [HttpPost("SignUpAdmin")]
+        public async Task<ActionResult> SignUpAdmin([FromBody] Administrator administrator)
+        {
+
+            AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(false);
+
+            try
+            {
+                await Task.Run(() => anonymousUserFacade.SignUpAdmin(administrator));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, $"{{ error: can't sign up a new administrator\"{ex.Message}\" }}");
+            }
+            return Ok(administrator);
             //return Created("ur_for_get_method/new_airline_id", airline);
         }
 
