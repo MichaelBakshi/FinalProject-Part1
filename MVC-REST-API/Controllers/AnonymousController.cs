@@ -252,7 +252,7 @@ namespace MVC_REST_API.Controllers
         }
 
 
-        [HttpPost("SignUp")]
+        [HttpPost("SignUpCustomer")]
         public async Task<ActionResult> SignUp([FromBody] Customer customer)
         {
             //AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>

@@ -64,13 +64,25 @@ namespace FinalProject_Part1
         }
 
 
-        public void SignUp(Customer customer)
+        public void SignUpCustomer(Customer customer)
         {
             _userDAO.Add(customer.user);
             customer.User_Id = _userDAO.GetAll().OrderByDescending(x => x.Id).ToList()[0].Id;
             _customerDAO.Add(customer);
         }
-      
 
+        public void SignUpAirline(AirlineCompany airline)
+        {
+            _userDAO.Add(airline.user);
+            airline.User_Id = _userDAO.GetAll().OrderByDescending(x => x.Id).ToList()[0].Id;
+            _airlineDAO.Add(airline);
+        }
+
+        public void SignUpAdmin(Administrator administrator)
+        {
+            _userDAO.Add(administrator.user);
+            administrator.User_Id = _userDAO.GetAll().OrderByDescending(x => x.Id).ToList()[0].Id;
+            _adminDAO.Add(administrator);
+        }
     }
 }
