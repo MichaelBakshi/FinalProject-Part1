@@ -253,7 +253,7 @@ namespace MVC_REST_API.Controllers
 
 
         [HttpPost("SignUpCustomer")]
-        public async Task<ActionResult> SignUp([FromBody] Customer customer)
+        public async Task<ActionResult> SignUpCustomer([FromBody] Customer customer)
         {
 
             AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(false);
