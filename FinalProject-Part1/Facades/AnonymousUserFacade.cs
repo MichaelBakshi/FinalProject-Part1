@@ -16,6 +16,11 @@ namespace FinalProject_Part1
             return _flightDAO.GetAll();
         }
 
+        public IList<Country> GetAllCountries()
+        {
+            return _countryDAO.GetAll();
+        }
+
         public IList<AirlineCompany> GetAllAirlineCompanies()
         {
             return _airlineDAO.GetAll();

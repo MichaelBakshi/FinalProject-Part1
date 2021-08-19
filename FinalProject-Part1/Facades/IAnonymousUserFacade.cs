@@ -7,7 +7,7 @@ namespace FinalProject_Part1
     public interface IAnonymousUserFacade
     {
         IList<Flight> GetAllFlights();
-
+        //IList<Country> GetAllCountries();
         IList<AirlineCompany> GetAllAirlineCompanies();
         Dictionary<Flight, int> GetAllFlightsVacancy();
         Flight GetFlightById(int id);
