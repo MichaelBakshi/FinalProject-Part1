@@ -58,6 +58,29 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("getallcountries/")]
+        public async Task<ActionResult<Country>> GetAllCountries()
+        {
+            AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            IList<Country> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllCountries());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: can't get all countries \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{The list of countries is empty. Nothing to return. }");
+            }
+            return Ok(result);
+        }
+
+
         [HttpGet("getflightbyid")]
         public async Task<ActionResult<Flight>> GetFlightById(int flightid)
         {
