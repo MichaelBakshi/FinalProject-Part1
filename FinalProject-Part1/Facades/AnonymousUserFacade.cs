@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject_Part1.Members;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,11 +77,17 @@ namespace FinalProject_Part1
             _customerDAO.Add(customer);
         }
 
-        public void SignUpAirline(AirlineCompany airline)
+        public void AddAirlineToWaitingList(AirlineCompany airline)
         {
-            _userDAO.Add(airline.user);
-            airline.User_Id = _userDAO.GetAll().OrderByDescending(x => x.Id).ToList()[0].Id;
-            _airlineDAO.Add(airline);
+            AirlineAwaitingConfirmation airline1 = new AirlineAwaitingConfirmation()
+            {
+                Country_Id = airline.Country_Id,
+                Email = airline.user.Email,
+                Name = airline.Name,
+                Password = airline.user.Password,
+                UserName = airline.user.Username
+            };
+            _airlineDAO.AddToAwaitingList(airline1);
         }
 
         public void SignUpAdmin(Administrator administrator)
