@@ -12,13 +12,14 @@ namespace FinalProject_Part1
         private IAdminDAO _adminDAO = new AdminDAOPGSQL();
         private IUserDAO _userDAO = new UserDAOPGSQL();
 
-        public bool TryLogin(string userName, string password, out ILoginToken token)
+        public bool TryLogin(string userName, string password, out ILoginToken token /*out User user_role*/)
         {
             token = null;
+
             if (userName== "admin" && password =="9999" )
             {
                 logger.Info("Super administrator logged in.");
-                token = new LoginToken<Administrator>();  
+                token = new LoginToken<Administrator>(); 
                 return true;
                 
             }
