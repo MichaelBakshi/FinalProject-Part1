@@ -38,12 +38,13 @@ namespace MVC_REST_API.Controllers
             ILoginToken token;
 
             bool loginSuccess = new LoginService().TryLogin(userDetails.UserName, userDetails.Password, out token);
+            int user_role = userDetails.User_Role;
 
             // 1 login failed
 
             if (!loginSuccess)
             {
-                return Unauthorized("login falied");
+                return Unauthorized("login failed");
             }
 
             string securityKey = "(*&gH7*T(*O&YT*O&GT*O&GT*&T";
@@ -58,25 +59,25 @@ namespace MVC_REST_API.Controllers
             LoginToken<AirlineCompany> token2 = token as LoginToken<AirlineCompany>;
             LoginToken<Customer> token3 = token as LoginToken<Customer>;
 
-            string userRole = "";
+            //string userRole = "";
 
             if (token1 != null)
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
-                claims.Add(new Claim("userid", token1.User.Id.ToString()));
+                claims.Add(new Claim("admin_id", token1.User.Id.ToString()));
                 claims.Add(new Claim("username", token1.User.user.Username));
                 claims.Add(new Claim("level", token1.User.Level.ToString()));
             }
             else if (token2 != null)
             {
                 claims.Add(new Claim(ClaimTypes.Role, "AirlineCompany"));
-                claims.Add(new Claim("userid", token2.User.Id.ToString()));
+                claims.Add(new Claim("airline_id", token2.User.Id.ToString()));
                 claims.Add(new Claim("username", token2.User.user.Username));
             }
             else if (token3 != null)
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Customer"));
-                claims.Add(new Claim("userid", token3.User.Id.ToString()));
+                claims.Add(new Claim("customer_id", token3.User.Id.ToString()));
                 claims.Add(new Claim("username", token3.User.user.Username));
             }
             else
@@ -94,6 +95,7 @@ namespace MVC_REST_API.Controllers
 
             // 5) return token
             return Ok(new JwtSecurityTokenHandler().WriteToken(jwtToken));
+            //return Ok (user_role);
         }
 
     }

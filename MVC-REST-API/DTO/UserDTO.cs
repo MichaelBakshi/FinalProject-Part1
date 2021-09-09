@@ -16,5 +16,7 @@ namespace MVC_REST_API.DTO
         [StringLength(maximumLength: 20, MinimumLength = 3)]
         public string Password { get; set; }
 
+        public int User_Role { get; set; }
+
     }
 }
