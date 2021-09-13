@@ -28,7 +28,6 @@ namespace MVC_REST_API.Controllers
             var decodedJwt = jsonToken as JwtSecurityToken;
 
             string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
-            int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
 
             Customer customer = new CustomerDAOPGSQL().GetCustomerByUsername(userName);
 
@@ -63,8 +62,8 @@ namespace MVC_REST_API.Controllers
         }
 
         // GET: api/<CustomerController>
-        [HttpGet("getallflightsbycustomer/")]
-        public async Task<ActionResult<Customer>> GetAllFlightsByCustomer([FromBody]Customer customer)
+        [HttpGet("getallflightsbycustomer")]
+        public async Task<ActionResult<Customer>> GetAllFlightsByCustomer()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
@@ -72,7 +71,7 @@ namespace MVC_REST_API.Controllers
             IList<Flight> result = null;
             try
             {
-                result = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer, customer ));
+                result = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
             }
             catch (Exception ex)
             {

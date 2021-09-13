@@ -27,11 +27,11 @@ namespace FinalProject_Part1
         }
 
 
-        public IList<Flight> GetAllFlightsByCustomer(LoginToken<Customer> token, Customer customer)
+        public IList<Flight> GetAllFlightsByCustomer(LoginToken<Customer> token)
         {
             if (token != null)
             {
-                return _flightDAO.GetFlightsByCustomer(customer);
+                return _flightDAO.GetFlightsByCustomer(token.User);
             }
             else
             {
