@@ -95,7 +95,7 @@ namespace FinalProject_Part1
                             Origin_Country_Id = (int)reader["origin_country_id"],
                             Destination_Country_Id = (int)reader["destination_country_id"],
                             Departure_Time = (DateTime)reader["departure_time"],
-                            Landing_Time = (DateTime)reader["landing_time"]
+                            Landing_Time = (DateTime)reader["landing_time"],
                             Remaining_Tickets = (int)reader["remaining_tickets"]
                         };
                         result.Add(f);
