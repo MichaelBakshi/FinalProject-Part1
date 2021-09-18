@@ -13,6 +13,7 @@ namespace MVC_REST_API.DTO
         public string Destination_Country_Name { get; set; }
         public DateTime Departure_Time { get; set; }
         public DateTime Landing_Time { get; set; }
+        public int Ticket_Id { get; set; }
 
     }
 }
