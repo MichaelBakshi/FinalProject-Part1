@@ -12,7 +12,7 @@ namespace FinalProject_Part1
         private IAdminDAO _adminDAO = new AdminDAOPGSQL();
         private IUserDAO _userDAO = new UserDAOPGSQL();
 
-        public bool TryLogin(string userName, string password, out ILoginToken token /*out User user_role*/)
+        public bool TryLogin(string userName, string password, out ILoginToken token )
         {
             token = null;
 

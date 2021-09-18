@@ -14,6 +14,7 @@ namespace FinalProject_Part1
         public DateTime Landing_Time { get; set; }
         public int Remaining_Tickets { get; set; }
         public AirlineCompany airlineCompany { get; set; }
+        public Ticket ticket { get; set; }
 
         public Flight()
         {
