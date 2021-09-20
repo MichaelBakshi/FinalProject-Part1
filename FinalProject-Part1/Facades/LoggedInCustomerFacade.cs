@@ -7,7 +7,7 @@ namespace FinalProject_Part1
     public class LoggedInCustomerFacade: AnonymousUserFacade, ILoggedInCustomerFacade
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        
         public LoggedInCustomerFacade(bool testMode) : base(testMode)
         {
             GlobalConfig.GetConfiguration(testMode);
@@ -58,17 +58,20 @@ namespace FinalProject_Part1
         }
         public void CancelTicket(LoginToken<Customer> token, Ticket ticket)
         {
+            //DateTime ticketDepartureTime = ticket.flight.Departure_Time;
+            //DateTime currentDateTime = DateTime.Now;
+
             if (token != null) 
             {
-                if (ticket.flight.Departure_Time < DateTime.Now)
-                {
+                //if (ticketDepartureTime < DateTime.Now)
+                //{
                     _ticketDAO.Remove(ticket);
-                }
-                else
-                {
-                    logger.Error("Trying to cancel ticket for the flight that already departed.");
-                    throw new NullTokenException("It's impossible to cancel ticket for the flight that already departed.");
-                }
+                //}
+                //else
+                //{
+                //    logger.Error("Trying to cancel ticket for the flight that already departed.");
+                //    throw new NullTokenException("It's impossible to cancel ticket for the flight that already departed.");
+                //}
             }
             else
             {
