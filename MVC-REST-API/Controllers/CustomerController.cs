@@ -129,6 +129,32 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("getcustomerdetailsbyid/{flightid}")]
+        public async Task<ActionResult<Customer>> GetCustomerDetailsById(int customerid)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
+                    token_customer, out LoggedInCustomerFacade facade);
+
+            Customer result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetCustomerById(customerid));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: can't get customer by this id \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{There is no customer by this id }");
+            }
+            return Ok(result);
+        }
+
+
+
+
         // POST api/<CustomerController>
         [HttpPost("purchaseticket")]
         public async Task<ActionResult> PurchaseTicket([FromBody] Flight flight)
