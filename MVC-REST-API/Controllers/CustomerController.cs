@@ -1,6 +1,8 @@
-﻿using FinalProject_Part1;
+﻿using AutoMapper;
+using FinalProject_Part1;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC_REST_API.DTO;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,6 +18,13 @@ namespace MVC_REST_API.Controllers
     //[Authorize(Roles = "Customer")]
     public class CustomerController : ControllerBase
     {
+
+        private readonly IMapper m_mapper;
+
+        public CustomerController(IMapper mapper)
+        {
+            m_mapper = mapper;
+        }
 
         private void AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer> token_customer, out LoggedInCustomerFacade facade)
         {
@@ -63,7 +72,7 @@ namespace MVC_REST_API.Controllers
 
         // GET: api/<CustomerController>
         [HttpGet("getallflightsbycustomer")]
-        public async Task<ActionResult<Customer>> GetAllFlightsByCustomer()
+        public async Task<ActionResult<Flight>> GetAllFlightsByCustomer()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
@@ -72,6 +81,19 @@ namespace MVC_REST_API.Controllers
             try
             {
                 result = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
+                //IList<Flight> tmpResult = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
+
+                //if (tmpResult != null && tmpResult.Count > 0)
+                //{
+                //    result = new List<FlightDTO>();
+
+                //    foreach (var flight in tmpResult)
+                //    {
+                //        result.Add(m_mapper.Map<FlightDTO>(tmpResult));
+                //    }
+                //}
+
+                
             }
             catch (Exception ex)
             {

@@ -58,9 +58,17 @@ namespace FinalProject_Part1
         }
         public void CancelTicket(LoginToken<Customer> token, Ticket ticket)
         {
-            if (token != null)
+            if (token != null) 
             {
-                _ticketDAO.Remove(ticket);
+                if (ticket.flight.Departure_Time < DateTime.Now)
+                {
+                    _ticketDAO.Remove(ticket);
+                }
+                else
+                {
+                    logger.Error("Trying to cancel ticket for the flight that already departed.");
+                    throw new NullTokenException("It's impossible to cancel ticket for the flight that already departed.");
+                }
             }
             else
             {
