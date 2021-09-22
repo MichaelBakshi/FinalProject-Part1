@@ -11,6 +11,7 @@ namespace FinalProject_Part1
         public int Customer_Id { get; set; }
         public Flight flight { get; set; }
         public Customer customer { get; set; }
+        public bool IsCancellable { get; set; }
 
         public Ticket()
         {

@@ -72,28 +72,37 @@ namespace MVC_REST_API.Controllers
 
         // GET: api/<CustomerController>
         [HttpGet("getallflightsbycustomer")]
-        public async Task<ActionResult<Flight>> GetAllFlightsByCustomer()
+        public async Task<ActionResult<Ticket>> GetAllFlightsByCustomer()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
 
-            IList<Flight> result = null;
+            //IList<Flight> result = null;
+            IList<Ticket> result = null;
+
             try
             {
-                result = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
-                //IList<Flight> tmpResult = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
+                var allFlightsByCustomer = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
+                result = new List<Ticket>();
 
-                //if (tmpResult != null && tmpResult.Count > 0)
-                //{
-                //    result = new List<FlightDTO>();
+                if (allFlightsByCustomer != null && allFlightsByCustomer.Count > 0)
+                {
+                    foreach (var flight in allFlightsByCustomer)
+                    {
+                        bool IsCancellable = true;
 
-                //    foreach (var flight in tmpResult)
-                //    {
-                //        result.Add(m_mapper.Map<FlightDTO>(tmpResult));
-                //    }
-                //}
+                        if (flight.Departure_Time.CompareTo(DateTime.Now) < 0)
+                        {
+                            IsCancellable = false;
+                        }
 
-                
+                        result.Add(new Ticket { 
+                            flight = flight,
+                            Id = flight.Ticket_Id,
+                            IsCancellable = IsCancellable
+                        });
+                    }                    
+                }                
             }
             catch (Exception ex)
             {
@@ -130,8 +139,8 @@ namespace MVC_REST_API.Controllers
         }
 
 
-        [HttpGet("getcustomerdetailsbyid/{flightid}")]
-        public async Task<ActionResult<Customer>> GetCustomerDetailsById(int customerid)
+        [HttpGet("getcustomerdetailsbyid")]
+        public async Task<ActionResult<Customer>> GetCustomerDetailsById()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
@@ -139,7 +148,7 @@ namespace MVC_REST_API.Controllers
             Customer result = null;
             try
             {
-                result = await Task.Run(() => facade.GetCustomerById(customerid));
+                result = await Task.Run(() => facade.GetCustomerById(token_customer.User.Id));
             }
             catch (Exception ex)
             {
