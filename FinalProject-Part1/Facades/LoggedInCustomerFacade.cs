@@ -41,6 +41,21 @@ namespace FinalProject_Part1
         }
 
 
+        public void UpdateCustomerDetails(LoginToken<Customer> token, Customer customer)
+        {
+            if (token != null)
+            {
+                    _customerDAO.Update(customer);
+            }
+            else
+            {
+                logger.Error("Error - token is null");
+                throw new NullTokenException("There is a problem to update your details. Access is denied.");
+            }
+        }
+
+
+
         public Ticket PurchaseTicket(LoginToken<Customer> token, Flight flight)
         {
             if (token != null)

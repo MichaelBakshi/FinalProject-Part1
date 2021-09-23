@@ -33,7 +33,7 @@ namespace MVC_REST_API.Controllers
             var decodedJwt = jsonToken as JwtSecurityToken;
 
             string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
-            int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
+            //int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "admin_id").Value);
 
             Administrator administrator = new AdminDAOPGSQL().GetAdminByUsername(userName);
 
