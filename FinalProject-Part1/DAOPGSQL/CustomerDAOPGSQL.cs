@@ -98,7 +98,9 @@ namespace FinalProject_Part1
                             Address = reader["address"].ToString(),
                             Phone_No = reader["phone_no"].ToString(),
                             Credit_Card_No = reader["credit_card_no"].ToString(),
-                            User_Id = (int)reader["user_id"]
+                            User_Id = (int)reader["user_id"],
+                            Username = reader["username"].ToString(),
+                            Password = reader["password"].ToString()
                         };
                     }
                 }
@@ -146,7 +148,8 @@ namespace FinalProject_Part1
 
         public void Update(Customer c)
         {
-            int result = ExecuteNonQuery($"call sp_update_customer( {c.Id}, '{c.First_Name}', '{c.Last_Name}', '{c.Address}', '{c.Phone_No}', '{c.Credit_Card_No}',  {c.User_Id})");
+            int result = ExecuteNonQuery($"call sp_update_customer( {c.Id}, '{c.First_Name}', '{c.Last_Name}', '{c.Address}'," +
+                $" '{c.Phone_No}', '{c.Credit_Card_No}',  {c.User_Id}, '{c.Username}','{c.Password}')");
         }
     }
 }
