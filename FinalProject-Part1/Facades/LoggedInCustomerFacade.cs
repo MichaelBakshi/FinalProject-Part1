@@ -45,6 +45,7 @@ namespace FinalProject_Part1
         {
             if (token != null)
             {
+                //_userDAO.Update(customer.user);
                     _customerDAO.Update(customer);
             }
             else

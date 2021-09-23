@@ -170,6 +170,7 @@ namespace MVC_REST_API.Controllers
 
             try
             {
+                //customer.user = token_customer.User.user;
                 await Task.Run(() => facade.UpdateCustomerDetails(token_customer, customer));
             }
             catch (Exception ex)
