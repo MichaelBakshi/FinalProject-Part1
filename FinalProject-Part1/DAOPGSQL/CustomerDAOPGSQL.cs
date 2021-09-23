@@ -64,7 +64,9 @@ namespace FinalProject_Part1
                             Address = reader["address"].ToString(),
                             Phone_No = reader["phone_no"].ToString(),
                             Credit_Card_No = reader["credit_card_no"].ToString(),
-                            User_Id = (int)reader["user_id"]
+                            User_Id = (int)reader["user_id"],
+                            Username = reader["username"].ToString(),
+                            Password = reader["password"].ToString()
                         };
                     }
                 }
