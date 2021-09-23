@@ -162,6 +162,24 @@ namespace MVC_REST_API.Controllers
         }
 
 
+        [HttpPut("UpdateCustomerDetails")]
+        public async Task<ActionResult> UpdateCustomerDetails([FromBody] Customer customer)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
+                    token_customer, out LoggedInCustomerFacade facade);
+
+            try
+            {
+                await Task.Run(() => facade.UpdateCustomerDetails(token_customer, customer));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: can't update your customer details \"{ex.Message}\" }}");
+            }
+
+            return Ok("Updated: " + customer);
+        }
+
 
 
         // POST api/<CustomerController>
