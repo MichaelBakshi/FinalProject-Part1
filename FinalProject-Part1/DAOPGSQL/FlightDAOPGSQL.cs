@@ -140,6 +140,7 @@ namespace FinalProject_Part1
             return keyValues;
         }
 
+
         public List<Flight> GetAll()
         {
             List<Flight> result = new List<Flight>();
@@ -172,6 +173,42 @@ namespace FinalProject_Part1
             }
             return result;
         }
+
+
+        public IList<Flight> GetAllFlightsByAirline()
+        {
+            List<Flight> result = new List<Flight>();
+
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+                {
+                    cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select * from sp_get_all_flights_by_airline()";
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Flight f = new Flight
+                        {
+                            Id = (int)reader["id"],
+                            Airline_Company_Id = (int)reader["airline_company_id"],
+                            Origin_Country_Id = (int)reader["origin_country_id"],
+                            Destination_Country_Id = (int)reader["destination_country_id"],
+                            Departure_Time = (DateTime)reader["departure_time"],
+                            Landing_Time = (DateTime)reader["landing_time"],
+                            Remaining_Tickets = (int)reader["remaining_tickets"]
+                        };
+                        result.Add(f);
+                    }
+                }
+            }
+            return result;
+        }
+
+
 
         public IList<Flight> GetFlightsByDepartureDate(DateTime _departure_date)
         {

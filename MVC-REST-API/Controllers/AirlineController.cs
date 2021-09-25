@@ -95,6 +95,44 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("getallflightsbyairline")]
+        public async Task<ActionResult<List<FlightDTO>>> GetAllFlightsByAirline()
+        {
+            AirlineCompanyProfile profile = new AirlineCompanyProfile();
+
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            List<FlightDTO> result = null;
+            try
+            {
+
+                List<Flight> list = await Task.Run(() => facade.GetAllFlightsByAirline(token_airline)) as List<Flight>;
+                List<FlightDTO> flightDTOList = new List<FlightDTO>();
+
+                foreach (Flight flight in list)
+                {
+                    //added our own m_mapper
+                    FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+                    flightDTOList.Add(flightDTO);
+                }
+                result = flightDTOList;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: can't get all flights \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{The list is empty.}");
+            }
+            return Ok(result);
+        }
+
+
+
+
         [HttpGet("getalltickets")]
         public async Task<ActionResult<List<TicketDTO>>> GetAllTickets()
         {
