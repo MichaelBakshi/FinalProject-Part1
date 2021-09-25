@@ -96,8 +96,8 @@ namespace MVC_REST_API.Controllers
         }
 
 
-        [HttpGet("getallflightsbyairline")]
-        public async Task<ActionResult<List<FlightDTO>>> GetAllFlightsByAirline()
+        [HttpGet("getflightsbyairline")]
+        public async Task<ActionResult<List<FlightDTO>>> GetFlightsByAirline()
         {
             AirlineCompanyProfile profile = new AirlineCompanyProfile();
 
@@ -108,7 +108,7 @@ namespace MVC_REST_API.Controllers
             try
             {
 
-                List<Flight> list = await Task.Run(() => facade.GetAllFlightsByAirline(token_airline)) as List<Flight>;
+                List<Flight> list = await Task.Run(() => facade.GetFlightsByAirline(token_airline)) as List<Flight>;
                 List<FlightDTO> flightDTOList = new List<FlightDTO>();
 
                 foreach (Flight flight in list)

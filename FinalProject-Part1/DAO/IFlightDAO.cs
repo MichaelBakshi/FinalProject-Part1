@@ -12,6 +12,6 @@ namespace FinalProject_Part1
         IList<Flight> GetFlightsByDepartureDate(DateTime departureDate);
         IList<Flight> GetFlightsByLandingDate(DateTime landingDate);
         IList<Flight> GetFlightsByCustomer(Customer customer);
-        IList<Flight> GetAllFlightsByAirline(AirlineCompany airline);
+        IList<Flight> GetFlightsByAirline(AirlineCompany airline);
     }
 }

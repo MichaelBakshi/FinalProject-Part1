@@ -38,11 +38,11 @@ namespace FinalProject_Part1
             }
         }
 
-        public IList<Flight> GetAllFlightsByAirline(LoginToken<AirlineCompany> token)
+        public IList<Flight> GetFlightsByAirline(LoginToken<AirlineCompany> token)
         {
             if (token != null)
             {
-                return _flightDAO.GetAllFlightsByAirline(token.User);
+                return _flightDAO.GetFlightsByAirline(token.User);
             }
             else
             {

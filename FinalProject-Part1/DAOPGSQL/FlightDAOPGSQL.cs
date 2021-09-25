@@ -175,7 +175,7 @@ namespace FinalProject_Part1
         }
 
 
-        public IList<Flight> GetAllFlightsByAirline()
+        public IList<Flight> GetFlightsByAirline(AirlineCompany a)
         {
             List<Flight> result = new List<Flight>();
 
@@ -185,7 +185,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"select * from sp_get_all_flights_by_airline()";
+                    cmd.CommandText = $"select * from sp_get_all_flights_by_airline({a.Id})";
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
