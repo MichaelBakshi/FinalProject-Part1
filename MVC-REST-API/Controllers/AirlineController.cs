@@ -41,19 +41,21 @@ namespace MVC_REST_API.Controllers
             var decodedJwt = jsonToken as JwtSecurityToken;
 
             string userName = decodedJwt.Claims.First(_ => _.Type == "username").Value;
-            int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
+            //int id = Convert.ToInt32(decodedJwt.Claims.First(_ => _.Type == "userid").Value);
 
             AirlineCompany airline = new AirlineDAOPGSQL().GetAirlineByUsername(userName);
+
+            token_airline = new LoginToken<AirlineCompany>()
+            {
+                User = airline
+            };
 
             if (airline == null)
             {
                 throw new Exception("Token not correct");
             }
 
-            token_airline = new LoginToken<AirlineCompany>()
-            {
-                User = airline
-            };
+            
 
             facade = FlightsCenterSystem.Instance.GetFacade(token_airline) as LoggedInAirlineFacade;
         }
