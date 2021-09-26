@@ -13,6 +13,7 @@ namespace FinalProject_Part1
         public DateTime Departure_Time { get; set; }
         public DateTime Landing_Time { get; set; }
         public int Remaining_Tickets { get; set; }
+        public bool IsCancellable { get; set; }
         public AirlineCompany airlineCompany { get; set; }
         public int Ticket_Id { get; set; }
 
