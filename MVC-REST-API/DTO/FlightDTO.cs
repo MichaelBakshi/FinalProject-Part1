@@ -14,6 +14,7 @@ namespace MVC_REST_API.DTO
         public DateTime Departure_Time { get; set; }
         public DateTime Landing_Time { get; set; }
         public int Remaining_Tickets { get; set; }
+        public bool IsCancellable { get; set; }
         public int Ticket_Id { get; set; }
 
     }

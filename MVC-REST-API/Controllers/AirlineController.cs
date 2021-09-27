@@ -115,6 +115,12 @@ namespace MVC_REST_API.Controllers
                 {
                     //added our own m_mapper
                     FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+
+                    if (flight.Departure_Time.CompareTo(DateTime.Now) >= 0)   // 
+                    {
+                        flightDTO.IsCancellable = true;
+                    }
+                   
                     flightDTOList.Add(flightDTO);
                 }
                 result = flightDTOList;
@@ -129,6 +135,51 @@ namespace MVC_REST_API.Controllers
             }
             return Ok(result);
         }
+
+
+        //[HttpGet("getallflightsbyairline")]
+        //public async Task<ActionResult<Flight>> GetAllFlightsByAirline()
+        //{
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+        //            token_airline, out LoggedInAirlineFacade facade);
+
+        //    //IList<Flight> result = null;
+        //    IList<Flight> result = null;
+
+        //    try
+        //    {
+        //        var allFlightsByAirline = await Task.Run(() => facade.GetFlightsByAirline(token_airline));
+        //        result = new List<Flight>();
+
+        //        if (allFlightsByAirline != null && allFlightsByAirline.Count > 0)
+        //        {
+        //            foreach (var flight in allFlightsByAirline)
+        //            {
+        //                bool IsCancellable = true;
+
+        //                if (flight.Departure_Time.CompareTo(DateTime.Now) < 0)
+        //                {
+        //                    IsCancellable = false;
+        //                }
+
+        //                result.Add(new Flight
+        //                {
+        //                    Id = flight.Id,
+        //                    IsCancellable = IsCancellable
+        //                });
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(400, $"{{ error: can't get flights by airline \"{ex.Message}\" }}");
+        //    }
+        //    if (result == null)
+        //    {
+        //        return StatusCode(204, "{There are no flights by this airline. The list is empty. }");
+        //    }
+        //    return Ok(result);
+        //}
 
 
 
@@ -187,8 +238,8 @@ namespace MVC_REST_API.Controllers
         //}
 
         // GET api/<AirlineController>/5
-        [HttpGet("getairlinebyid/{airlineId}")]
-        public async Task<ActionResult<AirlineCompany>> GetAirlineById(int airlineid)
+        [HttpGet("getairlinebyid")]
+        public async Task<ActionResult<AirlineCompany>> GetAirlineById()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
@@ -248,6 +299,8 @@ namespace MVC_REST_API.Controllers
 
             return Ok("Updated: " + flight);
         }
+
+
 
         // DELETE api/<AirlineController>/5
         [HttpDelete("cancelflight/")]
