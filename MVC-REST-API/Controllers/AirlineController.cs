@@ -247,7 +247,7 @@ namespace MVC_REST_API.Controllers
             AirlineCompany result = null;
             try
             {
-                result = await Task.Run(() => facade.GetAirlineById(airlineid));
+                result = await Task.Run(() => facade.GetAirlineById(token_airline.User.Id));
             }
             catch (Exception ex)
             {
