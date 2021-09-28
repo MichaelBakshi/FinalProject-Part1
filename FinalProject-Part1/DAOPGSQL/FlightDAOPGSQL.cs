@@ -344,7 +344,9 @@ namespace FinalProject_Part1
 
         public void Remove(Flight f)
         {
-            int result = ExecuteNonQuery($"call  sp_delete_flight ({f.Id})");
+            int result1 = ExecuteNonQuery($"call  sp_delete_tickets_by_flight_id ({f.Id})");
+            int result2 = ExecuteNonQuery($"call  sp_delete_flight ({f.Id})");
+
         }
 
         public void Update(Flight f)
