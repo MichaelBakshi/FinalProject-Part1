@@ -351,7 +351,7 @@ namespace FinalProject_Part1
 
         public void Update(Flight f)
         {
-            int result = ExecuteNonQuery($"call sp_update_flight( {f.Id}, {f.Airline_Company_Id}, {f.Origin_Country_Id}, {f.Destination_Country_Id}, '{f.Departure_Time}', '{f.Landing_Time}',  {f.Remaining_Tickets})");
+            int result = ExecuteNonQuery($"call sp_update_flight( {f.Id}, '{f.Departure_Time}', '{f.Landing_Time}')");
         }
     }
 }
