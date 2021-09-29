@@ -63,7 +63,9 @@ namespace FinalProject_Part1
                             First_Name = reader["first_name"].ToString(),
                             Last_Name = reader["last_name"].ToString(),
                             Level = (int)reader["level"],
-                            User_Id = (int)reader["user_id"]
+                            User_Id = (int)reader["user_id"],
+                            Username = reader["username"].ToString(),
+                            Password = reader["password"].ToString()
                         };
                     }
                 }
