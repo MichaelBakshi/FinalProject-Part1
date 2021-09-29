@@ -92,13 +92,6 @@ namespace MVC_REST_API.Controllers
         //}
 
 
-
-
-
-
-
-
-
         // GET: api/<AdminController>
         [HttpGet("getallcustomers/")]
         public async Task<ActionResult<Administrator>> GetAllCustomers()
@@ -344,7 +337,7 @@ namespace MVC_REST_API.Controllers
 
             try
             {
-                await Task.Run(() => facade.CreateAdmin(token_admin, administrator));
+                await Task.Run(() => facade.UpdateAdmin(token_admin, administrator));
             }
             catch (Exception ex)
             {
