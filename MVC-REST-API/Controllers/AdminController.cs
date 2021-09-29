@@ -311,8 +311,8 @@ namespace MVC_REST_API.Controllers
 
 
         // GET api/<AdminController>/5
-        [HttpGet("getadminbyid/{adminid}")]
-        public async Task<ActionResult<Flight>> GetAdminById(int adminid)
+        [HttpGet("getadminbyid")]
+        public async Task<ActionResult<Flight>> GetAdminById()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);
@@ -320,7 +320,7 @@ namespace MVC_REST_API.Controllers
             Administrator result = null;
             try
             {
-                result = await Task.Run(() => facade.GetAdminById(adminid));
+                result = await Task.Run(() => facade.GetAdminById(token_admin.User.Id));
             }
             catch (Exception ex)
             {
