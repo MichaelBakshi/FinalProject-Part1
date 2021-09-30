@@ -31,6 +31,28 @@ namespace FinalProject_Part1
                 throw new NullTokenException("Access is denied. You have no authorization to get all customers.");
             }
         }
+
+
+        public IList<AirlineCompany> GetAllAirlineCompanies(LoginToken<Administrator> token)
+        {
+            if (token != null)
+            {
+                if (token.User.Level == 1 || token.User.Level == 2 || token.User.Level == 3)
+                {
+                    return _airlineDAO.GetAll();
+                }
+                logger.Debug("This administrator level is not authorized to get all customers.");
+                throw new WrongLevelOfAccessException("This administrator level is not authorized to get all customers. Access is denied.");
+            }
+            else
+            {
+                logger.Error("Error - token is null");
+                throw new NullTokenException("Access is denied. You have no authorization to get all customers.");
+            }
+        }
+
+
+
         public void CreateNewAirline(LoginToken<Administrator> token, AirlineCompany airline)
         {
             if (token != null)

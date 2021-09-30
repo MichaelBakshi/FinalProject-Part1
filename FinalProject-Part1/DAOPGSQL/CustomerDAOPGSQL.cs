@@ -150,8 +150,7 @@ namespace FinalProject_Part1
 
         public void Update(Customer c)
         {
-            int result = ExecuteNonQuery($"call sp_update_customer( {c.Id}, '{c.First_Name}', '{c.Last_Name}', '{c.Address}'," +
-                $" '{c.Phone_No}', '{c.Credit_Card_No}',  {c.User_Id}, '{c.Username}','{c.Password}')");
+            int result = ExecuteNonQuery($"call sp_update_customer( {c.Id}, '{c.First_Name}', '{c.Last_Name}', '{c.Address}', '{c.Phone_No}', '{c.Credit_Card_No}',  {c.User_Id})");
         }
     }
 }

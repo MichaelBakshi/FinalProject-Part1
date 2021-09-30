@@ -118,6 +118,32 @@ namespace MVC_REST_API.Controllers
 
 
         // GET: api/<AdminController>
+        [HttpGet("getallairlines/")]
+        public async Task<ActionResult<Administrator>> GetAllAirlines()
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+
+            IList<AirlineCompany> result = null;
+            try
+            {
+                result = await Task.Run(() => facade.GetAllAirlineCompanies(token_admin));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ Error: Couldn't get the list of all airlines \"{ex.Message}\" }}");
+                //logger.Error("Couldn't get all customers");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{The list of airlines is empty.}");
+            }
+            return Ok(result);
+        }
+
+
+
+        // GET: api/<AdminController>
         [HttpGet("getallawaitingairlines/")]
         public async Task<ActionResult<Administrator>> GetAllAwaitingAirlines()
         {
