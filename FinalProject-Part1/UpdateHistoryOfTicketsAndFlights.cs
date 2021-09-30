@@ -34,7 +34,7 @@ namespace FinalProject_Part1
                 {
                     cmd.Connection.Open();
                     cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = $"call * sp_update_flights_history()";
+                    cmd.CommandText = $"call  sp_update_flights_history()";
 
                     cmd.ExecuteNonQuery();
                 }
