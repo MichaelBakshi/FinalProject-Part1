@@ -45,6 +45,20 @@ namespace MVC_REST_API.Mapppers
                 .ForMember(dest => dest.Landing_Time,
                             opt => opt.MapFrom(src => src.Landing_Time));
 
+            CreateMap<FlightDTO, Flight>()
+                .ForMember(dest => dest.Id,
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Airline_Company_Id,
+                            opt => opt.MapFrom(src => airlines.Where(a=>a.Name == src.Airline_Company_Name).ToList()[0].Id))
+                .ForMember(dest => dest.Origin_Country_Id,
+                            opt => opt.MapFrom(src => countries.Where(c=>c.Name == src.Origin_Country_Name).ToList()[0].Id))
+                .ForMember(dest => dest.Destination_Country_Id,
+                            opt => opt.MapFrom(src => countries.Where(c => c.Name == src.Destination_Country_Name).ToList()[0].Id))
+                .ForMember(dest => dest.Departure_Time,
+                            opt => opt.MapFrom(src => src.Departure_Time))
+                .ForMember(dest => dest.Landing_Time,
+                            opt => opt.MapFrom(src => src.Landing_Time));
+
         }
 
     }

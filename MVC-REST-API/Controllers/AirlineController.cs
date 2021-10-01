@@ -325,21 +325,28 @@ namespace MVC_REST_API.Controllers
 
         // PUT api/<AirlineController>/5
         [HttpPut("UpdateFlight")]
-        public async Task<ActionResult> UpdateFlight([FromBody] Flight flight)
+        public async Task<ActionResult> UpdateFllight([FromBody] FlightDTO[] flightDTOArr)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
 
+            FlightProfile profile = new FlightProfile();
+            
+
             try
             {
-                await Task.Run(() => facade.UpdateFlight(token_airline, flight));
+                foreach (var flightDTO in flightDTOArr)
+                {
+                    Flight flight = m_mapper.Map<FlightDTO, Flight>(flightDTO);
+                    await Task.Run(() => facade.UpdateFlight(token_airline, flight));
+                }                
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"{{ error: can't update flight details \"{ex.Message}\" }}");
             }
 
-            return Ok("Updated: " + flight);
+            return Ok();
         }
 
 
@@ -382,10 +389,14 @@ namespace MVC_REST_API.Controllers
         }
 
         [HttpPut("modifyairlinedetails")]
-        public async Task<ActionResult> ModifyAirlineDetails([FromBody] AirlineCompany airline)
+        public async Task<ActionResult> ModifyAirlineDetails([FromBody] AirlineDTO airlineDTO)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
+
+            AirlineCompanyProfile profile = new AirlineCompanyProfile();
+
+            AirlineCompany airline = m_mapper.Map<AirlineDTO, AirlineCompany>(airlineDTO);
 
             try
             {
