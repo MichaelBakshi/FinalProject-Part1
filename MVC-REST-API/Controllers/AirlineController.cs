@@ -137,52 +137,6 @@ namespace MVC_REST_API.Controllers
         }
 
 
-        //[HttpGet("getallflightsbyairline")]
-        //public async Task<ActionResult<Flight>> GetAllFlightsByAirline()
-        //{
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
-        //            token_airline, out LoggedInAirlineFacade facade);
-
-        //    //IList<Flight> result = null;
-        //    IList<Flight> result = null;
-
-        //    try
-        //    {
-        //        var allFlightsByAirline = await Task.Run(() => facade.GetFlightsByAirline(token_airline));
-        //        result = new List<Flight>();
-
-        //        if (allFlightsByAirline != null && allFlightsByAirline.Count > 0)
-        //        {
-        //            foreach (var flight in allFlightsByAirline)
-        //            {
-        //                bool IsCancellable = true;
-
-        //                if (flight.Departure_Time.CompareTo(DateTime.Now) < 0)
-        //                {
-        //                    IsCancellable = false;
-        //                }
-
-        //                result.Add(new Flight
-        //                {
-        //                    Id = flight.Id,
-        //                    IsCancellable = IsCancellable
-        //                });
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(400, $"{{ error: can't get flights by airline \"{ex.Message}\" }}");
-        //    }
-        //    if (result == null)
-        //    {
-        //        return StatusCode(204, "{There are no flights by this airline. The list is empty. }");
-        //    }
-        //    return Ok(result);
-        //}
-
-
-
 
         [HttpGet("getalltickets")]
         public async Task<ActionResult<List<TicketDTO>>> GetAllTickets()
@@ -216,51 +170,60 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("getallairlinecompanies/")]
-        //public async Task<ActionResult<AirlineCompany>> GetAllAirlineCompanies()
-        //{
-        //    AnonymousUserFacade facade = new AnonymousUserFacade(false);
 
-        //    IList<AirlineCompany> result = null;
-        //    try
-        //    {
-        //        result = await Task.Run(() => facade.GetAllAirlineCompanies());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(400, $"{{ error: can't get all airline comapnies \"{ex.Message}\" }}");
-        //    }
-        //    if (result == null)
-        //    {
-        //        return StatusCode(204, "{The list is empty. No result to return }");
-        //    }
-        //    return Ok(result);
-        //}
-
-        // GET api/<AirlineController>/5
-        [HttpGet("getairlinebyid")]
-        public async Task<ActionResult<AirlineCompany>> GetAirlineById()
+        [HttpGet("getmydetails")]
+        public async Task<ActionResult<AirlineCompany>> GetMyDetails()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
+            AirlineCompanyProfile profile = new AirlineCompanyProfile();
 
-            AirlineCompany result = null;
+            AirlineCompany airline = null;
+
             try
             {
-                result = await Task.Run(() => facade.GetAirlineById(token_airline.User.Id));
+                 await Task.Run(() => airline = facade.GetAirlineById(token_airline.User.Id));
             }
             catch (Exception ex)
             {
                 return StatusCode(400, $"{{ error: can't get airline by id \"{ex.Message}\" }}");
             }
-            if (result == null)
-            {
-                return StatusCode(204, "{There's no airline by this id. }");
-            }
-            return Ok(result);
+
+            AirlineDTO airlineDTO = m_mapper.Map<AirlineCompany, AirlineDTO>(airline);
+
+            //if (result == null)
+            //{
+            //    return StatusCode(204, "{There's no airline by this id. }");
+            //}
+            return Ok(airlineDTO);
         }
         //  return CreatedAtRoute(nameof(GetTestByIdv1), new { id = id });
         //return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
+
+
+        [HttpPut("modifyairlinedetails")]
+        public async Task<ActionResult> ModifyAirlineDetails([FromBody] AirlineDTO airlineDTO)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+                    token_airline, out LoggedInAirlineFacade facade);
+
+            AirlineCompanyProfile profile = new AirlineCompanyProfile();
+
+            AirlineCompany airline = m_mapper.Map<AirlineDTO, AirlineCompany>(airlineDTO);
+
+            try
+            {
+                await Task.Run(() => facade.MofidyAirlineDetails(token_airline, airline));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{{ error: can't modify airline details \"{ex.Message}\" }}");
+            }
+
+            return Ok("Updated " + airline);
+        }
+
+
 
         // POST api/<AirlineController>
         [HttpPost("AddNewFlight")]
@@ -280,46 +243,6 @@ namespace MVC_REST_API.Controllers
 
             return Ok(flight);
         }
-
-
-        //public async Task<ActionResult<List<FlightDTO>>> GetFlightsByAirline()
-        //{
-        //    AirlineCompanyProfile profile = new AirlineCompanyProfile();
-
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
-        //            token_airline, out LoggedInAirlineFacade facade);
-
-        //    List<FlightDTO> result = null;
-        //    try
-        //    {
-
-        //        List<Flight> list = await Task.Run(() => facade.GetFlightsByAirline(token_airline)) as List<Flight>;
-        //        List<FlightDTO> flightDTOList = new List<FlightDTO>();
-
-        //        foreach (Flight flight in list)
-        //        {
-        //            //added our own m_mapper
-        //            FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
-
-        //            if (flight.Departure_Time.CompareTo(DateTime.Now) >= 0)   // 
-        //            {
-        //                flightDTO.IsCancellable = true;
-        //            }
-
-        //            flightDTOList.Add(flightDTO);
-        //        }
-        //        result = flightDTOList;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(400, $"{{ error: can't get all flights \"{ex.Message}\" }}");
-        //    }
-        //    if (result == null)
-        //    {
-        //        return StatusCode(204, "{The list is empty.}");
-        //    }
-        //    return Ok(result);
-        //}
 
 
 
@@ -388,27 +311,8 @@ namespace MVC_REST_API.Controllers
             return Ok("New password has been created" );
         }
 
-        [HttpPut("modifyairlinedetails")]
-        public async Task<ActionResult> ModifyAirlineDetails([FromBody] AirlineDTO airlineDTO)
-        {
-            AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
-                    token_airline, out LoggedInAirlineFacade facade);
 
-            AirlineCompanyProfile profile = new AirlineCompanyProfile();
-
-            AirlineCompany airline = m_mapper.Map<AirlineDTO, AirlineCompany>(airlineDTO);
-
-            try
-            {
-                await Task.Run(() => facade.MofidyAirlineDetails(token_airline, airline));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"{{ error: can't modify airline details \"{ex.Message}\" }}");
-            }
-
-            return Ok("Updated " + airline);
-        }
+        
 
 
     }
