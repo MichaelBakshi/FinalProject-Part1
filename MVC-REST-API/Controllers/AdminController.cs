@@ -295,6 +295,31 @@ namespace MVC_REST_API.Controllers
             return Ok();
         }
 
+        // PUT api/<AirlineController>/5
+        //[HttpPut("UpdateFlight")]
+        //public async Task<ActionResult> UpdateFllight([FromBody] FlightDTO[] flightDTOArr)
+        //{
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+        //            token_airline, out LoggedInAirlineFacade facade);
+
+        //    FlightProfile profile = new FlightProfile();
+
+
+        //    try
+        //    {
+        //        foreach (var flightDTO in flightDTOArr)
+        //        {
+        //            Flight flight = m_mapper.Map<FlightDTO, Flight>(flightDTO);
+        //            await Task.Run(() => facade.UpdateFlight(token_airline, flight));
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"{{ error: can't update flight details \"{ex.Message}\" }}");
+        //    }
+
+        //    return Ok();
+        //}
 
 
 
