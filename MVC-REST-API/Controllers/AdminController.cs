@@ -210,24 +210,7 @@ namespace MVC_REST_API.Controllers
         }
 
 
-        // PUT api/<AdminController>/5
-        [HttpPut("UpdateAirline")]
-        public async Task<ActionResult> UpdateAirline([FromBody] AirlineCompany airline)
-        {
-            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
-                    token_admin, out LoggedInAdministratorFacade facade);
-
-            try
-            {
-                await Task.Run(() => facade.UpdateAirlineDetails(token_admin, airline));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(501, $"{{ error: can't update airline details \"{ex.Message}\" }}");
-            }
-
-            return Ok(airline);
-        }
+        
 
         // DELETE api/<AdminController>/5
         [HttpDelete("removeairline/")]
@@ -273,22 +256,47 @@ namespace MVC_REST_API.Controllers
         }
 
         [HttpPut("UpdateCustomerDetails")]
-        public async Task<ActionResult> UpdateCustomerDetails([FromBody] Customer customer)
+        public async Task<ActionResult> UpdateCustomerDetails([FromBody] Customer [] customers)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);
-
             try
             {
-                await Task.Run(() => facade.UpdateCustomerDetails(token_admin, customer));
+                foreach (var customer in customers)
+                {
+                    await Task.Run(() => facade.UpdateCustomerDetails(token_admin, customer));
+                }
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"{{ error: can't update customer details \"{ex.Message}\" }}");
             }
-
-            return Ok("Updated: " + customer);
+            return Ok();
         }
+
+
+        // PUT api/<AdminController>/5
+        [HttpPut("UpdateAirline")]
+        public async Task<ActionResult> UpdateAirline([FromBody] AirlineCompany [] airlines)
+        {
+            AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
+                    token_admin, out LoggedInAdministratorFacade facade);
+            try
+            {
+                foreach (var airline in airlines)
+                {
+                    await Task.Run(() => facade.UpdateAirlineDetails(token_admin, airline));
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, $"{{ error: can't update airline details \"{ex.Message}\" }}");
+            }
+            return Ok();
+        }
+
+
+
 
         [HttpDelete("removecustomer/")]
         public async Task<ActionResult<Administrator>> RemoveCustomer([FromBody] CustomerUser customer)

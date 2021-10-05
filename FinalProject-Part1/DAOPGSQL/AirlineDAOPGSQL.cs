@@ -165,7 +165,9 @@ namespace FinalProject_Part1
                             Id = (int)reader["id"],
                             Name = reader["name"].ToString(),
                             Country_Id = (int)reader["country_id"],
-                            User_Id = (int)reader["user_id"]
+                            User_Id = (int)reader["user_id"],
+                            Username = reader["username"].ToString(),
+                            Password = reader["password"].ToString(),
                         };
                         result.Add(c);
                     }
