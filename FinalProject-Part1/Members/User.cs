@@ -16,8 +16,9 @@ namespace FinalProject_Part1
 
         }
 
-        public User(string username, string password, string email, int user_Role)
+        public User( string username, string password, string email, int user_Role)
         {
+            //Id = id;
             Username = username;
             Password = password;
             Email = email;
