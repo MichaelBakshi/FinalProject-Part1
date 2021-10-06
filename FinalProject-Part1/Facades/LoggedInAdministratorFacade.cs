@@ -108,10 +108,11 @@ namespace FinalProject_Part1
                 {
                     User user = new User(airlineAwaitingConfirmation.UserName, airlineAwaitingConfirmation.Password,
                         airlineAwaitingConfirmation.Email, 2);
-                    _userDAO.Add(user);
-                    int user_id = user.Id;
+                    user.Id = _userDAO.AddUser(user);
+                    //int user_id = user.Id;
+                    //User userbyid = _userDAO.GetById(user.Id);
                     AirlineCompany airlineCompany = new AirlineCompany(airlineAwaitingConfirmation.Name, airlineAwaitingConfirmation.Country_Id,
-                       user_id);
+                       user.Id);
                     _airlineDAO.Add(airlineCompany);
                     _airlineDAO.Remove_from_awaiting_for_confirmation_list(airlineAwaitingConfirmation);
                 }

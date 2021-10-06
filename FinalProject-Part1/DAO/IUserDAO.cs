@@ -7,5 +7,6 @@ namespace FinalProject_Part1
     public interface IUserDAO : IBasicDb<User>
     {
         User GetUserByUsername(string username);
+        int AddUser(User user);
     }
 }

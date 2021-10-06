@@ -70,26 +70,6 @@ namespace MVC_REST_API.Controllers
         //    //return new CreatedResult("/api/admin/getcompanybyid/" + company.Id, company);
 
 
-        //[HttpGet("getairline")]
-        //public async Task<ActionResult<AirlineDTO>> GetAirline()
-        //{
-        //     //access facade
-        //     //request flight
-        //     //let's pretend this flight was returned
-        //    AirlineCompany company = new AirlineCompany()
-        //    {
-        //        Country_Id = 1,
-        //        Id = 2,
-        //        Name = "El-al",
-        //        Password = "LikeHome12345678"
-        //    };
-        //    LoginToken<Administrator> token = GetLoginToken();
-
-        //    AirlineDTO airlineDTO = m_mapper.Map<AirlineDTO>(company);
-
-        //    return Ok(JsonConvert.SerializeObject(airlineDTO));
-
-        //}
 
 
         // GET: api/<AdminController>

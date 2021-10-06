@@ -37,10 +37,71 @@ namespace FinalProject_Part1
         public void Add(User u)
         {
             //cancel executenonquery
-            ExecuteNonQuery($"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});");
+            //ExecuteNonQuery($"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});");
             // u.Id = 
+
+            int result = -1;
+
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+                {
+                    cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+
+                    
+                    //cmd.CommandText = $"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});";
+
+                    cmd.CommandText = $"INSERT INTO users(username, password, email, user_role) VALUES('{u.Username}','{u.Password}','{u.Email}', {u.User_Role}) RETURNING id ";
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        result = (int)reader["id"];
+                        
+                    }
+                }
+            }
+            //return result;
         }
 
+        /// <summary>
+        /// Not using in SP here, because of returning id
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
+        public int AddUser(User u)
+        {
+            //cancel executenonquery
+            //ExecuteNonQuery($"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});");
+            // u.Id = 
+
+            int result = -1;
+
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                using (cmd.Connection = new NpgsqlConnection(m_conn_string))
+                {
+                    cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+
+
+                    //cmd.CommandText = $"call sp_insert_user('{u.Username}', '{u.Password}', '{u.Email}', {u.User_Role});";
+
+                    cmd.CommandText = $"INSERT INTO users(username, password, email, user_role) VALUES('{u.Username}','{u.Password}','{u.Email}', {u.User_Role}) RETURNING id ";
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        result = (int)reader["id"];
+
+                    }
+                }
+            }
+            return result;
+        }
 
         public void AddUserForConfirmedAirline(User u)
         {

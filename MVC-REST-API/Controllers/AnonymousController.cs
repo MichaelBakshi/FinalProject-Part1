@@ -294,22 +294,22 @@ namespace MVC_REST_API.Controllers
             //return Created("ur_for_get_method/new_airline_id", airline);
         }
 
-        // POST api/<AdminController>
-        [HttpPost("AddAirlineToWaitingList")]
-        public async Task<ActionResult> AddAirlineToWaitingList([FromBody] AirlineCompany airline)
-        {
-            AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(false);
+        //// POST api/<AdminController>
+        //[HttpPost("AddAirlineToWaitingList")]
+        //public async Task<ActionResult> AddAirlineToWaitingList([FromBody] AirlineCompany airline)
+        //{
+        //    AnonymousUserFacade anonymousUserFacade = new AnonymousUserFacade(false);
 
-            try
-            {
-                await Task.Run(() => anonymousUserFacade.AddAirlineToWaitingList(airline));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(501, $"{{ error: can't add new airline to awaiting list\"{ex.Message}\" }}");
-            }
-            return Ok();
-        }
+        //    try
+        //    {
+        //        await Task.Run(() => anonymousUserFacade.AddAirlineToWaitingList(airline));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(501, $"{{ error: can't add new airline to awaiting list\"{ex.Message}\" }}");
+        //    }
+        //    return Ok();
+        //}
 
         [HttpPost("SignUpAdmin")]
         public async Task<ActionResult> SignUpAdmin([FromBody] Administrator administrator)

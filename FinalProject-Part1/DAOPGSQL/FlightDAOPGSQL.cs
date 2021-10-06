@@ -37,7 +37,8 @@ namespace FinalProject_Part1
         public void Add(Flight f)
         {
 
-            ExecuteNonQuery($"call sp_insert_flight({f.Airline_Company_Id}, {f.Origin_Country_Id}, {f.Destination_Country_Id}, '{f.Departure_Time}', '{f.Landing_Time}', {f.Remaining_Tickets} );");   
+            ExecuteNonQuery($"call sp_insert_flight({f.Airline_Company_Id}, {f.Origin_Country_Id}, {f.Destination_Country_Id}, '{f.Departure_Time}', '{f.Landing_Time}', {f.Remaining_Tickets} );");
+           
         }
 
         public Flight GetById(int id)

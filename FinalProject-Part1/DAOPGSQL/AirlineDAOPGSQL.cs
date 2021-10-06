@@ -39,6 +39,7 @@ namespace FinalProject_Part1
         {
 
             ExecuteNonQuery($"call sp_insert_airline('{a.Name}', {a.Country_Id}, {a.User_Id});");
+            
         }
 
         public void AddToAwaitingList(AirlineAwaitingConfirmation c)
