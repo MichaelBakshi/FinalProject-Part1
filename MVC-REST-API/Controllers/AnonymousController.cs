@@ -2,9 +2,11 @@
 using FinalProject_Part1.Members;
 using Microsoft.AspNetCore.Mvc;
 using MVC_REST_API.DTO;
+using MVC_REST_API.Mapppers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,6 +17,11 @@ namespace MVC_REST_API.Controllers
     [ApiController]
     public class AnonymousController : ControllerBase
     {
+        private readonly IMapper m_mapper;
+        public AnonymousController (IMapper mapper)
+        {
+            m_mapper = mapper;
+        }
 
         // GET: api/<AnonymousController>
         [HttpGet("getallairlinecompanies/")]
@@ -39,14 +46,23 @@ namespace MVC_REST_API.Controllers
         }
 
         [HttpGet("getallflights/")]
-        public async Task<ActionResult<Flight>> GetAllFlights()
+        public async Task<ActionResult<List<Flight>>> GetAllFlights()
         {
+            //AnonymousProfile profile = new AnonymousProfile();
             AnonymousUserFacade facade = new AnonymousUserFacade(false);
 
-            IList<Flight> result = null;
+            List<Flight> result = null;
             try
             {
-                result = await Task.Run(() => facade.GetAllFlights());
+                List<Flight> list = await Task.Run(() => facade.GetAllFlights()) as List<Flight>;
+                //List<FlightDTO> flightDTOList = new List<FlightDTO>();
+                //foreach (Flight flight in list)
+                //{
+                //    //added our own m_mapper
+                //    FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+                //    flightDTOList.Add(flightDTO);
+                //}
+                result = list;
             }
             catch (Exception ex)
             {
@@ -58,6 +74,46 @@ namespace MVC_REST_API.Controllers
             }
             return Ok(result);
         }
+
+        //[HttpGet("getflightsbyairline")]
+        //public async Task<ActionResult<List<FlightDTO>>> GetFlightsByAirline()
+        //{
+        //    AirlineCompanyProfile profile = new AirlineCompanyProfile();
+
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+        //            token_airline, out LoggedInAirlineFacade facade);
+
+        //    List<FlightDTO> result = null;
+        //    try
+        //    {
+        //        List<Flight> list = await Task.Run(() => facade.GetFlightsByAirline(token_airline)) as List<Flight>;
+        //        List<FlightDTO> flightDTOList = new List<FlightDTO>();
+
+        //        foreach (Flight flight in list)
+        //        {
+        //            //added our own m_mapper
+        //            FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+
+        //            if (flight.Departure_Time.CompareTo(DateTime.Now) >= 0)   // 
+        //            {
+        //                flightDTO.IsCancellable = true;
+        //            }
+
+        //            flightDTOList.Add(flightDTO);
+        //        }
+        //        result = flightDTOList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(400, $"{{ error: can't get all flights \"{ex.Message}\" }}");
+        //    }
+        //    if (result == null)
+        //    {
+        //        return StatusCode(204, "{The list is empty.}");
+        //    }
+        //    return Ok(result);
+        //}
+
 
 
         [HttpGet("getallcountries/")]

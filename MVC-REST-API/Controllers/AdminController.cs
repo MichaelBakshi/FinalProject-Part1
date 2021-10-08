@@ -4,6 +4,7 @@ using FinalProject_Part1.Members;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC_REST_API.DTO;
+using MVC_REST_API.Mapppers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -101,13 +102,21 @@ namespace MVC_REST_API.Controllers
         [HttpGet("getallairlines/")]
         public async Task<ActionResult<Administrator>> GetAllAirlines()
         {
+            AirlineCompanyProfile airlineCompanyProfile = new AirlineCompanyProfile();
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);
 
-            IList<AirlineCompany> result = null;
+            List<AirlineDTO> result = null;
             try
             {
-                result = await Task.Run(() => facade.GetAllAirlineCompanies(token_admin));
+                List<AirlineCompany> list  = await Task.Run(() => facade.GetAllAirlineCompanies(token_admin)) as List<AirlineCompany>;
+                List<AirlineDTO> airlineDTOList = new List<AirlineDTO>();
+                foreach(AirlineCompany airlineCompany in list)
+                {
+                    AirlineDTO airlineDTO = m_mapper.Map<AirlineCompany, AirlineDTO>(airlineCompany);
+                    airlineDTOList.Add(airlineDTO);
+                }
+                result = airlineDTOList;
             }
             catch (Exception ex)
             {
@@ -121,6 +130,37 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+        //[HttpGet("getalltickets")]
+        //public async Task<ActionResult<List<TicketDTO>>> GetAllTickets()
+        //{
+        //    TicketProfile ticketProfile = new TicketProfile();
+
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
+        //            token_airline, out LoggedInAirlineFacade facade);
+
+        //    List<TicketDTO> result = null;
+        //    try
+        //    {
+        //        List<Ticket> list = await Task.Run(() => facade.GetAllTickets(token_airline)) as List<Ticket>;
+        //        List<TicketDTO> ticketDTOList = new List<TicketDTO>();
+
+        //        foreach (Ticket ticket in list)
+        //        {
+        //            TicketDTO ticketDTO = m_mapper.Map<Ticket, TicketDTO>(ticket);
+        //            ticketDTOList.Add(ticketDTO);
+        //        }
+        //        result = ticketDTOList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
+        //    }
+        //    if (result == null)
+        //    {
+        //        return StatusCode(204, "{ }");
+        //    }
+        //    return Ok(result);
+        //}
 
 
         // GET: api/<AdminController>
