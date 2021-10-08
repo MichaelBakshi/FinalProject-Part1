@@ -130,50 +130,25 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("getalltickets")]
-        //public async Task<ActionResult<List<TicketDTO>>> GetAllTickets()
-        //{
-        //    TicketProfile ticketProfile = new TicketProfile();
-
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
-        //            token_airline, out LoggedInAirlineFacade facade);
-
-        //    List<TicketDTO> result = null;
-        //    try
-        //    {
-        //        List<Ticket> list = await Task.Run(() => facade.GetAllTickets(token_airline)) as List<Ticket>;
-        //        List<TicketDTO> ticketDTOList = new List<TicketDTO>();
-
-        //        foreach (Ticket ticket in list)
-        //        {
-        //            TicketDTO ticketDTO = m_mapper.Map<Ticket, TicketDTO>(ticket);
-        //            ticketDTOList.Add(ticketDTO);
-        //        }
-        //        result = ticketDTOList;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(400, $"{{ error: \"{ex.Message}\" }}");
-        //    }
-        //    if (result == null)
-        //    {
-        //        return StatusCode(204, "{ }");
-        //    }
-        //    return Ok(result);
-        //}
-
-
         // GET: api/<AdminController>
         [HttpGet("getallawaitingairlines/")]
         public async Task<ActionResult<Administrator>> GetAllAwaitingAirlines()
         {
+            AirlineCompanyProfile airlineCompanyProfile = new AirlineCompanyProfile();
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Administrator>
                     token_admin, out LoggedInAdministratorFacade facade);
 
-            IList<AirlineAwaitingConfirmation> result = null;
+            List<AirlineDTO> result = null;
             try
             {
-                result = await Task.Run(() => facade.GetAllAwaitingAirlineCompanies());
+                List<AirlineAwaitingConfirmation> list = await Task.Run(() => facade.GetAllAwaitingAirlineCompanies(token_admin)) as List<AirlineAwaitingConfirmation>;
+                List<AirlineDTO> airlineDTOList = new List<AirlineDTO>();
+                foreach (AirlineAwaitingConfirmation airlineCompany in list)
+                {
+                    AirlineDTO airlineDTO = m_mapper.Map<AirlineAwaitingConfirmation, AirlineDTO>(airlineCompany);
+                    airlineDTOList.Add(airlineDTO);
+                }
+                result = airlineDTOList;
             }
             catch (Exception ex)
             {

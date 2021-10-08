@@ -59,6 +59,9 @@ namespace FinalProject_Part1
 
         public Ticket PurchaseTicket(LoginToken<Customer> token, Flight flight)
         {
+            //TODO get all user tickets and check if already purchased
+
+
             if (token != null)
             {
                 Ticket t = new Ticket(flight.Id, token.User.Id);

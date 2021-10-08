@@ -132,7 +132,7 @@ namespace FinalProject_Part1
 
 
 
-        public IList<AirlineAwaitingConfirmation> GetAllAwaitingAirlineCompanies()
+        public IList<AirlineAwaitingConfirmation> GetAllAwaitingAirlineCompanies(LoginToken<Administrator> token)
         {
             return _airlineDAO.GetAllAirlineCompaniesFromAwaitingList();
         }

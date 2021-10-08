@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinalProject_Part1;
+using FinalProject_Part1.Members;
 using MVC_REST_API.DTO;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace MVC_REST_API.Mapppers
                             opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.user,
                             opt => opt.MapFrom(src => src.user));
+
             CreateMap<AirlineDTO, AirlineCompany>()
                 .ForMember(dest => dest.Country_Id,
                             opt => opt.MapFrom(src => countries.Where(c=>c.Name == src.CountryName).ToList()[0].Id))
@@ -40,6 +42,16 @@ namespace MVC_REST_API.Mapppers
                             opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.user,
                             opt => opt.MapFrom(src => src.user));
+
+            CreateMap<AirlineAwaitingConfirmation, AirlineDTO>()
+                .ForMember(dest => dest.CountryName,
+                            opt => opt.MapFrom(src => map_countryid_to_name[src.Country_Id]));
+                //.ForMember(dest => dest.Id,
+                //            opt => opt.MapFrom(src => src.Id))
+                //.ForMember(dest => dest.Name,
+                //            opt => opt.MapFrom(src => src.Name))
+                //.ForMember(dest => dest.user,
+                //            opt => opt.MapFrom(src => src.user));
         }
 
     }
