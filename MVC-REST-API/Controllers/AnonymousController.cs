@@ -45,24 +45,27 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getallflights/")]
-        public async Task<ActionResult<List<Flight>>> GetAllFlights()
+        [HttpGet("getallflights")]
+        public async Task<ActionResult<List<FlightDTO>>> GetAllFlights()
         {
-            //AnonymousProfile profile = new AnonymousProfile();
+            AirlineCompanyProfile profile = new AirlineCompanyProfile();
+
             AnonymousUserFacade facade = new AnonymousUserFacade(false);
 
-            List<Flight> result = null;
+            List<FlightDTO> result = null;
             try
             {
+
                 List<Flight> list = await Task.Run(() => facade.GetAllFlights()) as List<Flight>;
-                //List<FlightDTO> flightDTOList = new List<FlightDTO>();
-                //foreach (Flight flight in list)
-                //{
-                //    //added our own m_mapper
-                //    FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
-                //    flightDTOList.Add(flightDTO);
-                //}
-                result = list;
+                List<FlightDTO> flightDTOList = new List<FlightDTO>();
+
+                foreach (Flight flight in list)
+                {
+                    //added our own m_mapper
+                    FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+                    flightDTOList.Add(flightDTO);
+                }
+                result = flightDTOList;
             }
             catch (Exception ex)
             {
@@ -70,7 +73,7 @@ namespace MVC_REST_API.Controllers
             }
             if (result == null)
             {
-                return StatusCode(204, "{The list of flight is empty. Nothing to return. }");
+                return StatusCode(204, "{The list is empty.}");
             }
             return Ok(result);
         }

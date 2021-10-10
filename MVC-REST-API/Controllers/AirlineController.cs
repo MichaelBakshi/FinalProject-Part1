@@ -246,9 +246,9 @@ namespace MVC_REST_API.Controllers
 
 
 
-        // PUT api/<AirlineController>/5
+        // PUT api/<AirlineController>
         [HttpPut("UpdateFlight")]
-        public async Task<ActionResult> UpdateFllight([FromBody] FlightDTO[] flightDTOArr)
+        public async Task<ActionResult> UpdateFlight([FromBody] FlightDTO[] flightDTOArr)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
                     token_airline, out LoggedInAirlineFacade facade);
