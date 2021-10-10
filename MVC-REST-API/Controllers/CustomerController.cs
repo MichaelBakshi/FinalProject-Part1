@@ -73,47 +73,32 @@ namespace MVC_REST_API.Controllers
 
         // GET: api/<CustomerController>
         [HttpGet("getallflightsbycustomer")]
-        public async Task<ActionResult<Ticket>> GetAllFlightsByCustomer()
+        public async Task<ActionResult<List<FlightDTO>>> GetAllFlightsByCustomer()
         {
-            AirlineCompanyProfile profile = new AirlineCompanyProfile();
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
 
-            IList<Ticket> result = null;
-
+            IList<Flight> flights = new List<Flight>();
+            List<FlightDTO> flightsDTO = new List<FlightDTO>();
             try
             {
-                var allFlightsByCustomer = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
-                result = new List<Ticket>();
+                flights = facade.GetAllFlightsByCustomer(token_customer);
 
-                if (allFlightsByCustomer != null && allFlightsByCustomer.Count > 0)
+                foreach (Flight flight in flights)
                 {
-                    foreach (var flight in allFlightsByCustomer)
-                    {
-                        bool IsCancellable = true;
-
-                        if (flight.Departure_Time.CompareTo(DateTime.Now) < 0)
-                        {
-                            IsCancellable = false;
-                        }
-
-                        result.Add(new Ticket { 
-                            flight = flight,
-                            Id = flight.Ticket_Id,
-                            IsCancellable = IsCancellable
-                        });
-                    }                    
-                }                
+                    FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+                    flightsDTO.Add(flightDTO);
+                }
             }
             catch (Exception ex)
             {
                 return StatusCode(400, $"{{ error: can't get flights by customer \"{ex.Message}\" }}");
             }
-            if (result == null)
+            if (flights == null)
             {
-                return StatusCode(204, "{There are no flights by this customer. The list is empty. }");
+                return StatusCode(204, "{There are no tickets by this customer. The list is empty. }");
             }
-            return Ok(result);
+            return Ok(flightsDTO);
         }
 
         //[HttpGet("getallflights")]

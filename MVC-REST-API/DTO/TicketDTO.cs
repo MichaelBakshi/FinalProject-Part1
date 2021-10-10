@@ -9,7 +9,7 @@ namespace MVC_REST_API.DTO
     public class TicketDTO
     {
         public int Id { get; set; }
-        public Flight Flight { get; set; }
+        public FlightDTO Flight { get; set; }
         public Customer Customer { get; set; }
     }
 }

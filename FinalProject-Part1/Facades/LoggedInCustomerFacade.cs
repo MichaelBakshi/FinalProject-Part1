@@ -59,13 +59,26 @@ namespace FinalProject_Part1
 
         public Ticket PurchaseTicket(LoginToken<Customer> token, Flight flight)
         {
-            //TODO get all user tickets and check if already purchased
+            IList<Flight> myflights = _flightDAO.GetFlightsByCustomer(token.User);
+            foreach(Flight flight1 in myflights)
+            {
+                if (flight1.Id == flight.Id)
+                    throw new Exception("You have already bought ticket for this flight");
+            }
 
+            if (flight.Remaining_Tickets <= 0)
+            {
+                throw new Exception("Flight is full. No more tickets left");
+            }
 
             if (token != null)
             {
                 Ticket t = new Ticket(flight.Id, token.User.Id);
                 _ticketDAO.Add(t);
+
+                flight.Remaining_Tickets--;
+                _flightDAO.Update(flight);
+
                 return t;
             }
 

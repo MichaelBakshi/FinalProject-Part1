@@ -81,7 +81,14 @@ namespace FinalProject_Part1
         {
             if (token != null)
             { 
-                _flightDAO.Update(flight);
+                if (flight.Id == 0)
+                {
+                    _flightDAO.Add(flight);
+                }
+                else
+                {
+                    _flightDAO.Update(flight);
+                }
             }
             else
             {
