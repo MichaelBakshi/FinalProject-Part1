@@ -73,7 +73,7 @@ namespace MVC_REST_API.Controllers
 
         // GET: api/<CustomerController>
         [HttpGet("getallflightsbycustomer")]
-        public async Task<ActionResult<List<FlightDTO>>> GetAllFlightsByCustomer()
+        public async  Task<ActionResult<List<FlightDTO>>> GetAllFlightsByCustomer()
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
