@@ -101,36 +101,49 @@ namespace MVC_REST_API.Controllers
             return Ok(flightsDTO);
         }
 
-        //[HttpGet("getallflights")]
-        //public async Task<ActionResult<List<FlightDTO>>> GetAllFlights()
+
+        //// GET: api/<CustomerController>
+        //[HttpGet("getallflightsbycustomer")]
+        //public async Task<ActionResult<Ticket>> GetAllFlightsByCustomer()
         //{
         //    AirlineCompanyProfile profile = new AirlineCompanyProfile();
+        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
+        //            token_customer, out LoggedInCustomerFacade facade);
 
-        //    AuthenticateAndGetTokenAndGetFacade(out LoginToken<AirlineCompany>
-        //            token_airline, out LoggedInAirlineFacade facade);
+        //    IList<Ticket> result = null;
 
-        //    List<FlightDTO> result = null;
         //    try
         //    {
+        //        var allFlightsByCustomer = await Task.Run(() => facade.GetAllFlightsByCustomer(token_customer));
+        //        result = new List<Ticket>();
 
-        //        List<Flight> list = await Task.Run(() => facade.GetAllFlights()) as List<Flight>;
-        //        List<FlightDTO> flightDTOList = new List<FlightDTO>();
-
-        //        foreach (Flight flight in list)
+        //        if (allFlightsByCustomer != null && allFlightsByCustomer.Count > 0)
         //        {
-        //            //added our own m_mapper
-        //            FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
-        //            flightDTOList.Add(flightDTO);
+        //            foreach (var flight in allFlightsByCustomer)
+        //            {
+        //                bool IsCancellable = true;
+
+        //                if (flight.Departure_Time.CompareTo(DateTime.Now) < 0)
+        //                {
+        //                    IsCancellable = false;
+        //                }
+
+        //                result.Add(new Ticket
+        //                {
+        //                    flight = flight,
+        //                    Id = flight.Ticket_Id,
+        //                    IsCancellable = IsCancellable
+        //                });
+        //            }
         //        }
-        //        result = flightDTOList;
         //    }
         //    catch (Exception ex)
         //    {
-        //        return StatusCode(400, $"{{ error: can't get all flights \"{ex.Message}\" }}");
+        //        return StatusCode(400, $"{{ error: can't get flights by customer \"{ex.Message}\" }}");
         //    }
         //    if (result == null)
         //    {
-        //        return StatusCode(204, "{The list is empty.}");
+        //        return StatusCode(204, "{There are no flights by this customer. The list is empty. }");
         //    }
         //    return Ok(result);
         //}
