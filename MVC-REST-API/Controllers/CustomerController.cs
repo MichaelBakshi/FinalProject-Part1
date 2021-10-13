@@ -220,7 +220,7 @@ namespace MVC_REST_API.Controllers
 
         // POST api/<CustomerController>
         [HttpPost("purchaseticket")]
-        public async Task<ActionResult> PurchaseTicket([FromBody] Flight flight)
+        public async Task<ActionResult> PurchaseTicket([FromBody] FlightDTO flightDTO)
         {
             AuthenticateAndGetTokenAndGetFacade(out LoginToken<Customer>
                     token_customer, out LoggedInCustomerFacade facade);
@@ -229,6 +229,7 @@ namespace MVC_REST_API.Controllers
 
             try
             {
+                Flight flight = m_mapper.Map<FlightDTO, Flight >(flightDTO);
                 ticket = await Task.Run(() => facade.PurchaseTicket(token_customer, flight));
             }
             catch (Exception ex)
