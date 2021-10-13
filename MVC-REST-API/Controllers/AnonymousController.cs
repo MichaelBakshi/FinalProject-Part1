@@ -78,6 +78,42 @@ namespace MVC_REST_API.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("getflightsbyparameters")]
+        public async Task<ActionResult<List<FlightDTO>>> GetFlightsByParameters(int originCountryId, int destinationCountryId, DateTime departureDate)
+        {
+            AirlineCompanyProfile profile = new AirlineCompanyProfile();
+
+            AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            List<FlightDTO> result = null;
+            try
+            {
+
+                List<Flight> list = await Task.Run(() => facade.GetFlightsByParameters(originCountryId, destinationCountryId, departureDate)) as List<Flight>;
+                List<FlightDTO> flightDTOList = new List<FlightDTO>();
+
+                foreach (Flight flight in list)
+                {
+                    //added our own m_mapper
+                    FlightDTO flightDTO = m_mapper.Map<Flight, FlightDTO>(flight);
+                    flightDTOList.Add(flightDTO);
+                }
+                result = flightDTOList;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"{{ error: can't get all flights \"{ex.Message}\" }}");
+            }
+            if (result == null)
+            {
+                return StatusCode(204, "{The list is empty.}");
+            }
+            return Ok(result);
+        }
+
+
+
         //[HttpGet("getflightsbyairline")]
         //public async Task<ActionResult<List<FlightDTO>>> GetFlightsByAirline()
         //{
