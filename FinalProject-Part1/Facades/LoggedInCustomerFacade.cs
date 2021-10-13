@@ -66,10 +66,10 @@ namespace FinalProject_Part1
                     throw new Exception("You have already bought ticket for this flight");
             }
 
-            //if (flight.Remaining_Tickets <= 0)
-            //{
-            //    throw new Exception("Flight is full. No more tickets left");
-            //}
+            if (flight.Remaining_Tickets <= 0)
+            {
+                throw new Exception("Flight is full. No more tickets left");
+            }
 
             if (token != null)
             {
