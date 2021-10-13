@@ -1,0 +1,1294 @@
+create table countries (
+id int primary key,
+name text unique
+);
+
+create table tickets (
+    id bigint primary key ,
+    flight_id bigint,
+    customer_id bigint
+);
+
+create table flights (
+    id bigint primary key ,
+    airline_company_id bigint ,
+    origin_country_id int,
+    destination_country_id int,
+    departure_time date,
+    landing_time date,
+    remaining_tickets int
+);
+
+create table airline_companies (
+    id bigint primary key ,
+    name text unique ,
+    country_id int,
+    user_id bigint unique
+);
+
+create table airline_companies_awaiting_confirmation (
+    id bigint primary key ,
+    name text unique ,
+    country_id int,
+    user_id bigint unique
+);
+
+create table users (
+    id bigint primary key ,
+    username text unique ,
+    password text,
+    email text unique ,
+    user_role int
+);
+
+create table customers (
+    id bigint primary key ,
+    first_name text,
+    last_name text,
+    address text,
+    phone_no text unique ,
+    credit_card_no text unique ,
+    user_id bigint unique
+);
+
+
+create table  user_roles (
+    id int primary key ,
+    role_name text unique
+);
+
+
+create  table  administrators (
+    id int primary key ,
+    first_name text,
+    last_name text,
+    level int,
+    user_id bigint unique
+);
+
+insert into  users ( username, password, email, user_role)
+VALUES ('Billy_Willy', 'billywilly', 'billywilly@gmail.com', 1);
+insert into  users ( username, password, email, user_role)
+VALUES ('John_Doe', 'johndoe', 'johndoe@gmail.com', 1);
+insert into  users ( username, password, email, user_role)
+VALUES ('Chris_Isaak', 'chrisisaak', 'chrisisaak@gmail.com', 1);
+
+insert into user_roles (role_name)
+VALUES ('Administrator');
+insert into user_roles ( role_name)
+VALUES ('Airline_Company');
+insert into user_roles (role_name)
+VALUES ('Customer');
+
+insert into administrators (first_name, last_name, level, user_id)
+VALUES ('Billy', 'Willy', 1, 1);
+insert into administrators (first_name, last_name, level, user_id)
+VALUES ('John', 'Doe', 2, 2);
+insert into administrators (first_name, last_name, level, user_id)
+VALUES ('Chris', 'Isaak', 3, 12);
+
+
+insert into customers ( first_name, last_name, address, phone_no, credit_card_no, user_id)
+VALUES ('Asaf', 'Cohen', 'Lapid', '08-8976543', '4580523652145236', 3);
+insert into customers ( first_name, last_name, address, phone_no, credit_card_no, user_id)
+VALUES ('Irit', 'Yohanan', 'Oranit', '04-8523659', '4580526985473216', 4);
+insert into customers ( first_name, last_name, address, phone_no, credit_card_no, user_id)
+VALUES ('Orna', 'Rozen', 'Rishon', '03-8531236', '4580852369741258', 5);
+insert into customers ( first_name, last_name, address, phone_no, credit_card_no, user_id)
+VALUES ('Vered', 'Ostraikh', 'Tel_Aviv', '03-4561235', '4580456123789456', 6);
+
+insert into users ( username, password, email, user_role)
+VALUES ('AsafCohen', 'asafcohen', 'asafcohen@gmail.com', 3);
+insert into users ( username, password, email, user_role)
+VALUES ('IritYohanan', 'irityohanan', 'irityohanan@gmail.com', 3);
+insert into users ( username, password, email, user_role)
+VALUES ('OrnaRozen', 'ornarozen', 'ornarozen@gmail.com', 3);
+insert into users ( username, password, email, user_role)
+VALUES ('VeredOstraikh', 'veredostraikh', 'veredostraikh@gmail.com', 3);
+
+
+INSERT INTO countries(name) VALUES
+('Afghanistan'),
+('Albania'),
+('Algeria'),
+('American Samoa'),
+('Andorra'),
+('Angola'),
+('Anguilla'),
+('Antarctica'),
+('Antigua And Barbuda'),
+('Argentina'),
+('Armenia'),
+('Aruba'),
+('Australia'),
+('Austria'),
+('Azerbaijan'),
+('Bahamas'),
+('Bahrain'),
+('Bangladesh'),
+('Barbados'),
+('Belarus'),
+('Belgium'),
+('Belize'),
+('Benin'),
+('Bermuda'),
+('Bhutan'),
+('Bolivia'),
+('Bosnia And Herzegovina'),
+('BBotswana'),
+('Bouvet Island'),
+('Brazil'),
+('British Indian Ocean Territory'),
+('Brunei Darussalam'),
+('Bulgaria'),
+('Burkina Faso'),
+('Burundi'),
+('Cambodia'),
+('Cameroon'),
+('Canada'),
+('Cape Verde'),
+('Cayman Islands'),
+('Central African Republic'),
+('Chad'),
+('Chile'),
+('China'),
+('Christmas Island'),
+('Cocos (keeling) Islands'),
+('Colombia'),
+('Comoros'),
+('Congo'),
+('Congo, The Democratic Republic Of The'),
+('Cook Islands'),
+('Costa Rica'),
+('Cote D ivoire'),
+('Croatia'),
+('Cuba'),
+('Cyprus'),
+('Czech Republic'),
+('Denmark'),
+('Djibouti'),
+('Dominica'),
+('Dominican Republic'),
+('East Timor'),
+('Ecuador'),
+('Egypt'),
+('El Salvador'),
+('Equatorial Guinea'),
+('Eritrea'),
+('Estonia'),
+('Ethiopia'),
+('Falkland Islands (malvinas)'),
+('Faroe Islands'),
+('Fiji'),
+('Finland'),
+('France'),
+('French Guiana'),
+('French Polynesia'),
+('French Southern Territories'),
+('Gabon'),
+('Gambia'),
+('Georgia'),
+('Germany'),
+('Ghana'),
+('Gibraltar'),
+('Greece'),
+('Grenada'),
+('Guadeloupe'),
+('Guam'),
+('Guatemala'),
+('Guinea'),
+('Guinea-bissau'),
+('Guyana'),
+('Haiti'),
+('Heard Island And Mcdonald Islands'),
+('Holy See (vatican City State)'),
+('Honduras'),
+('Hong Kong'),
+('Hungary'),
+('Iceland'),
+('India'),
+('Indonesia'),
+('Iran, Islamic Republic Of'),
+('Iraq'),
+('Ireland'),
+('Israel'),
+('Italy'),
+('Jamaica'),
+('Japan'),
+('Jordan'),
+('Kazakstan'),
+('Kenya'),
+('Kiribati'),
+('Korea, Democratic Peoples Republic Of'),
+('Korea, Republic Of'),
+('Kosovo'),
+('Kuwait'),
+('Kyrgyzstan'),
+('Lao Peoples Democratic Republic'),
+('Latvia'),
+('Lebanon'),
+('Lesotho'),
+('Liberia'),
+('Libyan Arab Jamahiriya'),
+('Liechtenstein'),
+('Lithuania'),
+('Luxembourg'),
+('Macau'),
+('Macedonia, The Former Yugoslav Republic Of'),
+('Madagascar'),
+('Malawi'),
+('Malaysia'),
+('Maldives'),
+('Mali'),
+('Malta'),
+('Marshall Islands'),
+('Martinique'),
+('Mauritania'),
+('Mauritius'),
+('Mayotte'),
+('Mexico'),
+('Micronesia, Federated States Of'),
+('Moldova, Republic Of'),
+('Monaco'),
+('Mongolia'),
+('Montserrat'),
+('Montenegro'),
+('Morocco'),
+('Mozambique'),
+('Myanmar'),
+('Namibia'),
+('Nauru'),
+('Nepal'),
+('Netherlands'),
+('Netherlands Antilles'),
+('New Caledonia'),
+('New Zealand'),
+('Nicaragua'),
+('Niger'),
+('Nigeria'),
+('Niue'),
+('Norfolk Island'),
+('Northern Mariana Islands'),
+('Norway'),
+('Oman'),
+('Pakistan'),
+('Palau'),
+('Panama'),
+('Papua New Guinea'),
+('Paraguay'),
+('Peru'),
+('Philippines'),
+('Pitcairn'),
+('Poland'),
+('Portugal'),
+('Puerto Rico'),
+('Qatar'),
+('Reunion'),
+('Romania'),
+('Russian Federation'),
+('Rwanda'),
+('Saint Helena'),
+('Saint Kitts And Nevis'),
+('Saint Lucia'),
+('Saint Pierre And Miquelon'),
+('Saint Vincent And The Grenadines'),
+('Samoa'),
+('San Marino'),
+('Sao Tome And Principe'),
+('Saudi Arabia'),
+('Senegal'),
+('Serbia'),
+('Seychelles'),
+('Sierra Leone'),
+('Singapore'),
+('Slovakia'),
+('Slovenia'),
+('Solomon Islands'),
+('Somalia'),
+('South Africa'),
+('South Georgia And The South Sandwich Islands'),
+('Spain'),
+('Sri Lanka'),
+('Sudan'),
+('Suriname'),
+('Svalbard And Jan Mayen'),
+('Swaziland'),
+('Sweden'),
+('Switzerland'),
+('Syrian Arab Republic'),
+('Taiwan, Province Of China'),
+('Tajikistan'),
+('Tanzania, United Republic Of'),
+('Thailand'),
+('Togo'),
+('Tokelau'),
+('Tonga'),
+('Trinidad And Tobago'),
+('Tunisia'),
+('Turkey'),
+('Turkmenistan'),
+('Turks And Caicos Islands'),
+('Tuvalu'),
+('Uganda'),
+('Ukraine'),
+('United Arab Emirates'),
+('United Kingdom'),
+('United States'),
+('United States Minor Outlying Islands'),
+('Uruguay'),
+('Uzbekistan'),
+('Vanuatu'),
+('Venezuela'),
+('Viet Nam'),
+('Virgin Islands British'),
+('Virgin Islands, U.s.'),
+('Wallis And Futuna'),
+('Western Sahara'),
+('Yemen'),
+('Zambia'),
+('Zimbabwe');
+
+delete from countries;
+TRUNCATE countries, flights, airline_companies, airline_companies_awaiting_confirmation, tickets RESTART IDENTITY;
+
+
+insert into users ( username, password, email, user_role)
+VALUES ('EL_AL', 'elal', 'elal@gmail.com', 2);
+insert into users ( username, password, email, user_role)
+VALUES ('United', 'united', 'united@gmail.com', 2);
+insert into users ( username, password, email, user_role)
+VALUES ('Turkish', 'turkish', 'turkish@gmail.com', 2);
+insert into users ( username, password, email, user_role)
+VALUES ('Lufthansa', 'lufthansa', 'lufthansa@gmail.com', 2);
+insert into users ( username, password, email, user_role)
+VALUES ('Aeroflot', 'aeroflot', 'aeroflot@mal.ru', 2);
+
+insert into airline_companies (name, country_id, user_id)
+VALUES ('EL_AL', 104,7);
+insert into airline_companies (name, country_id, user_id)
+VALUES ('United Airlines', 226,8);
+insert into airline_companies (name, country_id, user_id)
+VALUES ('Turkish Airlines', 218,9);
+insert into airline_companies (name, country_id, user_id)
+VALUES ('Lufthansa', 81,10);
+insert into airline_companies (name, country_id, user_id)
+VALUES ('Aeroflot', 178,11);
+
+insert into flights ( airline_company_id, origin_country_id, destination_country_id, departure_time, landing_time, remaining_tickets)
+ VALUES (1, 104, 226, '2020-10-10 18:30', '2020-10-10 22:25', 210);
+insert into flights ( airline_company_id, origin_country_id, destination_country_id, departure_time, landing_time, remaining_tickets)
+ VALUES (2, 226, 172, '2020-12-01 15:25', '2020-12-02 02:20', 223);
+insert into flights ( airline_company_id, origin_country_id, destination_country_id, departure_time, landing_time, remaining_tickets)
+ VALUES (3, 218, 223, '2020-06-11 08:30', '2020-06-11 11:15', 206);
+insert into flights ( airline_company_id, origin_country_id, destination_country_id, departure_time, landing_time, remaining_tickets)
+ VALUES (4, 81, 206, '2020-03-16 02:10', '2020-03-16 03:45', 154);
+insert into flights ( airline_company_id, origin_country_id, destination_country_id, departure_time, landing_time, remaining_tickets)
+ VALUES (5, 178, 188, '2020-09-05 18:30', '2020-09-06 12:25', 210);
+
+insert into tickets (flight_id, customer_id)
+VALUES (1, 1);
+insert into tickets (flight_id, customer_id)
+VALUES (2, 2);
+insert into tickets (flight_id, customer_id)
+VALUES (3, 3);
+insert into tickets (flight_id, customer_id)
+VALUES (4, 4);
+insert into tickets (flight_id, customer_id)
+VALUES (5, 7);
+
+
+-----------------countries-------------
+CREATE OR REPLACE procedure sp_insert_country(_name text)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO countries (name)
+        VALUES (_name);
+    END;
+    $$;
+
+call sp_insert_country('Georgia');
+
+create or replace function sp_get_country_by_id (_id integer)
+returns table (id integer, name text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select countries.id, countries.name from countries
+        where  countries.id = _id;
+    end;
+    $$;
+
+select * from sp_get_country_by_id(5);
+
+create or replace function sp_get_all_countries ()
+returns table (id integer, name text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from countries;
+    end;
+    $$;
+
+select * from sp_get_all_countries();
+
+CREATE OR REPLACE procedure sp_delete_country(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from countries
+        where id = _id;
+    END;
+    $$;
+
+call  sp_delete_country(10);
+
+create or replace procedure sp_update_country (_id integer, _name text)
+language plpgsql AS
+    $$
+    BEGIN
+        update countries
+        set name =  _name
+        where id = _id;
+    END;
+    $$;
+
+call sp_update_country(9, 'Kazak');
+
+
+
+
+-----------------administrators-------------
+
+CREATE OR REPLACE procedure sp_insert_administrator(_first_name text, _last_name text, _level integer, _user_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO administrators ( first_name, last_name, level, user_id)
+        VALUES (_first_name, _last_name, _level, _user_id);
+    END;
+    $$;
+
+call sp_insert_administrator();
+
+create or replace function sp_get_administrator_by_id (_id integer)
+returns table (id integer, first_name text, last_name text, level integer, user_id integer, username text, password text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select a.id, a.first_name, a.last_name, a.level, a.user_id , u.username, u.password from administrators a
+        join users u on u.id = a.user_id
+        where  a.id = _id;
+    end;
+    $$;
+
+select * from sp_get_administrator_by_id(1);
+
+
+create or replace function sp_get_admin_by_username (_username text)
+returns table (id integer,first_name text, last_name text, level integer, user_id integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select a.id, a.first_name, a.last_name, a.level, a.user_id from administrators a
+        inner join users u on a.user_id = u.id
+        where  upper( u.username) = upper( _username);
+    end;
+    $$;
+
+select * from sp_get_admin_by_username('John_Doe');
+
+
+create or replace function sp_get_all_administrators ()
+returns table (id integer, first_name text, last_name text, level integer, user_id integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from administrators;
+    end;
+    $$;
+
+select * from sp_get_all_administrators();
+
+
+
+CREATE OR REPLACE procedure sp_delete_administrator(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from administrators
+        where id = _id;
+    END;
+    $$;
+
+call  sp_delete_administrator(10);
+
+create or replace procedure sp_update_administrator (_id integer, _first_name text, _last_name text, _level integer, _user_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        update administrators
+        set id = _id,
+            first_name =  _first_name,
+            last_name = _last_name,
+            level = _level,
+            user_id = _user_id
+        where id = _id;
+    END;
+    $$;
+
+call sp_update_administrator (1, 'Billy', 'Drilly', 1, 1);
+
+-----------------tickets---------------
+
+CREATE OR REPLACE procedure sp_insert_ticket(_flight_id bigint, _customer_id bigint)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO tickets (flight_id, customer_id)
+        VALUES (_flight_id, _customer_id);
+    END;
+    $$;
+
+call sp_insert_ticket(3, 19);
+
+create or replace function sp_get_ticket_by_id (_id integer)
+returns table (id integer, flight_id integer, customer_id integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select tickets.id, tickets.flight_id, tickets.customer_id from tickets
+        where  tickets.id = _id;
+    end;
+    $$;
+
+select * from sp_get_ticket_by_id(5);
+
+
+
+create or replace function sp_get_all_tickets ()
+returns table (id integer, flight_id integer, customer_id integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from tickets;
+    end;
+    $$;
+
+select * from sp_get_all_tickets();
+
+
+create or replace function sp_get_all_tickets_by_airline_id (_id integer)
+returns table (id integer, flight_id integer, customer_id integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select tickets.id, tickets.flight_id, tickets.customer_id from tickets
+        join flights f on tickets.flight_id = f.id
+        join airline_companies ac on ac.id = f.airline_company_id
+        where ac.id = _id;
+    end;
+    $$;
+
+select * from sp_get_all_tickets_by_airline_id(9);
+
+
+
+CREATE OR REPLACE procedure sp_delete_ticket(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from tickets
+        where id = _id;
+    END;
+    $$;
+
+call  sp_delete_ticket(24);
+
+create or replace procedure sp_update_ticket (_id integer, _flight_id bigint, _customer_id bigint)
+language plpgsql AS
+    $$
+    BEGIN
+        update tickets
+        set flight_id =  _flight_id,
+            customer_id = _customer_id
+        where id = _id;
+    END;
+    $$;
+
+call sp_update_ticket(14, 'Kazak');
+
+-----------------airlines---------------
+
+CREATE OR REPLACE procedure sp_insert_airline(_name text, _country_id bigint, _user_id bigint)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO airline_companies (name, country_id, user_id)
+        VALUES (_name, _country_id, _user_id);
+    END;
+    $$;
+
+call sp_insert_airline('Transavia',6, 60);
+
+
+/*create function sp_insert_airline(_name text, _country_id bigint, _user_id bigint)
+    returns int
+    language plpgsql
+as
+$$
+BEGIN
+        INSERT INTO airline_companies (name, country_id, user_id)
+        VALUES (_name, _country_id, _user_id);
+        select max(id) from airline_companies;
+    END;
+$$;
+
+alter function sp_insert_airline(text, bigint, bigint) owner to postgres;
+
+
+
+select sp_insert_airline('mojo',1,0);
+
+insert into users values (0,'mojok','123','aaa',2);*/
+
+
+CREATE OR REPLACE procedure sp_insert_airline_to_awaiting_for_confirmation_list(_name text, _country_id integer, _username text, _password text, _email text)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO airline_companies_awaiting_confirmation (name, country_id, username, password, email)
+        VALUES (_name, _country_id, _username, _password, _email);
+    END;
+    $$;
+
+call sp_insert_airline_to_awaiting_for_confirmation_list('Eurowings',8, 'eurowings', 'eurowings', 'eurowings@mail.com' );
+
+
+
+create or replace function sp_get_airline_by_id (_id integer)
+returns table (id integer,name text, country_id integer, user_id integer, username text, password text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select airline_companies.id, airline_companies.name, airline_companies.country_id, airline_companies.user_id,
+               users.username, users.password  from airline_companies
+        join users on airline_companies.user_id = users.id
+        where  airline_companies.id = _id;
+    end;
+    $$;
+
+select * from sp_get_airline_by_id(2);
+
+create or replace function sp_get_airline_by_name (_name text)
+returns table (id bigint,name text, country_id integer, user_id bigint) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select airline_companies.id, airline_companies.name, airline_companies.country_id, airline_companies.user_id from airline_companies
+        where  airline_companies.name = _name;
+    end;
+    $$;
+
+select * from sp_get_airline_by_name(upper('EL_al'));
+
+create or replace function sp_get_airline_by_username (_username text)
+returns table (id integer,name text, country_id integer, user_id integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select ac.id, ac.name, ac.country_id, ac.user_id from airline_companies ac
+        inner join users u on ac.user_id = u.id
+        where  upper( u.username) = upper( _username);
+    end;
+    $$;
+
+select * from sp_get_airline_by_username('turkish');
+
+
+create or replace function sp_get_all_airlines_by_country (_country_id integer)
+returns table (id bigint,airline_name text, country_id integer, user_id bigint) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select airline_companies.id, airline_companies.name , airline_companies.country_id, airline_companies.user_id
+        from airline_companies
+        --join countries on airline_companies.country_id=countries.id
+        where airline_companies.country_id = _country_id;
+    end;
+    $$;
+
+select * from sp_get_all_airlines_by_country ( 7) ;
+
+
+create or replace function sp_get_all_airline_companies ()
+returns table (id integer,name text, country_id integer, user_id integer, username text, password text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select a.id, a.name, a.country_id, a.user_id,  u.username, u.password from airline_companies a
+        join users u on a.user_id = u.id;
+    end;
+    $$;
+
+select * from sp_get_all_airline_companies();
+
+
+CREATE OR REPLACE procedure sp_delete_airline_company(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from airline_companies
+        where id = _id;
+    END;
+    $$;
+
+call  sp_delete_airline_company(10);
+
+
+
+create or replace procedure sp_update_airline (_id integer,_name text, _country_id integer, _user_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        update airline_companies
+        set name = _name,
+            country_id = _country_id,
+            user_id = _user_id
+        where id = _id;
+    END;
+    $$;
+
+call sp_update_airline(6, 'Pobeda', 178, 90);
+
+
+
+-----------------airline_companies_awaiting_confirmation--------------------
+
+
+create or replace function sp_get_all_airline_companies_from_awaiting_list ()
+returns table (name text, country_id integer, username text, password text, email text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from airline_companies_awaiting_confirmation;
+    end;
+    $$;
+
+select * from sp_get_all_airline_companies_from_awaiting_list();
+
+
+CREATE OR REPLACE procedure sp_delete_airline_company_from_awaiting_for_confirmation_list(_name text)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from airline_companies_awaiting_confirmation
+        where upper(name) = upper(_name);
+    END;
+    $$;
+
+call  sp_delete_airline_company_from_awaiting_for_confirmation_list('EUROWINGS');
+
+
+-----------------users-----------------
+
+create procedure sp_insert_user(_username text, _password text, _email text, _user_role integer)
+    language plpgsql
+
+as
+$$
+BEGIN
+        INSERT INTO users (username, password, email, user_role)
+        VALUES (_username, _password, _email, _user_role)
+        RETURNING id;
+    END;
+$$;
+
+alter procedure sp_insert_user(text, text, text, integer) owner to postgres;
+
+call sp_insert_user('uuuu', 'yyyyy', 'ural@m@@@', 2);
+
+
+CREATE OR REPLACE procedure sp_insert_user_for_confirmed_airline(_username text, _password text, _email text)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO users (username, password, email, user_role)
+        VALUES (_username, _password, _email, 2);
+    END;
+    $$;
+
+call sp_insert_user_for_confirmed_airline('FlyEmirates', 'flyemirates', 'emirates@mail.uae' );
+
+
+
+create or replace function sp_get_user_by_id (_id integer)
+returns table (id integer,username text, password text, email text, user_role integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select users.id, users.username, users.password, users.email, users.user_role from users
+        where  users.id = _id;
+    end;
+    $$;
+
+select * from sp_get_user_by_id(5);
+
+
+create or replace function sp_get_all_users ()
+returns table (id integer,username text, password text, email text, user_role integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from users;
+    end;
+    $$;
+
+select * from sp_get_all_users();
+
+
+CREATE OR REPLACE procedure sp_delete_user(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from users
+        where id = _id;
+    END;
+    $$;
+
+call  sp_delete_user(102);
+
+create or replace procedure sp_update_user (_id integer,_username text, _password text, _email text, _user_role integer)
+language plpgsql AS
+    $$
+    BEGIN
+        update users
+        set id = _id,
+            username = _username,
+            password = _password,
+            email = _email,
+            user_role = _user_role
+        where id = _id;
+    END;
+    $$;
+
+call sp_update_user(7, 'ellllal','elal', 'elal@gmail.com', 2 );
+
+
+create or replace function sp_get_user_by_username (_username text)
+returns table (id integer, username text, password text, email text, user_role integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select users.id, users.username, users.password, users.email, users.user_role from users
+        where upper( users.username) = upper( _username);
+    end;
+    $$;
+
+select * from sp_get_user_by_username('ornarozen');
+
+
+-----------------customers-----------------
+
+CREATE OR REPLACE procedure sp_insert_customer(_first_name text, _last_name text, _address text, _phone_no text, _credit_card_no text, _user_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO customers (first_name, last_name, address, phone_no,  credit_card_no, user_id)
+        VALUES (_first_name, _last_name, _address, _phone_no,_credit_card_no, _user_id );
+    END;
+    $$;
+
+call sp_insert_customer('Georgia');
+
+
+create or replace function sp_get_customer_by_id (_id integer)
+returns table (id integer,first_name text, last_name text, address text, phone_no text, credit_card_no text, user_id integer,
+username text, password text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select customers.id, customers.first_name, customers.last_name, customers.address, customers.phone_no, customers.credit_card_no,
+               customers.user_id, users.username, users.password from customers
+        join users on customers.user_id = users.id
+        where  customers.id = _id;
+    end;
+    $$;
+
+select * from sp_get_customer_by_id(3);
+
+
+create function sp_get_customer_by_username(_username text)
+    returns TABLE(id integer, first_name text, last_name text, address text, phone_no text, credit_card_no text, user_id integer, username text, password text)
+    language plpgsql
+as
+$$
+begin
+        return query
+        select customers.id, customers.first_name, customers.last_name, customers.address, customers.phone_no, customers.credit_card_no,
+               customers.user_id, users.username, users.password from customers
+        join users on customers.user_id = users.id
+        where upper( users.username) = upper( _username);
+    end;
+$$;
+
+alter function sp_get_customer_by_username(text) owner to postgres;
+
+select * from sp_get_customer_by_username('irityohanan');
+
+
+create or replace function sp_get_all_customers ()
+returns table (id integer,first_name text, last_name text, address text, phone_no text, credit_card_no text, user_id integer, username text, password text) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select c.id, c.first_name, c.last_name, c.address, c.phone_no, c.credit_card_no, c.user_id, u.username, u.password from customers c
+        join users u on c.user_id = u.id;
+    end;
+    $$;
+
+select * from sp_get_all_customers();
+
+CREATE OR REPLACE procedure sp_delete_customer(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from customers
+        where id = _id;
+    END;
+    $$;
+
+call  sp_delete_customer(5);
+
+create or replace procedure sp_update_customer (_id integer, _first_name text, _last_name text, _address text, _phone_no text, _credit_card_no text, _user_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        update customers
+        set
+            id = _id,
+            first_name = _first_name,
+            last_name=_last_name,
+            address = _address,
+            phone_no = _phone_no,
+            credit_card_no = _credit_card_no,
+            user_id= _user_id
+        where id = _id;
+    END;
+    $$;
+
+call sp_update_customer( 1, 'Asaf', 'Cohen', 'Lapid', '08-8976543', '4580523652145236', 3);
+
+-----------------flights-----------------
+
+CREATE OR REPLACE procedure sp_insert_flight(_airline_company_id bigint, _origin_country_id integer, _destination_country_id integer, _departure_time timestamp, _landing_time timestamp, _remaining_tickets integer)
+language plpgsql AS
+    $$
+    BEGIN
+        INSERT INTO flights (airline_company_id, origin_country_id, destination_country_id, departure_time,  landing_time, remaining_tickets)
+        VALUES (_airline_company_id, _origin_country_id, _destination_country_id, _departure_time,_landing_time, _remaining_tickets );
+    END;
+    $$;
+
+call sp_insert_flight(2, 35, 68, '2024-05-03 17:18:00', '2024-05-04 05:15:00', 51);
+
+create function sp_get_flight_by_id(_id integer)
+    returns TABLE(id integer, airline_company_id integer, origin_country_id integer, destination_country_id integer, departure_time timestamp without time zone, landing_time timestamp without time zone, remaining_tickets integer)
+    language plpgsql
+as
+$$
+begin
+        return query
+        select flights.id, flights.airline_company_id, flights.origin_country_id, flights.destination_country_id, flights.departure_time, flights.landing_time, flights.remaining_tickets from flights
+        where  flights.id = _id;
+    end;
+$$;
+
+select * from sp_get_flight_by_id(1);
+
+
+create or replace function sp_get_all_flights_by_customer (_customer_id integer)
+returns table (id integer, airline_company_id integer, origin_country_id integer, destination_country_id integer, departure_time timestamp, landing_time timestamp,
+ remaining_tickets integer, ticket_id integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select f.id, f.airline_company_id, f.origin_country_id, f.destination_country_id, f.departure_time, f.landing_time, f.remaining_tickets, t.id from flights f
+        join tickets t on f.id = t.flight_id
+        join  customers c on t.customer_id = c.id
+        where  c.id = _customer_id;
+    end;
+    $$;
+
+select * from sp_get_all_flights_by_customer(2);
+
+
+create or replace function sp_get_all_flights_by_airline (_airline_id integer)
+returns table (id integer, airline_company_id integer, origin_country_id integer, destination_country_id integer, departure_time timestamp, landing_time timestamp,
+ remaining_tickets integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select f.id, f.airline_company_id, f.origin_country_id, f.destination_country_id, f.departure_time, f.landing_time, f.remaining_tickets from flights f
+        --join tickets t on f.id = t.flight_id
+        join  airline_companies a on f.airline_company_id = a.id
+        where  a.id = _airline_id;
+    end;
+    $$;
+
+select * from sp_get_all_flights_by_airline(2);
+
+
+
+
+
+create or replace function sp_get_remaining_seats_on_each_flight ()
+returns table (id integer, airline_company_id integer, origin_country_id integer, destination_country_id integer, departure_time timestamp, landing_time timestamp, remaining_tickets integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select  f.id, f.airline_company_id, f.origin_country_id, f.destination_country_id, f.departure_time, f.landing_time, f.remaining_tickets from flights f
+        where  f.remaining_tickets >0;
+    end;
+    $$;
+
+select * from sp_get_remaining_seats_on_each_flight();
+
+
+
+create or replace function sp_get_all_flights ()
+returns table (id integer,airline_company_id integer, origin_country_id integer, destination_country_id integer, departure_time timestamp, landing_time timestamp, remaining_tickets integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from flights;
+    end;
+    $$;
+
+select * from sp_get_all_flights();
+
+create or replace function sp_get_flights_by_departure_date (_departure_date timestamp)
+returns table (id integer, airline_company_id integer, origin_country_id integer, destination_country_id integer, departure_time timestamp, landing_time timestamp, remaining_tickets integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from flights
+        where  flights.departure_time = _departure_date;
+    end;
+    $$;
+
+select * from sp_get_flights_by_departure_date('2020-10-10');
+
+
+create or replace function sp_get_flights_by_landing_date (_landing_date timestamp)
+returns table (id bigint, airline_company_id bigint, origin_country_id integer, destination_country_id integer, departure_time timestamp, landing_time timestamp, remaining_tickets integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select * from flights
+        where  flights.landing_time = _landing_date;
+    end;
+    $$;
+
+select * from sp_get_flights_by_landing_date('2020-12-02');
+
+
+
+create or replace function sp_get_flights_by_destination_country (_destination_country_id integer)
+returns table (id integer, airline_company_id integer, origin_country_id integer, destination_country_id integer, departure_time timestamp, landing_time timestamp, remaining_tickets integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select f.id, f.airline_company_id, f.origin_country_id, f.destination_country_id, f.departure_time, f.landing_time, f.remaining_tickets from flights f
+        join countries c on f.destination_country_id = c.id
+        where f.destination_country_id = _destination_country_id;
+    end;
+    $$;
+
+select * from sp_get_flights_by_destination_country(7);
+
+
+create or replace function sp_get_flights_by_origin_country (_country_id integer)
+returns table (id integer, airline_company_id integer, origin_country_id integer, destination_country_id integer,
+departure_time timestamp, landing_time timestamp, remaining_tickets integer) LANGUAGE plpgsql as
+    $$
+    begin
+        return query
+        select f.id, f.airline_company_id, f.origin_country_id, f.destination_country_id, f.departure_time, f.landing_time, f.remaining_tickets from flights f
+        join countries c on f.origin_country_id = c.id
+        where f.origin_country_id = _country_id;
+    end;
+    $$;
+
+select * from sp_get_flights_by_origin_country(4);
+
+
+CREATE OR REPLACE procedure sp_delete_flight(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from flights f
+        where id = _id;
+    END;
+    $$;
+
+call  sp_delete_flight(2);
+
+
+CREATE OR REPLACE procedure sp_delete_tickets_by_flight_id(_id integer)
+language plpgsql AS
+    $$
+    BEGIN
+        delete from tickets t
+        where t.flight_id=_id;
+    END;
+    $$;
+
+call  sp_delete_tickets_by_flight_id(2);
+
+
+
+
+create or replace procedure sp_update_flight (_id integer, _airline_company_id integer, _origin_country_id integer,
+_destination_country_id integer, _departure_time timestamp, _landing_time timestamp, _remaining_tickets integer)
+language plpgsql AS
+    $$
+    BEGIN
+        update flights
+        set
+            airline_company_id = _airline_company_id,
+            origin_country_id = _origin_country_id,
+            destination_country_id = _destination_country_id,
+            departure_time = _departure_time,
+            landing_time = _landing_time,
+            remaining_tickets = _remaining_tickets
+        where flights.id = _id;
+    END;
+    $$;
+
+call sp_update_flight(11 , 2, 53, 86, '2023-05-03 17:18:00', '2023-05-04 05:15:00', 0);
+
+delete from tickets;
+DELETE FROM flights;
+delete from airline_companies;
+delete from airline_companies_awaiting_confirmation;
+delete from countries;
+
+
+create table tickets_history (
+    id bigint primary key ,
+    flight_id bigint,
+    customer_id bigint
+);
+
+create table flights_history (
+    id bigint primary key ,
+    airline_company_id bigint ,
+    origin_country_id int,
+    destination_country_id int,
+    departure_time date,
+    landing_time date,
+    remaining_tickets int
+);
+
+create or replace procedure sp_delete_old_flights ()
+language plpgsql AS
+    $$
+    BEGIN
+        delete from flights
+        using tickets
+        WHERE flights.landing_time <= now() - interval '3 hour';
+
+    END;
+    $$;
+
+call sp_delete_old_flights ();
+
+create or replace procedure sp_delete_old_tickets ()
+language plpgsql AS
+    $$
+    BEGIN
+        delete from tickets
+        using flights
+        WHERE flights.landing_time <= now() - interval '3 hour';
+    END;
+    $$;
+
+call sp_delete_old_tickets ();
+
+create or replace procedure sp_insert_into_flights_history()
+language plpgsql AS
+    $$
+    BEGIN
+        insert into flights_history
+        select id,
+        airline_company_id,
+        origin_country_id,
+        destination_country_id,
+        departure_time,
+        landing_time,
+        remaining_tickets
+        FROM flights
+        WHERE flights.landing_time <= now() - interval '3 hour';
+    END;
+    $$;
+
+call sp_insert_into_flights_history();
+
+delete from  flights_history;
+
+
+create or replace procedure sp_update_tickets_history ()
+language plpgsql AS
+    $$
+    BEGIN
+        update tickets_history
+        set id = tickets.id,
+        flight_id = tickets.flight_id,
+        customer_id = tickets.customer_id
+        FROM tickets join  flights f on tickets.flight_id = f.id
+        WHERE f.landing_time <= now() - interval '3 hour';
+    END;
+    $$;
+
+call sp_update_tickets_history();
+
+
+create or replace procedure sp_update_flights_history ()
+language plpgsql AS
+    $$
+    BEGIN
+        update flights_history
+        set id = flights.id,
+        airline_company_id = flights.airline_company_id,
+        origin_country_id = flights.origin_country_id,
+        destination_country_id = flights.destination_country_id,
+        departure_time = flights.departure_time,
+        landing_time = flights.landing_time,
+        remaining_tickets = flights.remaining_tickets
+        FROM flights
+        WHERE flights.landing_time <= now() - interval '3 hour';
+    END;
+    $$;
+
+call sp_update_flights_history();
+
+
+create or replace procedure sp_delete_all_tables ()
+language plpgsql AS
+    $$
+    BEGIN
+        truncate administrators, airline_companies, customers, flights, tickets, users;
+        ALTER SEQUENCE users_id_seq RESTART WITH 0;
+        ALTER SEQUENCE administrators_id_seq RESTART WITH 0;
+        ALTER SEQUENCE airline_companies_id_seq RESTART WITH 0;
+        ALTER SEQUENCE customers_id_seq RESTART WITH 0;
+        ALTER SEQUENCE flights_id_seq RESTART WITH 0;
+        ALTER SEQUENCE tickets_id_seq RESTART WITH 0;
+    END;
+    $$;
+
+call sp_delete_all_tables ();
+
+
+select * from sp_get_flight_by_id(2);

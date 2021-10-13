@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FinalProject_Part1
@@ -340,6 +341,19 @@ namespace FinalProject_Part1
                     }
                 }
             }
+            return result;
+        }
+
+        public IList<Flight> GetFlightsByParameters(int originCountryId, int destinationCountryId, DateTime date)
+        {
+            List<Flight> result = new List<Flight>();
+
+            IList<Flight> originList = GetFlightsByOriginCountry(originCountryId);
+            IList<Flight> destinationList = GetFlightsByDestinationCountry(destinationCountryId);
+            IList<Flight> dateList = GetFlightsByDepartureDate(date);
+
+            result = originList.Intersect(destinationList).Intersect(dateList).ToList();
+
             return result;
         }
 
