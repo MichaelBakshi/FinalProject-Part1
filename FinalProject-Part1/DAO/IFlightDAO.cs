@@ -13,5 +13,6 @@ namespace FinalProject_Part1
         IList<Flight> GetFlightsByLandingDate(DateTime landingDate);
         IList<Flight> GetFlightsByCustomer(Customer customer);
         IList<Flight> GetFlightsByAirline(AirlineCompany airline);
+        IList<Flight> GetFlightsByParameters(int originCountryId, int destinationCountryId, DateTime departureDate);
     }
 }

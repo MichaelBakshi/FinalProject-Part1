@@ -74,6 +74,11 @@ namespace FinalProject_Part1
             return _flightDAO.GetFlightsByLandingDate(landingDate);
         }
 
+        public IList<Flight> GetFlightsByParameters(int originCountryId, int destinationCountryId, DateTime departureDate)
+        {
+            return _flightDAO.GetFlightsByParameters(originCountryId, destinationCountryId, departureDate);
+        }
+
 
         public void SignUpCustomer(Customer customer)
         {

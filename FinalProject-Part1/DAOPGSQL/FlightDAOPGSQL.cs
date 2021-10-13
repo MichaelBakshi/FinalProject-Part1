@@ -344,13 +344,13 @@ namespace FinalProject_Part1
             return result;
         }
 
-        public IList<Flight> GetFlightsByParameters(int originCountryId, int destinationCountryId, DateTime date)
+        public IList<Flight> GetFlightsByParameters(int originCountryId, int destinationCountryId, DateTime departureDate)
         {
             List<Flight> result = new List<Flight>();
 
             IList<Flight> originList = GetFlightsByOriginCountry(originCountryId);
             IList<Flight> destinationList = GetFlightsByDestinationCountry(destinationCountryId);
-            IList<Flight> dateList = GetFlightsByDepartureDate(date);
+            IList<Flight> dateList = GetFlightsByDepartureDate(departureDate);
 
             result = originList.Intersect(destinationList).Intersect(dateList).ToList();
 
