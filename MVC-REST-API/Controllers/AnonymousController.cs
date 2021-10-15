@@ -80,11 +80,14 @@ namespace MVC_REST_API.Controllers
 
 
         [HttpGet("getflightsbyparameters")]
-        public async Task<ActionResult<List<FlightDTO>>> GetFlightsByParameters(int originCountryId, int destinationCountryId, DateTime departureDate)
+        public async Task<ActionResult<List<FlightDTO>>> GetFlightsByParameters(string originCountry, string destinationCountry, DateTime departureDate)
         {
             AirlineCompanyProfile profile = new AirlineCompanyProfile();
 
             AnonymousUserFacade facade = new AnonymousUserFacade(false);
+
+            int originCountryId = 0;
+            int destinationCountryId = 0;
 
             List<FlightDTO> result = null;
             try
