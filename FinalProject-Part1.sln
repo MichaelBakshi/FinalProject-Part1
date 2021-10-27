@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddingRandomDatabase", "Add
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC-REST-API", "MVC-REST-API\MVC-REST-API.csproj", "{FB42A490-45F4-424D-8057-64FE4BAB7AA2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "finalprojectprt4", "finalprojectprt4", "{5ABF0684-0406-402F-B343-4FF69B9AC5F4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
